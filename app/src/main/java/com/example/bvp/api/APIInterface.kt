@@ -88,6 +88,13 @@ interface APIInterface {
         @Part("type") type: RequestBody
     ): Call<UploadResponse>
 
+    @Multipart
+    @POST("FileUploader/API.php?apicall=newsletter")
+    fun uploadNewsletter(
+        @Part file: MultipartBody.Part,
+        @Part("name") name: RequestBody
+    ): Call<UploadResponse>
+
     @Streaming
     @GET
     fun downloadProfilePictureByUrl(@Url fileName: String): Call<ResponseBody>

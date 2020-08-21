@@ -7,13 +7,13 @@ import java.io.File
 import java.io.FileInputStream
 
 class UploadRequestBody(
-    private val file: File,
+    private val file: File?,
     private val contentType: String
 ) : RequestBody() {
 
     override fun contentType() = "$contentType/*".toMediaTypeOrNull()
 
-    override fun contentLength() = file.length()
+    override fun contentLength() = file!!.length()
 
     override fun writeTo(sink: BufferedSink) {
         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
