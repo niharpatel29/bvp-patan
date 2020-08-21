@@ -479,6 +479,7 @@ class ModifyProfile : AppCompatActivity() {
                             if (imageOperations.saveToInternalStorage(fileFromCache)) {
                                 imageOperations.setProfilePicture(imgProfile)
                             }
+                            Log.d(TAG, "photo uploaded")
                             operations.displayToast(getString(R.string.updated_successfully))
                             finish()
                         }

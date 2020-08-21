@@ -72,7 +72,7 @@ class UploadNewsletter : AppCompatActivity() {
 
     private fun uploadFile(fileName: String) {
         if (selectedFile == null) {
-            operations.displayToast(getString(R.string.select_file_first))
+            operations.displayToast(getString(R.string.file_not_selected))
             return
         }
 

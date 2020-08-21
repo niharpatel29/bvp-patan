@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.example.bvp.api.postClient
 import com.example.bvp.operations.ImageOperations
+import com.example.bvp.operations.Operations
 import com.example.bvp.prefs.SharedPref
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.categories.*
@@ -27,6 +28,7 @@ class Categories : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPref
     private lateinit var dbHandler: MyDBHandler
+    private lateinit var operations: Operations
     private lateinit var imageOperations: ImageOperations
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,7 @@ class Categories : AppCompatActivity() {
 
         sharedPref = SharedPref(this)
         dbHandler = MyDBHandler(this)
+        operations = Operations(this)
         imageOperations = ImageOperations(this)
 
         toolbar()
@@ -104,7 +107,8 @@ class Categories : AppCompatActivity() {
             .skipMemoryCache(true)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    TODO("Not yet implemented")
+                    Log.d(TAG, "error")
+                    operations.displayToast("Error loading file")
                 }
 
                 override fun onResourceReady(
