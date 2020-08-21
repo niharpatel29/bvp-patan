@@ -1,0 +1,138 @@
+<resources>
+    <string name="app_name">BVP</string>
+
+    <string name="temp_country_name">CountryName</string>
+
+    <string name="btn_admin_login">Admin Login</string>
+    <string name="btn_user_login">User Login</string>
+    <string name="btn_edit_profile">Edit Profile</string>
+    <string name="btn_logout">Logout</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_signup">Signup</string>
+    <string name="btn_select_dob">Select DOB</string>
+    <string name="btn_select_anniversary">Select Anniversary</string>
+    <string name="btn_update">Update</string>
+
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_mobile_number">Mobile Number</string>
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_middle_name">Middle Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_position">Position</string>
+    <string name="hint_set_password">Set Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_secondary_mobile">Secondary Mobile Number</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_dob">Birth Date</string>
+    <string name="hint_anniversary">Anniversary</string>
+    <string name="hint_bloodgroup">Bloodgroup</string>
+    <string name="hint_gender">Gender</string>
+    <string name="hint_country">Country</string>
+    <string name="hint_state">State</string>
+    <string name="hint_city">City</string>
+    <string name="hint_zipcode">Zipcode</string>
+    <string name="hint_residential_address">Residential Address</string>
+    <string name="hint_search">Search</string>
+
+    <string name="name">Name</string>
+    <string name="first_name">First Name</string>
+    <string name="middle_name">Middle Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
+    <string name="mobile_secondary">Secondary Mobile</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="anniversary">Anniversary</string>
+    <string name="bloodgroup">Bloodgroup</string>
+    <string name="residential_address">Residential Address</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="admin_login">Admin login</string>
+    <string name="register_new_user">Register a new user</string>
+    <string name="password">Password</string>
+    <string name="signup">Signup</string>
+    <string name="divider">divider</string>
+    <string name="profile">Profile</string>
+    <string name="india">India</string>
+    <string name="user_not_exist">User not exist</string>
+    <string name="login_successful">Login successful</string>
+    <string name="login_failed">Login failed</string>
+    <string name="sql_error">sql error</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="password_not_match">Password Doesn\'t Match</string>
+    <string name="registered_successfully_please_login">Registered successfully. Please login</string>
+    <string name="user_registered_successfully">Registered successfully</string>
+    <string name="registration_successful">Registration successful</string>
+    <string name="already_registered">You are already registered</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="required_field">Required field</string>
+    <string name="updated_successfully">Updated successfully</string>
+    <string name="update_failed">Update failed, Please try again</string>
+    <string name="gender">Gender</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="branch_position">Branch Position</string>
+    <string name="title_go_back">Do you want to go back?</string>
+    <string name="message_go_back">Changes you made may not be saved.</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="confirm_logout">Are you sure you want to logout?</string>
+    <string name="response_failed">Response failed</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="user_directory">User directory</string>
+    <string name="user_details">User details</string>
+    <string name="categories">Categories</string>
+    <string name="members">Members</string>
+    <string name="circular">Circular</string>
+    <string name="announcement">Announcement</string>
+    <string name="newsletters">Newsletters</string>
+    <string name="projects">Projects</string>
+    <string name="calendar">Calendar</string>
+    <string name="photos">Photos</string>
+    <string name="feedback">Feedback</string>
+    <string name="about">About</string>
+
+    <string name="type_dob">dob</string>
+    <string name="type_anniversary">anniversary</string>
+    <string name="type_bloodgroup">bloodgroup</string>
+    <string name="type_gender">gender</string>
+    <string name="type_country">country</string>
+    <string name="type_call">call</string>
+    <string name="type_sms">sms</string>
+    <string name="type_whatsapp">whatsapp</string>
+
+    <string name="spinner_select">Select Category</string>
+
+    <string name="action_edit_profile">Edit Profile</string>
+
+    <string-array name="spinner_select_category">
+        <item>Select Category</item>
+    </string-array>
+
+    <string-array name="blood_type">
+        <item>A+ve</item>
+        <item>B+ve</item>
+        <item>O+ve</item>
+        <item>AB+ve</item>
+        <item>A-ve</item>
+        <item>B-ve</item>
+        <item>O-ve</item>
+        <item>AB-ve</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="action_settings">Settings</string>
+
+</resources>

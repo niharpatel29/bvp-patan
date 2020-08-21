@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "803931738376",
+    "firebase_url": "https://bvp-patan.firebaseio.com",
+    "project_id": "bvp-patan",
+    "storage_bucket": "bvp-patan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803931738376:android:58f7432d13169dd6a59cbd",
+        "android_client_info": {
+          "package_name": "com.example.bvp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803931738376-tvkl0hkbc84d0i44i74u4msasbfiko68.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg15hIfqAXB3KQpql5e1WbXgIQtes_UmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803931738376-tvkl0hkbc84d0i44i74u4msasbfiko68.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

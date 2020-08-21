@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#00BCD5</color>
+    <color name="colorPrimaryDark">#006B7A</color>
+    <color name="colorAccent">@color/colorOrange</color>
+    <color name="colorOrange">#EB970B</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>-->
+
+    <color name="colorPrimary">#5378ED</color>
+    <color name="colorPrimaryDark">#5378ED</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBackground">#EFEFEF</color>
+    <color name="colorDivider">#33000000</color>
+    <color name="colorSearch">#BCCCFF</color>
+    <color name="colorHint">#646464</color>
+    <color name="colorCategoryItem">#BDCDFF</color>
+
+    <color name="backgroundStartColor">#5378ED</color>
+    <color name="backgroundCenterColor">#6286F4</color>
+    <color name="backgroundEndColor">#9283F8</color>
+</resources>

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Categories">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:titleTextColor="@color/colorWhite" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        tools:context=".Categories">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btnUserDirectory"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_members" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/members"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_1"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_newsletter" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/newsletters"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_1"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_projects" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/projects"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_photos" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/photos"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_1"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_announcement" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/announcement"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_1"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_calendar" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/calendar"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_feedback" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/feedback"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="@dimen/dp_0"
+                android:layout_height="@dimen/dp_1"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_margin="@dimen/dp_10"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardBackgroundColor="@color/colorCategoryItem"
+                    app:cardCornerRadius="@dimen/dp_50"
+                    app:cardElevation="@dimen/elevation"
+                    app:cardUseCompatPadding="false"
+                    tools:ignore="ContentDescription">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/dp_18"
+                        app:srcCompat="@drawable/ic_category_about" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="@dimen/dp_120"
+                    android:maxLines="1"
+                    android:text="@string/about"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/size_16sp"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
