@@ -1,9 +1,7 @@
 package com.example.bvp.admin
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
 import com.example.bvp.api.APIInterface
@@ -27,35 +25,6 @@ class AdminRegistersNewUser : AppCompatActivity() {
         operations = Operations(this)
 
         handleButtonClicks()
-    }
-
-    override fun onBackPressed() {
-        logoutDialog()
-    }
-
-    private fun logoutDialog() {
-        val builder = AlertDialog.Builder(this)
-
-        builder
-            .setTitle(getString(R.string.logout))
-            .setMessage(getString(R.string.confirm_logout))
-            .setCancelable(true)
-
-        builder
-            .setPositiveButton(getString(R.string.logout)) { Dialog, id ->
-                Dialog.dismiss()
-                sharedPrefAdmin.adminLogout()
-                startActivity(Intent(this, AdminLogin::class.java))
-                finish()
-            }
-
-        builder
-            .setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
-                Dialog.dismiss()
-            }
-
-        val dialog = builder.create()
-        dialog.show()
     }
 
     private fun handleButtonClicks() {

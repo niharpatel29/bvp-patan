@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Newsletters">
+    android:gravity="center"
+    tools:context=".admin.UploadNewsletter">
 
     <Button
-        android:id="@+id/btnCrash"
+        android:id="@+id/btnSelectFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="do not click" />
+        android:text="select file" />
 
 </LinearLayout>

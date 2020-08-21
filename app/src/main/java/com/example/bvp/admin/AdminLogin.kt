@@ -80,14 +80,8 @@ class AdminLogin : AppCompatActivity() {
                                 setName(adminName)
                                 setId(adminId)
                             }
-                            operations.displayToast(getString(R.string.login_successful))
 
-                            startActivity(
-                                Intent(
-                                    this@AdminLogin,
-                                    AdminRegistersNewUser::class.java
-                                )
-                            )
+                            startActivity(Intent(this@AdminLogin, AdminActions::class.java))
                             finish()
                         }
                         "failed" -> {

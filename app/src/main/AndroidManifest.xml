@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".Newsletters"></activity>
+        <activity android:name=".admin.UploadNewsletter"/>
+        <activity android:name=".admin.AdminActions" />
+        <activity android:name=".Newsletters" />
         <!--
         <activity
             android:name=".Profile"

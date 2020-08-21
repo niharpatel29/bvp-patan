@@ -109,7 +109,7 @@ class ModifyProfile : AppCompatActivity() {
         builder
             .setPositiveButton(getString(R.string.ok)) { Dialog, id ->
                 Dialog.dismiss()
-                finish()
+                super.onBackPressed()
             }
 
         builder

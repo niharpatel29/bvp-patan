@@ -52,6 +52,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="admin_login">Admin login</string>
     <string name="register_new_user">Register a new user</string>
+    <string name="upload_newsletter">Upload newsletter</string>
     <string name="password">Password</string>
     <string name="signup">Signup</string>
     <string name="divider">divider</string>
