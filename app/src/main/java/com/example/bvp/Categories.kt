@@ -76,8 +76,12 @@ class Categories : AppCompatActivity() {
     }
 
     private fun handleButtonClicks() {
-        btnUserDirectory.setOnClickListener {
+        btnMembers.setOnClickListener {
             startActivity(Intent(this, UserDirectory::class.java))
+        }
+
+        btnNewsletters.setOnClickListener {
+            startActivity(Intent(this, Newsletters::class.java))
         }
     }
 

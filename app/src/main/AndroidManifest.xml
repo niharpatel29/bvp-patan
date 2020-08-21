@@ -13,13 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <!--<activity
+        <activity android:name=".Newsletters"></activity>
+        <!--
+        <activity
             android:name=".Profile"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-        </activity>-->
+        </activity>
+        -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
@@ -50,4 +53,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
