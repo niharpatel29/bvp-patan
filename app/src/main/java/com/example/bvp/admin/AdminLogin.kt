@@ -31,7 +31,7 @@ class AdminLogin : AppCompatActivity() {
 
     private fun checkLoginStatus() {
         if (sharedPrefAdmin.getLoginStatus()) {
-            startActivity(Intent(this, AdminRegistersNewUser::class.java))
+            startActivity(Intent(this, AdminActions::class.java))
             finish()
         }
     }
