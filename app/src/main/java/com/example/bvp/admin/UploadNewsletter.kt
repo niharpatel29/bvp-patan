@@ -29,6 +29,7 @@ class UploadNewsletter : AppCompatActivity() {
     }
 
     private lateinit var operations: Operations
+    private lateinit var sharedPrefAdmin: SharedPrefAdmin
 
     private var selectedFile: File? = null
 
@@ -37,6 +38,7 @@ class UploadNewsletter : AppCompatActivity() {
         setContentView(R.layout.upload_newsletter)
 
         operations = Operations(this)
+        sharedPrefAdmin = SharedPrefAdmin(this)
 
         handleButtonClicks()
     }
@@ -84,6 +86,7 @@ class UploadNewsletter : AppCompatActivity() {
                 selectedFile!!.name,
                 body
             ),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), sharedPrefAdmin.getId()!!),
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fileName)
         )
 

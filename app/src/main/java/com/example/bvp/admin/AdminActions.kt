@@ -45,9 +45,7 @@ class AdminActions : AppCompatActivity() {
         builder
             .setPositiveButton(getString(R.string.logout)) { Dialog, id ->
                 Dialog.dismiss()
-                sharedPrefAdmin.adminLogout()
-                startActivity(Intent(this, AdminLogin::class.java))
-                finish()
+                logout()
             }
 
         builder
@@ -57,5 +55,11 @@ class AdminActions : AppCompatActivity() {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun logout() {
+        sharedPrefAdmin.adminLogout()
+        startActivity(Intent(this, AdminLogin::class.java))
+        finish()
     }
 }

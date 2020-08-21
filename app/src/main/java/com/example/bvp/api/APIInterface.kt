@@ -84,15 +84,15 @@ interface APIInterface {
     @POST("FileUploader/API.php?apicall=profile_picture")
     fun uploadProfilePicture(
         @Part image: MultipartBody.Part,
-        @Part("user_id") userId: RequestBody,
-        @Part("type") type: RequestBody
+        @Part("user_id") userId: RequestBody
     ): Call<UploadResponse>
 
     @Multipart
     @POST("FileUploader/API.php?apicall=newsletter")
     fun uploadNewsletter(
         @Part file: MultipartBody.Part,
-        @Part("name") name: RequestBody
+        @Part("admin_id") adminId: RequestBody,
+        @Part("file_name") fileName: RequestBody
     ): Call<UploadResponse>
 
     @Streaming

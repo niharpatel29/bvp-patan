@@ -457,8 +457,7 @@ class ModifyProfile : AppCompatActivity() {
                 file.name,
                 body
             ),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), sharedPref.getId()!!),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "image")
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), sharedPref.getId()!!)
         )
 
         call.enqueue(object : Callback<UploadResponse> {
