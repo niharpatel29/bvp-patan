@@ -91,6 +91,7 @@ class Categories : AppCompatActivity() {
     private fun downloadProfilePicture() {
         val mFile = File(imageOperations.profilePicturePath, imageOperations.fileName)
         if (mFile.exists()) {
+            operations.displayToast("exist")
             return
         }
 
@@ -107,8 +108,7 @@ class Categories : AppCompatActivity() {
             .skipMemoryCache(true)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onLoadCleared(placeholder: Drawable?) {
-                    Log.d(TAG, "error")
-                    operations.displayToast("Error loading file")
+                    Log.d(TAG, "error loading file")
                 }
 
                 override fun onResourceReady(

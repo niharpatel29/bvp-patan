@@ -61,8 +61,9 @@ class ModifyProfile : AppCompatActivity() {
 
     private var selectedDOB: String? = null
     private var selectedAnniversary: String? = null
-    private var selectImageFlag = false
+    private var selectedImageFlag = false
     private lateinit var fileFromCache: Bitmap
+    private lateinit var tempCacheFile: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -440,21 +441,21 @@ class ModifyProfile : AppCompatActivity() {
     }
 
     private fun uploadImage() {
-        if (!selectImageFlag) {
+        if (!selectedImageFlag) {
             operations.displayToast(getString(R.string.updated_successfully))
             operations.hideProgressDialog()
             finish()
             return
         }
 
-        val file = File(imageOperations.profilePicturePath.toString(), imageOperations.fileName)
-        val body = UploadRequestBody(file, "image")
+        operations.showProgressDialog()
+        val body = UploadRequestBody(tempCacheFile, "image")
 
         val apiService = postClient()!!.create(APIInterface::class.java)
         val call = apiService.uploadProfilePicture(
             MultipartBody.Part.createFormData(
                 "file",
-                file.name,
+                tempCacheFile.name,
                 body
             ),
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), sharedPref.getId()!!)
@@ -474,12 +475,12 @@ class ModifyProfile : AppCompatActivity() {
                     val mResponse = response.body()
                     when (mResponse!!.error) {
                         false -> {
-                            selectImageFlag = false
+                            selectedImageFlag = false
                             // save file permanently
                             if (imageOperations.saveToInternalStorage(fileFromCache)) {
                                 imageOperations.setProfilePicture(imgProfile)
                             }
-                            Log.d(TAG, "photo uploaded")
+                            Log.d(TAG, mResponse.message)
                             operations.displayToast(getString(R.string.updated_successfully))
                             finish()
                         }
@@ -537,12 +538,9 @@ class ModifyProfile : AppCompatActivity() {
             val compressedImage = Compressor.compress(this@ModifyProfile, imageFile)
             compressedImage.let {
                 fileFromCache = BitmapFactory.decodeFile(it.absolutePath)
-//                if (imageOperations.saveToInternalStorage(fileFromCache)) {
-//                    imageOperations.setProfilePicture(imgProfile)
-                // save file temporary
+                tempCacheFile = File(it.absolutePath)
                 imgProfile.setImageBitmap(fileFromCache)
-//                }
-                Log.d(TAG, "Compressed default_image path: ${it.absolutePath}")
+                Log.d(TAG, "Compressed default image path: ${it.absolutePath}")
             }
         }
     }
@@ -558,7 +556,7 @@ class ModifyProfile : AppCompatActivity() {
                     val resultUri = UCrop.getOutput(data!!)
                     val imageFile = File(resultUri!!.path!!)
                     compressImage(imageFile)
-                    selectImageFlag = true
+                    selectedImageFlag = true
                 }
                 UCrop.RESULT_ERROR -> {
                     val cropError = UCrop.getError(data!!)

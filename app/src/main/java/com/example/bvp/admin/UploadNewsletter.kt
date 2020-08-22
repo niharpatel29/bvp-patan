@@ -2,8 +2,11 @@ package com.example.bvp.admin
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.ContentResolver
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
@@ -20,6 +23,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 class UploadNewsletter : AppCompatActivity() {
 
@@ -31,7 +36,7 @@ class UploadNewsletter : AppCompatActivity() {
     private lateinit var operations: Operations
     private lateinit var sharedPrefAdmin: SharedPrefAdmin
 
-    private var selectedFile: File? = null
+    private var selectedFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,22 +76,33 @@ class UploadNewsletter : AppCompatActivity() {
     }
 
     private fun uploadFile(fileName: String) {
-        if (selectedFile == null) {
+        if (selectedFileUri == null) {
             operations.displayToast(getString(R.string.file_not_selected))
             return
         }
 
+        val parcelFileDescriptor =
+            contentResolver.openFileDescriptor(selectedFileUri!!, "r", null) ?: return
+
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val file = File(cacheDir, contentResolver.getFileName(selectedFileUri!!))
+        val outputStream = FileOutputStream(file)
+        inputStream.copyTo(outputStream)
+
         operations.showProgressDialog()
-        val body = UploadRequestBody(selectedFile, "*")
+        val body = UploadRequestBody(file, "*")
 
         val apiService = postClient()!!.create(APIInterface::class.java)
         val call = apiService.uploadNewsletter(
             MultipartBody.Part.createFormData(
                 "file",
-                selectedFile!!.name,
+                file.name,
                 body
             ),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), sharedPrefAdmin.getId()!!),
+            RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(),
+                sharedPrefAdmin.getId()!!
+            ),
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), fileName)
         )
 
@@ -105,7 +121,7 @@ class UploadNewsletter : AppCompatActivity() {
                     when (mResponse!!.error) {
                         false -> {
                             operations.displayToast(getString(R.string.updated_successfully))
-                            selectedFile = null
+                            selectedFileUri = null
                             finish()
                         }
                         true -> {
@@ -120,13 +136,25 @@ class UploadNewsletter : AppCompatActivity() {
         })
     }
 
+    private fun ContentResolver.getFileName(fileUri: Uri): String {
+        var fileName = ""
+        val returnCursor = this.query(fileUri, null, null, null, null)
+        if (returnCursor != null) {
+            val nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            returnCursor.moveToFirst()
+            fileName = returnCursor.getString(nameIndex)
+            returnCursor.close()
+        }
+        return fileName
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 REQUEST_CODE_PICK_FILE -> {
-                    val resultUri = data?.data
-                    selectedFile = File(resultUri!!.path!!)
+                    selectedFileUri = data?.data
+//                    selectedFile = File(resultUri!!.path!!)
                 }
             }
         }
