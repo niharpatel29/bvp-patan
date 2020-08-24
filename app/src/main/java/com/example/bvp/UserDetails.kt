@@ -31,7 +31,7 @@ class UserDetails : AppCompatActivity() {
 
         dbHandler = MyDBHandler(this)
         operations = Operations(this)
-        userId = intent.getStringExtra("user_id")
+        userId = intent.getStringExtra("user_id")!!
         userDetails = dbHandler.getUserDetails(userId)
 
         toolbar()

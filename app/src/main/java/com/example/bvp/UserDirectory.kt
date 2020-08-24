@@ -48,11 +48,10 @@ class UserDirectory : AppCompatActivity() {
         val users = dbHandler.getAllUsers()
         for (i in users.indices) {
             val userId = users[i].userId
-            val image = R.drawable.default_image
             val name = "${users[i].firstname} ${users[i].lastname}"
             val position = users[i].position
 
-            userList.add(ListItem(userId, image, name, position))
+            userList.add(ListItem(userId, name, position))
         }
 
         usersAdapter = UsersAdapter(this, userList)

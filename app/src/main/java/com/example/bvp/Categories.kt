@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -39,6 +40,14 @@ class Categories : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
         operations = Operations(this)
         imageOperations = ImageOperations(this)
+
+        val root = Environment.getExternalStorageDirectory()
+        val dir = File(root.absolutePath.toString() + "/BVP/")
+        Log.d(TAG, dir.toString())
+        if (!dir.exists()) {
+            dir.mkdir()
+            Log.d(TAG, "not exist")
+        }
 
         toolbar()
         handleButtonClicks()

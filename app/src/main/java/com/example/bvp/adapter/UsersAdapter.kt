@@ -13,6 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.bvp.R
 import com.example.bvp.UserDetails
+import com.example.bvp.api.postClient
 import com.example.bvp.model.ListItem
 import com.example.bvp.other.CircleTransform
 
@@ -31,10 +32,13 @@ class UsersAdapter(private val context: Context, private var userList: ArrayList
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = userList[position]
 
+        val imageURL =
+            "${postClient()!!.baseUrl()}FileUploader/Uploads/ProfilePictures/${user.userId}.jpg"
+
         Glide
             .with(context)
-            .load(user.image)
-            .error(R.mipmap.ic_launcher)
+            .load(imageURL)
+            .error(R.drawable.default_image)
             .transition(withCrossFade())
             .thumbnail(0.5f)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
