@@ -42,7 +42,7 @@ class Categories : AppCompatActivity() {
         imageOperations = ImageOperations(this)
 
         val root = Environment.getExternalStorageDirectory()
-        val dir = File(root.absolutePath.toString() + "/BVP/")
+        val dir = File(root.absolutePath.toString() + "/bp/")
         Log.d(TAG, dir.toString())
         if (!dir.exists()) {
             dir.mkdir()

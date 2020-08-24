@@ -51,7 +51,6 @@ class Newsletters : AppCompatActivity() {
     private fun toolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
         toolbar.navigationIcon?.setColorFilter(
             resources.getColor(R.color.colorWhite),
             PorterDuff.Mode.SRC_ATOP

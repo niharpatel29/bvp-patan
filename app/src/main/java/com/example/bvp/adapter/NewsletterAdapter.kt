@@ -108,7 +108,11 @@ class NewsletterAdapter(
                 File(Environment.getExternalStorageDirectory().absolutePath.toString() + "/BVP Patan/")
             if (!filePath.exists()) {
                 Log.d(TAG, "path not exist")
-                filePath.mkdir()
+                if(filePath.mkdir()){
+                    Log.d(TAG, "created")
+                }else{
+                    Log.d(TAG, "not created")
+                }
             }
 
             val file = File(filePath, fileName)
