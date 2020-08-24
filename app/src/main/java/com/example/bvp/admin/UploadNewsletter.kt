@@ -126,6 +126,7 @@ class UploadNewsletter : AppCompatActivity() {
                         }
                         true -> {
                             operations.displayToast(mResponse.message)
+                            Log.d(TAG, mResponse.message)
                         }
                     }
                     operations.hideProgressDialog()
@@ -138,12 +139,12 @@ class UploadNewsletter : AppCompatActivity() {
 
     private fun ContentResolver.getFileName(fileUri: Uri): String {
         var fileName = ""
-        val returnCursor = this.query(fileUri, null, null, null, null)
-        if (returnCursor != null) {
-            val nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-            returnCursor.moveToFirst()
-            fileName = returnCursor.getString(nameIndex)
-            returnCursor.close()
+        val cursor = this.query(fileUri, null, null, null, null)
+        if (cursor != null) {
+            val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            cursor.moveToFirst()
+            fileName = cursor.getString(nameIndex)
+            cursor.close()
         }
         return fileName
     }
@@ -154,7 +155,7 @@ class UploadNewsletter : AppCompatActivity() {
             when (requestCode) {
                 REQUEST_CODE_PICK_FILE -> {
                     selectedFileUri = data?.data
-//                    selectedFile = File(resultUri!!.path!!)
+                    Log.d(TAG, contentResolver.getFileName(selectedFileUri!!))
                 }
             }
         }
