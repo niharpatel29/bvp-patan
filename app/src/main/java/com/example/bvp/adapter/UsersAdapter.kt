@@ -16,12 +16,8 @@ import com.example.bvp.UserDetails
 import com.example.bvp.model.ListItem
 import com.example.bvp.other.CircleTransform
 
-class CustomAdapter(private val context: Context, private var userList: ArrayList<ListItem>) :
-    RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
-
-    companion object {
-        const val TAG = "CustomAdapterTAG"
-    }
+class UsersAdapter(private val context: Context, private var userList: ArrayList<ListItem>) :
+    RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_item_user, parent, false)

@@ -6,7 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bvp.adapter.CustomAdapter
+import com.example.bvp.adapter.UsersAdapter
 import com.example.bvp.model.ListItem
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.user_directory.*
@@ -18,7 +18,7 @@ class UserDirectory : AppCompatActivity() {
     }
 
     private val userList = ArrayList<ListItem>()
-    private lateinit var customAdapter: CustomAdapter
+    private lateinit var usersAdapter: UsersAdapter
     private lateinit var dbHandler: MyDBHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +55,8 @@ class UserDirectory : AppCompatActivity() {
             userList.add(ListItem(userId, image, name, position))
         }
 
-        customAdapter = CustomAdapter(this, userList)
-        recyclerView.adapter = customAdapter
+        usersAdapter = UsersAdapter(this, userList)
+        recyclerView.adapter = usersAdapter
     }
 
     private fun search() {
@@ -87,6 +87,6 @@ class UserDirectory : AppCompatActivity() {
             }
         }
         // update recyclerview
-        customAdapter.updateList(temp)
+        usersAdapter.updateList(temp)
     }
 }

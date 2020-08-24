@@ -98,5 +98,5 @@ interface APIInterface {
 
     @Streaming
     @GET
-    fun downloadProfilePictureByUrl(@Url fileName: String): Call<ResponseBody>
+    fun downloadFileByUrl(@Url fileName: String): Call<ResponseBody>
 }

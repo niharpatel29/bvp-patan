@@ -86,5 +86,7 @@ data class Newsletter(
     @SerializedName("path")
     val path: String,
     @SerializedName("type")
-    val type: String
+    val type: String,
+    @SerializedName("upload_time")
+    val uploadTime: String
 )
