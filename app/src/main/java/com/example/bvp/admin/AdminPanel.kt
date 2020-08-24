@@ -5,15 +5,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
-import kotlinx.android.synthetic.main.admin_actions.*
+import kotlinx.android.synthetic.main.admin_panel.*
 
-class AdminActions : AppCompatActivity() {
+class AdminPanel : AppCompatActivity() {
 
     private lateinit var sharedPrefAdmin: SharedPrefAdmin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.admin_actions)
+        setContentView(R.layout.admin_panel)
 
         sharedPrefAdmin = SharedPrefAdmin(this)
 

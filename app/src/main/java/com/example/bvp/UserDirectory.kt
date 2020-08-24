@@ -35,7 +35,6 @@ class UserDirectory : AppCompatActivity() {
     private fun toolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = getString(R.string.user_directory)
         toolbar.navigationIcon?.setColorFilter(
             resources.getColor(R.color.colorWhite),
             PorterDuff.Mode.SRC_ATOP

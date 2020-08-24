@@ -13,6 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         app:layout_collapseMode="pin"
+        app:title="@string/categories"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:titleTextColor="@color/colorWhite" />
 

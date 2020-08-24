@@ -2,10 +2,7 @@ package com.example.bvp.api
 
 import com.example.bvp.admin.AdminLoginModel
 import com.example.bvp.admin.AdminRegistersNewUserModel
-import com.example.bvp.response.AllUsers
-import com.example.bvp.response.GeneralResponse
-import com.example.bvp.response.UploadResponse
-import com.example.bvp.response.UserLogin
+import com.example.bvp.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -94,6 +91,10 @@ interface APIInterface {
         @Part("admin_id") adminId: RequestBody,
         @Part("file_name") fileName: RequestBody
     ): Call<UploadResponse>
+
+    //get all users
+    @POST("getNewsletters.php")
+    fun performGetNewsletters(): Call<GetNewsletters>
 
     @Streaming
     @GET

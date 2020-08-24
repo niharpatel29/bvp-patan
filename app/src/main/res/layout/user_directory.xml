@@ -15,6 +15,7 @@
         android:background="@color/colorPrimary"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/AppTheme.PopupOverlay"
+        app:title="@string/user_directory"
         app:titleTextColor="@color/colorWhite" />
 
     <LinearLayout

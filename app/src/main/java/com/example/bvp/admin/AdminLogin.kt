@@ -31,7 +31,7 @@ class AdminLogin : AppCompatActivity() {
 
     private fun checkLoginStatus() {
         if (sharedPrefAdmin.getLoginStatus()) {
-            startActivity(Intent(this, AdminActions::class.java))
+            startActivity(Intent(this, AdminPanel::class.java))
             finish()
         }
     }
@@ -81,7 +81,7 @@ class AdminLogin : AppCompatActivity() {
                                 setId(adminId)
                             }
 
-                            startActivity(Intent(this@AdminLogin, AdminActions::class.java))
+                            startActivity(Intent(this@AdminLogin, AdminPanel::class.java))
                             finish()
                         }
                         "failed" -> {

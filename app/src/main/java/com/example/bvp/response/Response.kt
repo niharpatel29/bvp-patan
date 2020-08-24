@@ -70,3 +70,21 @@ data class UploadResponse(
     @SerializedName("message")
     val message: String
 )
+
+data class GetNewsletters(
+    @SerializedName("newsletter")
+    val newsletter: List<Newsletter>,
+    @SerializedName("response")
+    val response: String
+)
+
+data class Newsletter(
+    @SerializedName("file_name")
+    val fileName: String,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("path")
+    val path: String,
+    @SerializedName("type")
+    val type: String
+)

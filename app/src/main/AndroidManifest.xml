@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity android:name=".admin.UploadNewsletter"/>
-        <activity android:name=".admin.AdminActions" />
+        <activity android:name=".admin.AdminPanel" />
         <activity android:name=".Newsletters" />
         <!--
         <activity

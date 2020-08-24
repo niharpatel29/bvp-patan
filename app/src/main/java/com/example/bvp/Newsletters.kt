@@ -11,13 +11,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
+import com.example.bvp.operations.Operations
+import com.example.bvp.response.GetNewsletters
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.newsletters.*
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,15 +29,46 @@ class Newsletters : AppCompatActivity() {
         const val REQUEST_CODE_PERMISSION_SETTING = 101
     }
 
+    private lateinit var operations: Operations
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.newsletters)
 
-        btnCrash.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-        }
+        operations = Operations(this)
 
         requestStoragePermission()
+    }
+
+    private fun getNewsletters() {
+        val apiService = postClient()!!.create(APIInterface::class.java)
+        val call = apiService.performGetNewsletters()
+
+        call.enqueue(object : Callback<GetNewsletters> {
+            override fun onFailure(call: Call<GetNewsletters>, t: Throwable) {
+                operations.hideProgressDialog()
+                Log.d("onFailure", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<GetNewsletters>,
+                response: Response<GetNewsletters>
+            ) {
+                if (response.isSuccessful) {
+                    when (response.body()!!.response) {
+                        "ok" -> {
+
+                        }
+                        else -> {
+                            operations.displayToast(getString(R.string.unknown_error))
+                        }
+                    }
+                } else {
+                    operations.displayToast(getString(R.string.response_failed))
+                }
+                operations.hideProgressDialog()
+            }
+        })
     }
 
     private fun requestStoragePermission() {
@@ -100,8 +132,8 @@ class Newsletters : AppCompatActivity() {
         alertDialog.show()
     }
 
-    // navigating user to app settings
     private fun openSettings() {
+        // navigating user to app settings
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts("package", packageName, null)
         intent.data = uri
