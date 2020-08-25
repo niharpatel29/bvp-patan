@@ -199,7 +199,7 @@ class NewsletterAdapter(
                 if (type == "pdf") {
                     it.setDataAndType(path, "application/pdf")
                 }
-                if (type == "jpg") {
+                if (type == "jpg" || type == "png" || type == "jpeg") {
                     it.setDataAndType(path, "image/*")
                 }
                 it.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
