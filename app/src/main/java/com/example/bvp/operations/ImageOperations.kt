@@ -5,8 +5,10 @@ import android.content.ContextWrapper
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
+import android.widget.ImageView
 import com.example.bvp.R
 import com.github.abdularis.civ.CircleImageView
+import com.mikhaellopez.circularimageview.CircularImageView
 import java.io.*
 
 class ImageOperations(val context: Context) {
@@ -41,7 +43,7 @@ class ImageOperations(val context: Context) {
         }
     }
 
-    fun setProfilePicture(imageView: CircleImageView) {
+    fun setProfilePicture(imageView: CircularImageView) {
         imageView.setImageBitmap(loadFromInternalStorage())
     }
 

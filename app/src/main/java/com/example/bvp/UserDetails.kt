@@ -4,10 +4,16 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.bvp.adapter.ContentAdapter
+import com.example.bvp.api.postClient
 import com.example.bvp.model.UserListItem
 import com.example.bvp.model.UserModel
 import com.example.bvp.operations.Operations
+import com.example.bvp.other.CircleTransform
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.user_details.*
 
@@ -76,9 +82,22 @@ class UserDetails : AppCompatActivity() {
     }
 
     private fun setHeaders() {
+        val imageURL =
+            "${postClient()!!.baseUrl()}FileUploader/Uploads/ProfilePictures/$userId.jpg"
         val name = "${userDetails.firstname} ${userDetails.lastname}"
         val mobilePrimary = userDetails.mobilePrimary
         val position = userDetails.position
+
+        Glide
+            .with(this)
+            .load(imageURL)
+            .error(R.drawable.default_image)
+            .placeholder(R.drawable.default_image)
+//            .transition(withCrossFade())
+            .thumbnail(0.5f)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .transform(CircleTransform(this))
+            .into(imgProfile)
 
         tvName.text = name
         tvMobilePrimary.text = mobilePrimary

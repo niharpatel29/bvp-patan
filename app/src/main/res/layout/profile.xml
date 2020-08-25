@@ -36,18 +36,44 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <!--<com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/img_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            app:cardCornerRadius="@dimen/dp_100"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="@dimen/dp_0"
+            tools:ignore="ContentDescription">
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:scaleType="centerInside"
             android:src="@drawable/default_image"
-            app:civ_border_color="@color/colorAccent"
-            app:civ_border_width="2dp" />-->
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="@dimen/border" />
 
-        <com.github.abdularis.civ.CircleImageView
+        </androidx.cardview.widget.CardView>
+
+        <!--<androidx.cardview.widget.CardView
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            app:cardCornerRadius="@dimen/dp_100"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="@dimen/dp_0"
+            tools:ignore="ContentDescription">
+
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_margin="@dimen/border"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/default_image" />
+
+        </androidx.cardview.widget.CardView>-->
+
+        <!--<com.github.abdularis.civ.CircleImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dp_100"
             android:layout_height="@dimen/dp_100"
@@ -55,7 +81,7 @@
             android:scaleType="centerInside"
             android:src="@drawable/default_image"
             app:strokeColor="@color/colorWhite"
-            app:strokeWidth="@dimen/profile_border" />
+            app:strokeWidth="@dimen/profile_border" />-->
 
         <LinearLayout
             android:layout_width="wrap_content"

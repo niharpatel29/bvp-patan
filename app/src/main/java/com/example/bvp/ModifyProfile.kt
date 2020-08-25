@@ -146,7 +146,7 @@ class ModifyProfile : AppCompatActivity() {
     }
 
     private fun handleButtonClicks() {
-        imgProfile.setOnClickListener {
+        btnChangeProfile.setOnClickListener {
             openImageChooser()
         }
 
