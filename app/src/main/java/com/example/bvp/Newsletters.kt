@@ -48,6 +48,11 @@ class Newsletters : AppCompatActivity() {
         requestStoragePermission()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        newsletterAdapter.notifyDataSetChanged()
+    }
+
     private fun toolbar() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

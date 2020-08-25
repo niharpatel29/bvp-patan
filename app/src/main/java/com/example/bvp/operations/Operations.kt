@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 
 class Operations(private val context: Context) {
 
+    val bvpDirectory = "/BVP Patan/"
     private val progressDialog = ProgressDialog(context)
 
     fun getValue(value: TextInputLayout): String {

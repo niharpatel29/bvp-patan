@@ -41,16 +41,9 @@ class Categories : AppCompatActivity() {
         operations = Operations(this)
         imageOperations = ImageOperations(this)
 
-        val root = Environment.getExternalStorageDirectory()
-        val dir = File(root.absolutePath.toString() + "/bp/")
-        Log.d(TAG, dir.toString())
-        if (!dir.exists()) {
-            dir.mkdir()
-            Log.d(TAG, "not exist")
-        }
-
         toolbar()
         handleButtonClicks()
+        createDirectory()
         downloadProfilePicture()
     }
 
@@ -96,10 +89,18 @@ class Categories : AppCompatActivity() {
         }
     }
 
+    private fun createDirectory() {
+        val filePath =
+            File(Environment.getExternalStorageDirectory().absolutePath.toString() + operations.bvpDirectory)
+        if (!filePath.exists()) {
+            filePath.mkdir()
+        }
+    }
+
     private fun downloadProfilePicture() {
         val mFile = File(imageOperations.profilePicturePath, imageOperations.fileName)
         if (mFile.exists()) {
-            operations.displayToast("exist")
+            Log.d(TAG, "Already exist")
             return
         }
 
