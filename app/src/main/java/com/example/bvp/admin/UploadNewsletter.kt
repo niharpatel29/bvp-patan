@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
 import com.example.bvp.api.APIInterface
@@ -15,7 +17,9 @@ import com.example.bvp.api.postClient
 import com.example.bvp.operations.Operations
 import com.example.bvp.response.UploadResponse
 import com.example.bvp.upload.UploadRequestBody
+import kotlinx.android.synthetic.main.newsletters.*
 import kotlinx.android.synthetic.main.upload_newsletter.*
+import kotlinx.android.synthetic.main.upload_newsletter.toolbar
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -45,7 +49,31 @@ class UploadNewsletter : AppCompatActivity() {
         operations = Operations(this)
         sharedPrefAdmin = SharedPrefAdmin(this)
 
+        toolbar()
         handleButtonClicks()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item!!.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        toolbar.overflowIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun handleButtonClicks() {

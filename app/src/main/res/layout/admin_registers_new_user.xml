@@ -14,7 +14,7 @@
         android:background="@color/colorPrimary"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="@string/admin_panel"
+        app:title="@string/register_new_user"
         app:titleTextColor="@color/colorWhite" />
 
     <ScrollView

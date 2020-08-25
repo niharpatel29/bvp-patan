@@ -68,7 +68,6 @@ class Categories : AppCompatActivity() {
 
     private fun toolbar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.navigationIcon?.setColorFilter(
             resources.getColor(R.color.colorWhite),
             PorterDuff.Mode.SRC_ATOP

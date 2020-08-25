@@ -141,7 +141,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/dp_18"
-                        app:srcCompat="@drawable/ic_category_projects" />
+                        app:srcCompat="@drawable/ic_category_announcement" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -151,7 +151,7 @@
                     android:ellipsize="end"
                     android:maxWidth="@dimen/dp_120"
                     android:maxLines="1"
-                    android:text="@string/projects"
+                    android:text="@string/announcement"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/size_16sp"
                     app:autoSizeTextType="uniform" />
@@ -231,7 +231,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/dp_18"
-                        app:srcCompat="@drawable/ic_category_announcement" />
+                        app:srcCompat="@drawable/ic_category_projects" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -241,7 +241,7 @@
                     android:ellipsize="end"
                     android:maxWidth="@dimen/dp_120"
                     android:maxLines="1"
-                    android:text="@string/announcement"
+                    android:text="@string/projects"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/size_16sp"
                     app:autoSizeTextType="uniform" />

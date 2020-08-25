@@ -1,7 +1,9 @@
 package com.example.bvp.admin
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
 import com.example.bvp.api.APIInterface
@@ -24,7 +26,31 @@ class AdminRegistersNewUser : AppCompatActivity() {
         sharedPrefAdmin = SharedPrefAdmin(this)
         operations = Operations(this)
 
+        toolbar()
         handleButtonClicks()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item!!.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        toolbar.overflowIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun handleButtonClicks() {
@@ -34,6 +60,9 @@ class AdminRegistersNewUser : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (operations.checkNullOrEmpty(layoutLastname)) {
+                return@setOnClickListener
+            }
+            if (operations.checkNullOrEmpty(layoutPosition)) {
                 return@setOnClickListener
             }
             if (operations.checkNullOrEmpty(layoutUserMobile)) {

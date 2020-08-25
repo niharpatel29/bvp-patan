@@ -56,6 +56,10 @@ class Profile : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item!!.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
             R.id.action_edit -> {
                 startActivity(Intent(this, ModifyProfile::class.java))
                 true
