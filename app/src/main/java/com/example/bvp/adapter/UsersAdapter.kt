@@ -39,9 +39,10 @@ class UsersAdapter(private val context: Context, private var userList: ArrayList
             .with(context)
             .load(imageURL)
             .error(R.drawable.default_image)
+            .placeholder(R.drawable.default_image)
             .transition(withCrossFade())
             .thumbnail(0.5f)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .transform(CircleTransform(context))
             .into(holder.imageView)
 
