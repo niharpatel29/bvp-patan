@@ -14,6 +14,7 @@
     <string name="btn_select_dob">Select DOB</string>
     <string name="btn_select_anniversary">Select Anniversary</string>
     <string name="btn_update">Update</string>
+    <string name="btn_mark_read">Mark As Read</string>
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
@@ -98,6 +99,7 @@
     <string name="calendar">Calendar</string>
     <string name="photos">Photos</string>
     <string name="feedback">Feedback</string>
+    <string name="feedback_and_rating">Feedback &amp; Rating</string>
     <string name="about">About</string>
     <string name="admin_panel">Admin panel</string>
     <string name="file_not_selected">File not selected</string>

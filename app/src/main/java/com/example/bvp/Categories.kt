@@ -86,6 +86,14 @@ class Categories : AppCompatActivity() {
         btnNewsletters.setOnClickListener {
             startActivity(Intent(this, Newsletters::class.java))
         }
+
+        btnAnnouncement.setOnClickListener {
+            startActivity(Intent(this, Announcement::class.java))
+        }
+
+        btnFeedback.setOnClickListener {
+            startActivity(Intent(this, Feedback::class.java))
+        }
     }
 
     private fun createDirectory() {

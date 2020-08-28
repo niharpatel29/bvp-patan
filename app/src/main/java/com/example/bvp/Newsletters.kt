@@ -31,6 +31,7 @@ import retrofit2.Response
 class Newsletters : AppCompatActivity() {
 
     companion object {
+        const val TAG = "NewslettersTAG"
         const val REQUEST_CODE_PERMISSION_SETTING = 101
     }
 
@@ -134,8 +135,7 @@ class Newsletters : AppCompatActivity() {
         })
     }
 
-    private fun requestStoragePermission(): Boolean {
-        var granted = false
+    private fun requestStoragePermission() {
         Dexter
             .withContext(this)
             .withPermissions(
@@ -146,24 +146,14 @@ class Newsletters : AppCompatActivity() {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     // check if all permissions are granted
                     if (report.areAllPermissionsGranted()) {
-                        Toast.makeText(
-                            this@Newsletters,
-                            "All permissions are granted!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        granted = true
+                        Log.d(TAG, "Permission granted")
                     }
 
                     // check for permanent denial of any permission
                     if (report.isAnyPermissionPermanentlyDenied) {
                         // show alert dialog navigating to Settings
-                        Toast.makeText(
-                            this@Newsletters,
-                            "Permanently denied",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        operations.displayToast("Permanently denied")
                         showSettingsDialog()
-                        granted = false
                     }
                 }
 
@@ -174,17 +164,10 @@ class Newsletters : AppCompatActivity() {
                     token.continuePermissionRequest()
                 }
             }).withErrorListener {
-                Toast.makeText(
-                    this,
-                    "Error occurred! ",
-                    Toast.LENGTH_SHORT
-                ).show()
-                granted = false
+                operations.displayToast("Error occurred")
             }
             .onSameThread()
             .check()
-
-        return granted
     }
 
     private fun showSettingsDialog() {
