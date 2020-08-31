@@ -31,7 +31,7 @@
         <activity android:name=".admin.AdminPanel" />
         <activity android:name=".admin.AdminRegistersNewUser" />
         <activity android:name=".admin.UploadNewsletter" />
-        <activity android:name=".admin.MakeAnnouncement"/>
+        <activity android:name=".admin.MakeAnnouncement" />
         <activity
             android:name=".Login"
             android:theme="@style/MyTheme" />
@@ -46,6 +46,7 @@
         <activity android:name=".Newsletters" />
         <activity android:name=".Announcement" />
         <activity android:name=".Feedback" />
+
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
@@ -59,6 +60,26 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <!--FCM-->
+        <service
+            android:name=".firebase.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_baseline_check_circle_filled" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="#FF0638" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
     </application>
 
 </manifest>

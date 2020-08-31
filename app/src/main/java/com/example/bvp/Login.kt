@@ -1,6 +1,10 @@
 package com.example.bvp
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,12 +18,13 @@ import com.example.bvp.prefs.SharedPref
 import com.example.bvp.response.AllUsers
 import com.example.bvp.response.UserLogin
 import com.example.bvp.sqlite.MyDBHandler
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.login.*
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.*
 
 class Login : AppCompatActivity() {
 
@@ -41,8 +46,45 @@ class Login : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
 
+        notificationChannel()
+        subscribeToTopic()
+        generateToken()
+
         checkLoginStatus()
         handleButtonClicks()
+    }
+
+    private fun notificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                getString(R.string.default_notification_channel_id),
+                getString(R.string.default_notification_channel_name),
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    private fun subscribeToTopic() {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("logged_in")
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("karobari")
+        FirebaseMessaging.getInstance().unsubscribeFromTopic("general")
+    }
+
+    private fun generateToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.d(TAG, "token: getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                val token = task.result?.token
+                Log.d(TAG, "token: $token")
+//                sharedPref.setToken(token)
+            })
     }
 
     private fun checkLoginStatus() {
