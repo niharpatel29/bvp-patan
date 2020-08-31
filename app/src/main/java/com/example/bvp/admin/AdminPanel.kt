@@ -33,6 +33,10 @@ class AdminPanel : AppCompatActivity() {
         btnUploadNewsletter.setOnClickListener {
             startActivity(Intent(this, UploadNewsletter::class.java))
         }
+
+        btnMakeAnnouncement.setOnClickListener {
+            startActivity(Intent(this, MakeAnnouncement::class.java))
+        }
     }
 
     private fun logoutDialog() {

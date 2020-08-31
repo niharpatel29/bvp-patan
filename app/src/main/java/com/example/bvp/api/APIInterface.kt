@@ -2,6 +2,7 @@ package com.example.bvp.api
 
 import com.example.bvp.admin.other.AdminLoginModel
 import com.example.bvp.admin.other.AdminRegistersNewUserModel
+import com.example.bvp.admin.other.MakeAnnouncementResponse
 import com.example.bvp.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -76,6 +77,15 @@ interface APIInterface {
         @Field("position") position: String,
         @Field("mobile_primary") mobile_primary: String
     ): Call<AdminRegistersNewUserModel>
+
+    //admin registers new default_image
+    @POST("admin/makeAnnouncement.php?apicall=new")
+    @FormUrlEncoded
+    fun performMakeAnnouncement(
+        @Field("admin_id") admin_id: String?,
+        @Field("title") title: String,
+        @Field("message") message: String
+    ): Call<MakeAnnouncementResponse>
 
     @POST("getAnnouncement.php")
     fun performGetAnnouncement(): Call<GetAnnouncement>

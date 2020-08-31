@@ -20,73 +20,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/dp_20">
+        android:gravity="center">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutTitle"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/colorPrimary"
-            app:hintTextColor="@color/colorBlack"
-            app:startIconDrawable="@drawable/ic_baseline_title">
+            tools:ignore="UselessParent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:hint="@string/hint_title"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/size_16sp" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_20">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutTitle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorBlack"
+                    app:startIconDrawable="@drawable/ic_baseline_title">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutMessage"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/colorPrimary"
-            app:hintTextColor="@color/colorBlack"
-            app:startIconDrawable="@drawable/ic_baseline_text">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:hint="@string/hint_title"
+                        android:inputType="text|textCapSentences"
+                        android:maxLines="1"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/size_16sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:hint="@string/hint_message"
-                android:inputType="textMultiLine|textCapSentences"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/size_16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutMessage"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorBlack"
+                    app:startIconDrawable="@drawable/ic_baseline_text">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSend"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="@dimen/short_button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/margin_to_show_elevation"
-            android:layout_marginTop="@dimen/dp_40"
-            android:layout_marginBottom="@dimen/margin_to_show_elevation"
-            android:elevation="@dimen/elevation"
-            android:text="@string/btn_send"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/size_20sp"
-            android:textStyle="bold"
-            app:autoSizeMaxTextSize="@dimen/size_20sp"
-            app:autoSizeTextType="uniform"
-            app:backgroundTint="@color/colorPrimary"
-            app:cornerRadius="@dimen/button_corner_radius" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:hint="@string/hint_message"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/size_16sp" />
 
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSend"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="@dimen/short_button_width"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="@dimen/margin_to_show_elevation"
+                    android:layout_marginTop="@dimen/dp_40"
+                    android:layout_marginBottom="@dimen/margin_to_show_elevation"
+                    android:elevation="@dimen/elevation"
+                    android:text="@string/btn_send"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/size_20sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/size_20sp"
+                    app:autoSizeTextType="uniform"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="@dimen/button_corner_radius" />
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>
