@@ -1,7 +1,7 @@
 package com.example.bvp.api
 
-import com.example.bvp.admin.AdminLoginModel
-import com.example.bvp.admin.AdminRegistersNewUserModel
+import com.example.bvp.admin.other.AdminLoginModel
+import com.example.bvp.admin.other.AdminRegistersNewUserModel
 import com.example.bvp.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -77,6 +77,9 @@ interface APIInterface {
         @Field("mobile_primary") mobile_primary: String
     ): Call<AdminRegistersNewUserModel>
 
+    @POST("getAnnouncement.php")
+    fun performGetAnnouncement(): Call<GetAnnouncement>
+
     @Multipart
     @POST("FileUploader/API.php?apicall=profile_picture")
     fun uploadProfilePicture(
@@ -92,7 +95,6 @@ interface APIInterface {
         @Part("file_name") fileName: RequestBody
     ): Call<UploadResponse>
 
-    //get all users
     @POST("getNewsletters.php")
     fun performGetNewsletters(): Call<GetNewsletters>
 

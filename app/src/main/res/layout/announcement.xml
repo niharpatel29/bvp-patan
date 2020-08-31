@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context=".Announcement">
 
@@ -14,7 +15,7 @@
         android:background="@color/colorPrimary"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="@string/categories"
+        app:title="@string/announcement"
         app:titleTextColor="@color/colorWhite" />
 
     <LinearLayout
@@ -23,10 +24,22 @@
         android:orientation="vertical"
         android:padding="@dimen/dp_10">
 
+        <TextView
+            android:id="@+id/tvTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_announcement"
+            android:textSize="@dimen/size_22sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foreground="?android:attr/selectableItemBackground"
+            android:visibility="gone"
             app:cardBackgroundColor="@color/colorWhite"
             app:cardCornerRadius="8dp"
             app:cardUseCompatPadding="false">
@@ -42,27 +55,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Meeting :"
-                    android:textSize="@dimen/size_22sp"
+                    android:textSize="@dimen/size_20sp"
                     android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@color/colorDivider"
+                    android:contentDescription="@string/divider" />
 
                 <TextView
                     android:id="@+id/tvMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_20"
                     android:autoLink="web|email"
                     android:text="meeting will be held at the BVP main branch on 8:20 pm. www.google.com niharpatel29@gmail.com kdsjknc dfjfhbhewk cx n v "
                     android:textColorLink="@color/colorPrimary"
                     android:textSize="@dimen/size_20sp" />
 
-                <com.google.android.material.button.MaterialButton
+                <!--<com.google.android.material.button.MaterialButton
                     android:id="@+id/btnMarkRead"
                     style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
                     android:layout_width="@dimen/short_button_width"
                     android:layout_height="@dimen/button_height"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="@dimen/margin_to_show_elevation"
-                    android:layout_marginTop="@dimen/dp_50"
+                    android:layout_marginTop="@dimen/dp_30"
                     android:layout_marginBottom="@dimen/margin_to_show_elevation"
                     android:elevation="@dimen/elevation"
                     android:maxLines="1"
@@ -75,7 +95,7 @@
                     app:autoSizeMaxTextSize="@dimen/size_20sp"
                     app:autoSizeTextType="uniform"
                     app:backgroundTint="@color/colorPrimary"
-                    app:cornerRadius="@dimen/button_corner_radius" />
+                    app:cornerRadius="@dimen/button_corner_radius" />-->
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>

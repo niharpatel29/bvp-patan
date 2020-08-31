@@ -90,3 +90,18 @@ data class Newsletter(
     @SerializedName("upload_time")
     val uploadTime: String
 )
+
+data class GetAnnouncement(
+    @SerializedName("flag")
+    val flag: String,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("response")
+    val response: String,
+    @SerializedName("time")
+    val time: String,
+    @SerializedName("title")
+    val title: String
+)

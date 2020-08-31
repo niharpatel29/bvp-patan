@@ -103,6 +103,7 @@
     <string name="about">About</string>
     <string name="admin_panel">Admin panel</string>
     <string name="file_not_selected">File not selected</string>
+    <string name="no_announcement">No Announcement</string>
 
     <string name="type_dob">dob</string>
     <string name="type_anniversary">anniversary</string>
