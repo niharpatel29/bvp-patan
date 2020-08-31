@@ -24,3 +24,10 @@ data class AdminRegistersNewUserModel(
     @SerializedName("response")
     val response: String
 )
+
+data class MakeAnnouncementResponse(
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("response")
+    val response: String
+)

@@ -15,6 +15,7 @@
     <string name="btn_select_anniversary">Select Anniversary</string>
     <string name="btn_update">Update</string>
     <string name="btn_mark_read">Mark As Read</string>
+    <string name="btn_send">Send</string>
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
@@ -38,6 +39,8 @@
     <string name="hint_residential_address">Residential Address</string>
     <string name="hint_search">Search</string>
     <string name="hint_file_name">File Name</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_message">Message</string>
 
     <string name="name">Name</string>
     <string name="first_name">First Name</string>
@@ -104,6 +107,7 @@
     <string name="admin_panel">Admin panel</string>
     <string name="file_not_selected">File not selected</string>
     <string name="no_announcement">No Announcement</string>
+    <string name="make_announcement">Make Announcement</string>
 
     <string name="type_dob">dob</string>
     <string name="type_anniversary">anniversary</string>

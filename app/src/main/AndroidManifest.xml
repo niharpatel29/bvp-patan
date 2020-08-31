@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".Announcement"></activity>
+        <activity android:name=".admin.MakeAnnouncement"></activity>
+        <activity android:name=".Announcement" />
         <activity android:name=".Feedback" />
         <activity
             android:name=".MainActivity"
