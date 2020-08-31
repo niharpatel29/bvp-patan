@@ -1,4 +1,4 @@
-package com.example.bvp.admin
+package com.example.bvp.admin.other
 
 import com.google.gson.annotations.SerializedName
 

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
+import com.example.bvp.admin.other.SharedPrefAdmin
 import kotlinx.android.synthetic.main.admin_panel.*
 
 class AdminPanel : AppCompatActivity() {

@@ -12,12 +12,12 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
+import com.example.bvp.admin.other.SharedPrefAdmin
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
 import com.example.bvp.operations.Operations
 import com.example.bvp.response.UploadResponse
 import com.example.bvp.upload.UploadRequestBody
-import kotlinx.android.synthetic.main.newsletters.*
 import kotlinx.android.synthetic.main.upload_newsletter.*
 import kotlinx.android.synthetic.main.upload_newsletter.toolbar
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
