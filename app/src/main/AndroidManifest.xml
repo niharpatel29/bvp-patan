@@ -16,9 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".admin.MakeAnnouncement"></activity>
-        <activity android:name=".Announcement" />
-        <activity android:name=".Feedback" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/MyTheme">
@@ -34,6 +31,7 @@
         <activity android:name=".admin.AdminPanel" />
         <activity android:name=".admin.AdminRegistersNewUser" />
         <activity android:name=".admin.UploadNewsletter" />
+        <activity android:name=".admin.MakeAnnouncement"/>
         <activity
             android:name=".Login"
             android:theme="@style/MyTheme" />
@@ -46,6 +44,8 @@
         <activity android:name=".UserDirectory" />
         <activity android:name=".UserDetails" />
         <activity android:name=".Newsletters" />
+        <activity android:name=".Announcement" />
+        <activity android:name=".Feedback" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
