@@ -133,8 +133,15 @@ class ModifyProfile : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun setValuesOnStart() {
+    private fun setHeaders() {
         imageOperations.setProfilePicture(imgProfile)
+        val name = "${sharedPref.getFirstname()} ${sharedPref.getLastname()}"
+        tvName.text = name
+        tvPosition.text = sharedPref.getPosition()
+    }
+
+    private fun setValuesOnStart() {
+        setHeaders()
         operations.run {
             val name = "${sharedPref.getFirstname()} ${sharedPref.getLastname()}"
             tvName.text = name
