@@ -2,11 +2,15 @@ package com.example.bvp.firebase
 
 import android.app.PendingIntent
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.bvp.Login
 import com.example.bvp.R
+import com.example.bvp.operations.Operations
+import com.example.bvp.prefs.SharedPref
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONException
@@ -16,6 +20,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     companion object {
         const val TAG = "fcmTAG"
+    }
+
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Log.d(TAG, "token: $token")
+
+//        Operations(applicationContext).displayToast("token updated")
+        SharedPref(applicationContext).setFCMToken(token) //working
+        Handler(Looper.getMainLooper()).post { Operations(applicationContext).displayToast("token updated") }
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

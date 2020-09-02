@@ -4,31 +4,33 @@ import android.content.Context
 import com.example.bvp.model.UserModel
 
 // USE THIS CLASS FOR AFTER LOGIN PROCESSES FOR BEST RESULTS
-class SharedPref(private val context: Context) {
+class SharedPref(context: Context) {
 
-    private val defaultValue = ""
+    companion object {
+        private const val defaultValue = ""
+        private const val myPreference = "myPref"
+        private const val KEY_LOGIN_STATUS = "login_status"
+        private const val KEY_FCM_TOKEN = "fcm_token"
+        private const val KEY_USER_ID = "user_id"
+        private const val KEY_MOBILE_PRIMARY = "mobile_primary"
+        private const val KEY_FIRSTNAME = "firstname"
+        private const val KEY_MIDDLENAME = "middlename"
+        private const val KEY_LASTNAME = "lastname"
+        private const val KEY_MOBILE_SECONDARY = "mobile_secondary"
+        private const val KEY_POSITION = "position"
+        private const val KEY_EMAIL = "email"
+        private const val KEY_DOB = "dob"
+        private const val KEY_ANNIVERSARY = "anniversary"
+        private const val KEY_BLOODGROUP = "bloodgroup"
+        private const val KEY_GENDER = "gender"
+        private const val KEY_COUNTRY = "country"
+        private const val KEY_STATE = "state"
+        private const val KEY_CITY = "city"
+        private const val KEY_ZIPCODE = "zipcode"
+        private const val KEY_RESIDENTIAL_ADDRESS = "residential_address"
+    }
 
-    private val myPreference = "myPref"
-    private var KEY_LOGIN_STATUS = "login_status"
-    private var KEY_USER_ID = "user_id"
-    private var KEY_MOBILE_PRIMMARY = "mobile_primary"
-    private var KEY_FIRSTNAME = "firstname"
-    private var KEY_MIDDLENAME = "middlename"
-    private var KEY_LASTNAME = "lastname"
-    private var KEY_MOBILE_SECONDARY = "mobile_secondary"
-    private var KEY_POSITION = "position"
-    private var KEY_EMAIL = "email"
-    private var KEY_DOB = "dob"
-    private var KEY_ANNIVERSARY = "anniversary"
-    private var KEY_BLOODGROUP = "bloodgroup"
-    private var KEY_GENDER = "gender"
-    private var KEY_COUNTRY = "country"
-    private var KEY_STATE = "state"
-    private var KEY_CITY = "city"
-    private var KEY_ZIPCODE = "zipcode"
-    private var KEY_RESIDENTIAL_ADDRESS = "residential_address"
-
-    private var sharedPreferences =
+    private val sharedPreferences =
         context.getSharedPreferences(myPreference, Context.MODE_PRIVATE)
 
     fun setLoginStatus(loginStatus: Boolean) {
@@ -39,6 +41,16 @@ class SharedPref(private val context: Context) {
 
     fun getLoginStatus(): Boolean {
         return sharedPreferences.getBoolean(KEY_LOGIN_STATUS, false)
+    }
+
+    fun setFCMToken(token: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString(KEY_FCM_TOKEN, token)
+        editor.apply()
+    }
+
+    fun getFCMToken(): String? {
+        return sharedPreferences.getString(KEY_FCM_TOKEN, defaultValue)
     }
 
     fun setId(id: String) {
@@ -53,12 +65,12 @@ class SharedPref(private val context: Context) {
 
     fun setMobilePrimary(mobilePrimary: String) {
         val editor = sharedPreferences.edit()
-        editor.putString(KEY_MOBILE_PRIMMARY, mobilePrimary)
+        editor.putString(KEY_MOBILE_PRIMARY, mobilePrimary)
         editor.apply()
     }
 
     fun getMobilePrimary(): String? {
-        return sharedPreferences.getString(KEY_MOBILE_PRIMMARY, defaultValue)
+        return sharedPreferences.getString(KEY_MOBILE_PRIMARY, defaultValue)
     }
 
     fun setFirstname(firstname: String?) {

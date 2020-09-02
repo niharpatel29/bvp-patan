@@ -17,6 +17,7 @@
     <color name="colorSearch">#BCCCFF</color>
     <color name="colorHint">#646464</color>
     <color name="colorCategoryItem">#BDCDFF</color>
+    <color name="colorRed">#FF0638</color>
 
     <color name="backgroundStartColor">#5378ED</color>
     <color name="backgroundCenterColor">#6286F4</color>

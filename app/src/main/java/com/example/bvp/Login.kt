@@ -48,7 +48,7 @@ class Login : AppCompatActivity() {
 
         notificationChannel()
         subscribeToTopic()
-        generateToken()
+//        generateToken()
 
         checkLoginStatus()
         handleButtonClicks()
@@ -73,7 +73,7 @@ class Login : AppCompatActivity() {
         FirebaseMessaging.getInstance().unsubscribeFromTopic("general")
     }
 
-    private fun generateToken() {
+    /*private fun generateToken() {
         FirebaseInstanceId.getInstance().instanceId
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
@@ -85,7 +85,7 @@ class Login : AppCompatActivity() {
                 Log.d(TAG, "token: $token")
 //                sharedPref.setToken(token)
             })
-    }
+    }*/
 
     private fun checkLoginStatus() {
         if (sharedPref.getLoginStatus()) {
