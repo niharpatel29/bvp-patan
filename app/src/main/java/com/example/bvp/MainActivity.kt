@@ -26,30 +26,5 @@ class MainActivity : AppCompatActivity() {
         btnUserLogin.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
-
-        btnSub.setOnClickListener {
-            FirebaseMessaging.getInstance().subscribeToTopic("karobari").addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Operations(this).displayToast("karobari subscribed")
-                } else {
-                    Operations(this).displayToast("failed")
-                }
-            }
-        }
-
-        btnUnsub.setOnClickListener {
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("karobari").addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Operations(this).displayToast("karobari unsubscribed")
-                } else {
-                    Operations(this).displayToast("failed")
-                }
-            }
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("fcmTAG", "destroyed")
     }
 }
