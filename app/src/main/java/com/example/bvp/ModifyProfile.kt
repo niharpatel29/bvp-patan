@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.ContentResolver
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PorterDuff
@@ -38,7 +37,7 @@ import kotlinx.android.synthetic.main.modify_profile.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -476,7 +475,7 @@ class ModifyProfile : AppCompatActivity() {
                 tempCacheFile.name,
                 body
             ),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), sharedPref.getId()!!)
+            sharedPref.getId()!!.toRequestBody("multipart/form-data".toMediaTypeOrNull())
         )
 
         call.enqueue(object : Callback<UploadResponse> {
@@ -524,7 +523,7 @@ class ModifyProfile : AppCompatActivity() {
     }
 
     private fun cropImage(sourceUri: Uri) {
-        val destinationUri = Uri.fromFile(File(cacheDir, getFileName(contentResolver, sourceUri)!!))
+        val destinationUri = Uri.fromFile(File(cacheDir, contentResolver.getFileName(sourceUri)))
 
         val options = UCrop.Options()
         options.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
@@ -538,19 +537,19 @@ class ModifyProfile : AppCompatActivity() {
             .start(this)
     }
 
-    private fun getFileName(resolver: ContentResolver, uri: Uri): String? {
-        var cursor: Cursor? = null
-        try {
-            cursor = resolver.query(uri, null, null, null, null)!!
+    private fun ContentResolver.getFileName(uri: Uri): String {
+        var fileName = ""
+        val cursor = this.query(uri, null, null, null, null)
+        if (cursor != null) {
             val nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
             cursor.moveToFirst()
-            val name = cursor.getString(nameIndex)
-            return name
-        } finally {
-            cursor?.close()
+            fileName = cursor.getString(nameIndex)
+            cursor.close()
         }
+        return fileName
     }
 
+    // automatically converts any FORMAT to .jpg
     private fun compressImage(imageFile: File) {
         lifecycleScope.launch {
             val compressedImage = Compressor.compress(this@ModifyProfile, imageFile)
