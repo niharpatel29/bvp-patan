@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.example.bvp.api.postClient
+import com.example.bvp.firebase.Topic
 import com.example.bvp.operations.ImageOperations
 import com.example.bvp.operations.Operations
 import com.example.bvp.prefs.SharedPref
@@ -139,10 +140,18 @@ class Categories : AppCompatActivity() {
     private fun logout() {
         sharedPref.userLogout()
         dbHandler.clearDatabase()
+        handleSubscription()
         deleteProfilePicture()
 
         startActivity(Intent(this, Login::class.java))
         finish()
+    }
+
+    private fun handleSubscription() {
+        Topic().run {
+            unsubscribe(login)
+            unsubscribe(sharedPref.getPosition()!!)
+        }
     }
 
     private fun deleteProfilePicture() {

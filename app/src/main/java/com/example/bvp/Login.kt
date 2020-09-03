@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
+import com.example.bvp.firebase.Topic
 import com.example.bvp.model.UserModel
 import com.example.bvp.operations.ImageOperations
 import com.example.bvp.operations.Operations
@@ -14,7 +15,6 @@ import com.example.bvp.prefs.SharedPref
 import com.example.bvp.response.AllUsers
 import com.example.bvp.response.UserLogin
 import com.example.bvp.sqlite.MyDBHandler
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,16 +39,10 @@ class Login : AppCompatActivity() {
         operations = Operations(this)
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
+        Topic().run { subscribe(global) }
 
-        subscribeToTopic()
         checkLoginStatus()
         handleButtonClicks()
-    }
-
-    private fun subscribeToTopic() {
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("logged_in")
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("karobari")
-        FirebaseMessaging.getInstance().unsubscribeFromTopic("general")
     }
 
     private fun checkLoginStatus() {
@@ -149,6 +143,7 @@ class Login : AppCompatActivity() {
                                 operations.displayToast(e.message.toString())
                             }
 
+                            handleSubscription()
                             getAllUsersFromServer(userMobile, userPassword)
                         }
                         "failed" -> {
@@ -191,6 +186,13 @@ class Login : AppCompatActivity() {
         layoutPassword.visibility = View.VISIBLE
         layoutPassword.editText?.requestFocus()
         btnLogin.text = getString(R.string.login)
+    }
+
+    private fun handleSubscription() {
+        Topic().run {
+            subscribe(login)
+            subscribe(sharedPref.getPosition()!!)
+        }
     }
 
     private fun getAllUsersFromServer(userMobile: String, userPassword: String) {
