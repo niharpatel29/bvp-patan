@@ -1,10 +1,6 @@
 package com.example.bvp
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,8 +14,6 @@ import com.example.bvp.prefs.SharedPref
 import com.example.bvp.response.AllUsers
 import com.example.bvp.response.UserLogin
 import com.example.bvp.sqlite.MyDBHandler
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
