@@ -138,9 +138,9 @@ class Categories : AppCompatActivity() {
     }
 
     private fun logout() {
+        handleSubscription()
         sharedPref.userLogout()
         dbHandler.clearDatabase()
-        handleSubscription()
         deleteProfilePicture()
 
         startActivity(Intent(this, Login::class.java))
