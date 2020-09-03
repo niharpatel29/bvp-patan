@@ -1,12 +1,15 @@
 package com.example.bvp.firebase
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.example.bvp.Login
 import com.example.bvp.R
 import com.example.bvp.operations.Operations
@@ -39,31 +42,22 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Log.d(TAG, "To: ${remoteMessage.to}")
 
             val json = JSONObject(remoteMessage.data.toString())
-            showPushNotification(json)
+            showNotification(json)
         } catch (e: Exception) {
             Log.e(TAG, "Exception: ${e.message}")
         }
     }
 
-    private fun showPushNotification(json: JSONObject) {
-        Log.d(TAG, "JSON data: $json")
-        try {
-            //getting json data
-            val data = json.getJSONObject("data")
+    data class JsonData(val title: String, val message: String)
 
-            val title = data.getString("title")
-            val message = data.getString("message")
-
-            Log.d(TAG, "title: $title, msg: $message")
-            makeNotification(title, message)
-        } catch (e: JSONException) {
-            Log.e(TAG, "Json Exception: ${e.message}")
-        } catch (e: Exception) {
-            Log.e(TAG, "Exception: ${e.message}")
+    private fun showNotification(json: JSONObject) {
+        if (getDataFromJson(json) == null) {
+            return
         }
-    }
 
-    private fun makeNotification(title: String, message: String) {
+        val title = getDataFromJson(json)?.title
+        val message = getDataFromJson(json)?.message
+
         val intent = Intent(this, Login::class.java)
         intent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         val pendingIntent =
@@ -71,7 +65,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val builder =
             NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
-//            .setFullScreenIntent(pendingIntent, true)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pendingIntent)
@@ -81,7 +74,40 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setSmallIcon(R.drawable.ic_baseline_check_circle_filled)
                 .setColor(resources.getColor(R.color.colorPrimary))
 
-        val notificationManager = NotificationManagerCompat.from(this)
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationChannel(notificationManager)
         notificationManager.notify(999, builder.build())
+    }
+
+    private fun getDataFromJson(json: JSONObject): JsonData? {
+        Log.d(TAG, "JSON data: $json")
+        return try {
+            val data = json.getJSONObject("data")
+
+            val title = data.getString("title")
+            val message = data.getString("message")
+
+            Log.d(TAG, "title: $title, msg: $message")
+            JsonData(title, message)
+        } catch (e: JSONException) {
+            Log.e(TAG, "Json Exception: ${e.message}")
+            null
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception: ${e.message}")
+            null
+        }
+    }
+
+    private fun notificationChannel(notificationManager: NotificationManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val notificationChannel = NotificationChannel(
+                getString(R.string.default_notification_channel_id),
+                getString(R.string.default_notification_channel_name),
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
     }
 }
