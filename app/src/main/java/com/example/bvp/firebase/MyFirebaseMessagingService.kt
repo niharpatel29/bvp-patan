@@ -26,9 +26,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(token)
         Log.d(TAG, "token: $token")
 
-//        Operations(applicationContext).displayToast("token updated")
         SharedPref(applicationContext).setFCMToken(token) //working
-        Handler(Looper.getMainLooper()).post { Operations(applicationContext).displayToast("token updated") }
+        Handler(Looper.getMainLooper()).post {
+            Operations(applicationContext).displayToast("token updated")
+        }
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -78,6 +79,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.ic_baseline_check_circle_filled)
+                .setColor(resources.getColor(R.color.colorPrimary))
 
         val notificationManager = NotificationManagerCompat.from(this)
         notificationManager.notify(999, builder.build())

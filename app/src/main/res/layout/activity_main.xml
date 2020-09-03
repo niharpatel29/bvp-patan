@@ -47,4 +47,20 @@
         app:backgroundTint="@color/colorPrimary"
         app:cornerRadius="@dimen/button_corner_radius" />
 
+    <Button
+        android:id="@+id/btnSub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnUserLogin"
+        android:layout_centerHorizontal="true"
+        android:text="subscribe to karobari" />
+
+    <Button
+        android:id="@+id/btnUnsub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSub"
+        android:layout_centerHorizontal="true"
+        android:text="unsubscribe from karobari" />
+
 </RelativeLayout>

@@ -1,10 +1,12 @@
 package com.example.bvp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.admin.AdminLogin
+import com.example.bvp.operations.Operations
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +25,26 @@ class MainActivity : AppCompatActivity() {
 
         btnUserLogin.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
+        }
+
+        btnSub.setOnClickListener {
+            FirebaseMessaging.getInstance().subscribeToTopic("karobari").addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Operations(this).displayToast("karobari subscribed")
+                } else {
+                    Operations(this).displayToast("failed")
+                }
+            }
+        }
+
+        btnUnsub.setOnClickListener {
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("karobari").addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Operations(this).displayToast("karobari unsubscribed")
+                } else {
+                    Operations(this).displayToast("failed")
+                }
+            }
         }
     }
 
