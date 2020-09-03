@@ -52,6 +52,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun showNotification(json: JSONObject) {
         if (getDataFromJson(json) == null) {
+            Log.e(TAG, "json data is null")
             return
         }
 
