@@ -531,6 +531,9 @@ class ModifyProfile : AppCompatActivity() {
         options.setToolbarWidgetColor(ContextCompat.getColor(this, R.color.colorWhite))
         options.setActiveControlsWidgetColor(ContextCompat.getColor(this, R.color.colorPrimary))
         options.withAspectRatio(1F, 1F)
+//        options.withMaxResultSize(20000, 20000)
+//        options.setMaxBitmapSize(20)
+//        options.setCompressionQuality(20)
 
         UCrop.of(sourceUri, destinationUri)
             .withOptions(options)
