@@ -1,7 +1,9 @@
 package com.example.bvp.admin
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
@@ -18,11 +20,35 @@ class AdminPanel : AppCompatActivity() {
 
         sharedPrefAdmin = SharedPrefAdmin(this)
 
+        toolbar()
         handleButtonClicks()
     }
 
     override fun onBackPressed() {
         logoutDialog()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item!!.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        toolbar.overflowIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun handleButtonClicks() {
