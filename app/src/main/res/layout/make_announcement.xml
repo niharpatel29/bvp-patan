@@ -77,6 +77,29 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbGeneral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/general"
+                        android:textSize="@dimen/size_18sp"
+                        app:buttonTint="@color/colorPrimary" />
+
+                    <CheckBox
+                        android:id="@+id/cbKarobari"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/karobari"
+                        android:textSize="@dimen/size_18sp"
+                        app:buttonTint="@color/colorPrimary" />
+
+                </LinearLayout>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSend"
                     style="@style/Widget.MaterialComponents.Button.UnelevatedButton"

@@ -4,7 +4,7 @@
     <string name="default_notification_channel_id">bvp_default_channel_id</string>
     <string name="default_notification_channel_name">BVP notifications</string>
 
-<!--    <string name="temp_country_name">CountryName</string>-->
+    <!--    <string name="temp_country_name">CountryName</string>-->
 
     <string name="btn_admin_login">Admin Login</string>
     <string name="btn_user_login">User Login</string>
@@ -111,6 +111,13 @@
     <string name="file_not_selected">File not selected</string>
     <string name="no_announcement">No Announcement</string>
     <string name="make_announcement">Make Announcement</string>
+    <string name="karobari">Karobari</string>
+    <string name="general">General</string>
+
+    <string name="topic_global">global</string>
+    <string name="topic_login">login</string>
+    <string name="topic_karobari">karobari</string>
+    <string name="topic_general">general</string>
 
     <string name="type_dob">dob</string>
     <string name="type_anniversary">anniversary</string>

@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class Login : AppCompatActivity() {
 
@@ -39,7 +40,7 @@ class Login : AppCompatActivity() {
         operations = Operations(this)
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
-        Topic().run { subscribe(global) }
+        Topic(this).run { subscribe(global) }
 
         checkLoginStatus()
         handleButtonClicks()
@@ -189,9 +190,9 @@ class Login : AppCompatActivity() {
     }
 
     private fun handleSubscription() {
-        Topic().run {
+        Topic(this).run {
             subscribe(login)
-            subscribe(sharedPref.getPosition()!!)
+            subscribe(sharedPref.getPosition()!!.toLowerCase(Locale.getDefault()))
         }
     }
 

@@ -21,6 +21,7 @@ import com.example.bvp.prefs.SharedPref
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.categories.*
 import java.io.File
+import java.util.*
 
 class Categories : AppCompatActivity() {
 
@@ -148,9 +149,9 @@ class Categories : AppCompatActivity() {
     }
 
     private fun handleSubscription() {
-        Topic().run {
+        Topic(this).run {
             unsubscribe(login)
-            unsubscribe(sharedPref.getPosition()!!)
+            unsubscribe(sharedPref.getPosition()!!.toLowerCase(Locale.getDefault()))
         }
     }
 
