@@ -30,6 +30,8 @@ data class UserInfo(
     val anniversary: String,
     @SerializedName("bloodgroup")
     val bloodgroup: String,
+    @SerializedName("category")
+    val category: String,
     @SerializedName("city")
     val city: String,
     @SerializedName("country")

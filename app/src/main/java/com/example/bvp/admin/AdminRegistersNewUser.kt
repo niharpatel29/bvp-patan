@@ -61,6 +61,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
         radioGroup.setOnCheckedChangeListener { radioGroup, i ->
             if (radioGeneral.isChecked) {
                 layoutPosition.visibility = View.GONE
+                layoutPosition.editText!!.text = null
             } else {
                 layoutPosition.visibility = View.VISIBLE
             }
