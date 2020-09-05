@@ -4,6 +4,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
 import com.example.bvp.admin.other.AdminRegistersNewUserModel
@@ -29,6 +30,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
         operations = Operations(this)
 
         toolbar()
+        setVisibility()
         handleButtonClicks()
     }
 
@@ -55,6 +57,16 @@ class AdminRegistersNewUser : AppCompatActivity() {
         )
     }
 
+    private fun setVisibility() {
+        radioGroup.setOnCheckedChangeListener { radioGroup, i ->
+            if (radioGeneral.isChecked) {
+                layoutPosition.visibility = View.GONE
+            } else {
+                layoutPosition.visibility = View.VISIBLE
+            }
+        }
+    }
+
     private fun handleButtonClicks() {
         btnRegisterUser.setOnClickListener {
             // return if empty
@@ -64,20 +76,34 @@ class AdminRegistersNewUser : AppCompatActivity() {
             if (operations.checkNullOrEmpty(layoutLastname)) {
                 return@setOnClickListener
             }
-            if (operations.checkNullOrEmpty(layoutPosition)) {
-                return@setOnClickListener
-            }
             if (operations.checkNullOrEmpty(layoutUserMobile)) {
                 return@setOnClickListener
+            }
+            if (radioGroup.checkedRadioButtonId <= 0) {
+                setRadioError(true)
+                return@setOnClickListener
+            } else {
+                setRadioError(false)
             }
             // register if not empty
             val adminId = sharedPrefAdmin.getId()
             val firstname = operations.getValue(layoutFirstname)
             val lastname = operations.getValue(layoutLastname)
-            val position = operations.getValue(layoutPosition)
             val userMobile = operations.getValue(layoutUserMobile)
+            val category = if (radioGeneral.isChecked) "0" else "1"
+            val position = operations.getValue(layoutPosition)
 
-            adminRegistersNewUser(adminId, firstname, lastname, position, userMobile)
+            adminRegistersNewUser(adminId, firstname, lastname, category, position, userMobile)
+        }
+    }
+
+    private fun setRadioError(error: Boolean) {
+        if (error) {
+            radioKarobari.error = getString(R.string.required_field)
+            radioGeneral.error = getString(R.string.required_field)
+        } else {
+            radioKarobari.error = null
+            radioGeneral.error = null
         }
     }
 
@@ -85,6 +111,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
         adminId: String?,
         firstName: String,
         lastName: String,
+        category: String,
         position: String,
         userMobile: String
     ) {
@@ -95,6 +122,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
             adminId,
             firstName,
             lastName,
+            category,
             position,
             userMobile
         )
