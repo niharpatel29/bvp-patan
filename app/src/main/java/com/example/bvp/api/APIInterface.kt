@@ -74,6 +74,7 @@ interface APIInterface {
         @Field("admin_id") admin_id: String?,
         @Field("first_name") first_name: String,
         @Field("last_name") last_name: String,
+        @Field("category") category: String,
         @Field("position") position: String,
         @Field("mobile_primary") mobile_primary: String
     ): Call<AdminRegistersNewUserModel>
