@@ -77,28 +77,29 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <LinearLayout
+                <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <CheckBox
-                        android:id="@+id/cbGeneral"
+                    <RadioButton
+                        android:id="@+id/radioGeneral"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/general"
                         android:textSize="@dimen/size_18sp"
                         app:buttonTint="@color/colorPrimary" />
 
-                    <CheckBox
-                        android:id="@+id/cbKarobari"
+                    <RadioButton
+                        android:id="@+id/radioKarobari"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/karobari"
                         android:textSize="@dimen/size_18sp"
                         app:buttonTint="@color/colorPrimary" />
 
-                </LinearLayout>
+                </RadioGroup>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSend"

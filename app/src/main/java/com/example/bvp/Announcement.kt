@@ -85,15 +85,10 @@ class Announcement : AppCompatActivity() {
                         "ok" -> {
                             val title = mResponse.title
                             val message = mResponse.message
-                            val flag = mResponse.flag
 
-                            if (flag == "1") {
-                                tvTitle.text = title
-                                tvMessage.text = message
-                                showAnnouncement(true)
-                            } else {
-                                showAnnouncement(false)
-                            }
+                            tvTitle.text = title
+                            tvMessage.text = message
+                            showAnnouncement(true)
                         }
                         "null" -> {
                             showAnnouncement(false)

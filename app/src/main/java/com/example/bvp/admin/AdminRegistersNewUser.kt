@@ -91,7 +91,8 @@ class AdminRegistersNewUser : AppCompatActivity() {
             val firstname = operations.getValue(layoutFirstname)
             val lastname = operations.getValue(layoutLastname)
             val userMobile = operations.getValue(layoutUserMobile)
-            val category = if (radioGeneral.isChecked) "0" else "1"
+            val category =
+                if (radioGeneral.isChecked) getString(R.string.topic_general) else getString(R.string.topic_karobari)
             val position = operations.getValue(layoutPosition)
 
             adminRegistersNewUser(adminId, firstname, lastname, category, position, userMobile)

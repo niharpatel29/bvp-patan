@@ -64,14 +64,30 @@ class MakeAnnouncement : AppCompatActivity() {
             if (operations.checkNullOrEmpty(layoutMessage)) {
                 return@setOnClickListener
             }
+            if (radioGroup.checkedRadioButtonId <= 0) {
+                setRadioError(true)
+                return@setOnClickListener
+            } else {
+                setRadioError(false)
+            }
             // register if not empty
             val adminId = sharedPrefAdmin.getId()
-            val topic = // error code. need to solve
-                if (cbGeneral.isChecked) getString(R.string.topic_general) else getString(R.string.topic_karobari)
+            val topic =
+                if (radioGeneral.isChecked) getString(R.string.topic_general) else getString(R.string.topic_karobari)
             val title = operations.getValue(layoutTitle)
             val message = operations.getValue(layoutMessage)
 
-            makeAnnouncement(adminId, title, topic, message)
+            makeAnnouncement(adminId, topic, title, message)
+        }
+    }
+
+    private fun setRadioError(error: Boolean) {
+        if (error) {
+            radioKarobari.error = getString(R.string.required_field)
+            radioGeneral.error = getString(R.string.required_field)
+        } else {
+            radioKarobari.error = null
+            radioGeneral.error = null
         }
     }
 

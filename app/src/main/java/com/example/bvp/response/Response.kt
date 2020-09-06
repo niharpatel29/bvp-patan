@@ -94,8 +94,6 @@ data class Newsletter(
 )
 
 data class GetAnnouncement(
-    @SerializedName("flag")
-    val flag: String,
     @SerializedName("id")
     val id: String,
     @SerializedName("message")
