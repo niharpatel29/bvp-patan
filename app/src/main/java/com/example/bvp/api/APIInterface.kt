@@ -84,6 +84,7 @@ interface APIInterface {
     @FormUrlEncoded
     fun performMakeAnnouncement(
         @Field("admin_id") admin_id: String?,
+        @Field("topic") topic: String,
         @Field("title") title: String,
         @Field("message") message: String
     ): Call<MakeAnnouncementResponse>

@@ -26,8 +26,10 @@ data class AdminRegistersNewUserModel(
 )
 
 data class MakeAnnouncementResponse(
-    @SerializedName("message")
-    val message: String,
+    @SerializedName("message_id")
+    val messageId: String,
     @SerializedName("response")
-    val response: String
+    val response: String,
+    @SerializedName("response_message")
+    val responseMessage: String
 )

@@ -66,15 +66,18 @@ class MakeAnnouncement : AppCompatActivity() {
             }
             // register if not empty
             val adminId = sharedPrefAdmin.getId()
+            val topic = // error code. need to solve
+                if (cbGeneral.isChecked) getString(R.string.topic_general) else getString(R.string.topic_karobari)
             val title = operations.getValue(layoutTitle)
             val message = operations.getValue(layoutMessage)
 
-            makeAnnouncement(adminId, title, message)
+            makeAnnouncement(adminId, title, topic, message)
         }
     }
 
     private fun makeAnnouncement(
         adminId: String?,
+        topic: String,
         title: String,
         message: String
     ) {
@@ -83,6 +86,7 @@ class MakeAnnouncement : AppCompatActivity() {
         val apiService = postClient()!!.create(APIInterface::class.java)
         val call = apiService.performMakeAnnouncement(
             adminId,
+            topic,
             title,
             message
         )
@@ -99,7 +103,7 @@ class MakeAnnouncement : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     val mResponse = response.body()
-                    val responseMessage = mResponse!!.message
+                    val responseMessage = mResponse!!.responseMessage
                     when (mResponse.response) {
                         "ok" -> {
                             operations.displayToast(responseMessage)
