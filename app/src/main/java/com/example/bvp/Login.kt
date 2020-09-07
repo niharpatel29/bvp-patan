@@ -19,7 +19,6 @@ import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 
 class Login : AppCompatActivity() {
 
@@ -107,6 +106,7 @@ class Login : AppCompatActivity() {
                             val middleName = user.middleName
                             val lastName = user.lastName
                             val mobileSecondary = user.mobileSecondary
+                            val category = user.category
                             val position = user.position
                             val email = user.email
                             val dob = user.dob
@@ -128,6 +128,7 @@ class Login : AppCompatActivity() {
                                     setMiddlename(middleName)
                                     setLastname(lastName)
                                     setMobileSecondary(mobileSecondary)
+                                    setCategory(category)
                                     setPosition(position)
                                     setEmail(email)
                                     setDOB(dob)
@@ -192,7 +193,7 @@ class Login : AppCompatActivity() {
     private fun handleSubscription() {
         Topic(this).run {
             subscribe(login)
-            subscribe(sharedPref.getPosition()!!.toLowerCase(Locale.getDefault()))
+            subscribe(sharedPref.getCategory()!!)
         }
     }
 

@@ -151,7 +151,7 @@ class Categories : AppCompatActivity() {
     private fun handleSubscription() {
         Topic(this).run {
             unsubscribe(login)
-            unsubscribe(sharedPref.getPosition()!!.toLowerCase(Locale.getDefault()))
+            unsubscribe(sharedPref.getCategory()!!)
         }
     }
 

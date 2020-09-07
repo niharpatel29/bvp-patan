@@ -17,6 +17,7 @@ class SharedPref(context: Context) {
         private const val KEY_MIDDLENAME = "middlename"
         private const val KEY_LASTNAME = "lastname"
         private const val KEY_MOBILE_SECONDARY = "mobile_secondary"
+        private const val KEY_CATEGORY = "category"
         private const val KEY_POSITION = "position"
         private const val KEY_EMAIL = "email"
         private const val KEY_DOB = "dob"
@@ -111,6 +112,16 @@ class SharedPref(context: Context) {
 
     fun getMobileSecondary(): String? {
         return sharedPreferences.getString(KEY_MOBILE_SECONDARY, defaultValue)
+    }
+
+    fun setCategory(category: String?) {
+        val editor = sharedPreferences.edit()
+        editor.putString(KEY_CATEGORY, category)
+        editor.apply()
+    }
+
+    fun getCategory(): String? {
+        return sharedPreferences.getString(KEY_CATEGORY, defaultValue)
     }
 
     fun setPosition(position: String?) {
