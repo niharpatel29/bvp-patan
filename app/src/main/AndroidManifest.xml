@@ -44,7 +44,13 @@
         <activity android:name=".UserDirectory" />
         <activity android:name=".UserDetails" />
         <activity android:name=".Newsletters" />
-        <activity android:name=".Announcement" />
+        <activity
+            android:name=".Announcement"
+            android:parentActivityName=".Categories">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Categories" />
+        </activity>
         <activity android:name=".Feedback" />
 
         <!--uCrop-->
@@ -74,6 +80,9 @@
         </service>
 
         <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/channel_default_id" />
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_baseline_check_circle_filled" />
         <meta-data
@@ -81,7 +90,7 @@
             android:resource="@color/colorPrimary" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
+            android:value="@string/channel_default_id" />
     </application>
 
 </manifest>
