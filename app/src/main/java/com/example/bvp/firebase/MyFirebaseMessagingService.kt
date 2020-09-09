@@ -68,7 +68,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val builder =
-            NotificationCompat.Builder(this, getChannel(json)!!.id)
+            NotificationCompat.Builder(this, getString(R.string.channel_default_id))
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pendingIntent)
@@ -77,6 +77,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setSmallIcon(R.drawable.ic_baseline_check_circle_filled)
                 .setColor(resources.getColor(R.color.colorPrimary))
+                .setChannelId(getChannel(json)!!.id)
 
         notificationManager.notify(999, builder.build())
     }
