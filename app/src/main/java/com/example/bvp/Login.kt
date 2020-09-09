@@ -1,5 +1,7 @@
 package com.example.bvp
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +9,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
+import com.example.bvp.broadcast.MyReceiver
 import com.example.bvp.firebase.Topic
 import com.example.bvp.model.UserModel
 import com.example.bvp.operations.ImageOperations
@@ -19,11 +22,12 @@ import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class Login : AppCompatActivity() {
 
     companion object {
-        private const val TAG = "LoginTAG"
+        const val TAG = "LoginTAG"
     }
 
     private lateinit var sharedPref: SharedPref
@@ -39,10 +43,50 @@ class Login : AppCompatActivity() {
         operations = Operations(this)
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
-        Topic(this).run { subscribe(global) }
 
+        initialCalls()
         checkLoginStatus()
         handleButtonClicks()
+    }
+
+    private fun initialCalls() {
+        Topic(this).run { subscribe(global) }
+        sendBroadcast()
+    }
+
+    private fun sendBroadcast() {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 18)
+        calendar.set(Calendar.MINUTE, 35)
+        calendar.set(Calendar.SECOND, 0)
+
+        Log.d(TAG, calendar.get(Calendar.YEAR).toString())
+        Log.d(TAG, calendar.get(Calendar.MONTH).toString())
+        Log.d(TAG, calendar.get(Calendar.DAY_OF_MONTH).toString())
+        Log.d(TAG, calendar.get(Calendar.HOUR_OF_DAY).toString())
+        Log.d(TAG, calendar.get(Calendar.MINUTE).toString())
+        Log.d(TAG, calendar.get(Calendar.SECOND).toString())
+
+        //creating a new intent specifying the broadcast receiver
+        val intent = Intent(applicationContext, MyReceiver::class.java)
+        //creating a pending intent using the intent
+        val pendingIntent =
+            PendingIntent.getBroadcast(
+                applicationContext,
+                100,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        //setting the repeating alarm that will be fired every day
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_FIFTEEN_MINUTES,
+            pendingIntent
+        )
     }
 
     private fun checkLoginStatus() {

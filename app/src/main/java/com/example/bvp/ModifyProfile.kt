@@ -74,7 +74,7 @@ class ModifyProfile : AppCompatActivity() {
         imageOperations = ImageOperations(this)
 
         toolbar()
-        initOperations()
+        initialCalls()
         setValuesOnStart()
         handleButtonClicks()
     }
@@ -103,7 +103,7 @@ class ModifyProfile : AppCompatActivity() {
         )
     }
 
-    private fun initOperations() {
+    private fun initialCalls() {
         exposedDropdown(getString(R.string.type_bloodgroup))
         exposedDropdown(getString(R.string.type_gender))
         exposedDropdown(getString(R.string.type_country))
@@ -260,8 +260,7 @@ class ModifyProfile : AppCompatActivity() {
         val mDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            this, { view, year, month, dayOfMonth ->
                 calendar.set(year, month, dayOfMonth)
                 selectedDOB = dateToString(calendar)
 
@@ -296,8 +295,7 @@ class ModifyProfile : AppCompatActivity() {
         val mDay = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            this, { view, year, month, dayOfMonth ->
                 calendar.set(year, month, dayOfMonth)
                 selectedAnniversary = dateToString(calendar)
 

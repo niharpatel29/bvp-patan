@@ -21,7 +21,6 @@ import com.example.bvp.prefs.SharedPref
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.categories.*
 import java.io.File
-import java.util.*
 
 class Categories : AppCompatActivity() {
 
@@ -91,6 +90,10 @@ class Categories : AppCompatActivity() {
 
         btnAnnouncement.setOnClickListener {
             startActivity(Intent(this, Announcement::class.java))
+        }
+
+        btnCalendarEvents.setOnClickListener {
+            startActivity(Intent(this, CalendarEvents::class.java))
         }
 
         btnFeedback.setOnClickListener {

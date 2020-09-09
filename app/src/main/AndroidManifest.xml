@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -32,6 +33,7 @@
         <activity android:name=".admin.AdminRegistersNewUser" />
         <activity android:name=".admin.UploadNewsletter" />
         <activity android:name=".admin.MakeAnnouncement" />
+
         <activity
             android:name=".Login"
             android:theme="@style/MyTheme" />
@@ -44,6 +46,7 @@
         <activity android:name=".UserDirectory" />
         <activity android:name=".UserDetails" />
         <activity android:name=".Newsletters" />
+        <activity android:name=".CalendarEvents" />
         <activity
             android:name=".Announcement"
             android:parentActivityName=".Categories">
@@ -53,12 +56,12 @@
         </activity>
         <activity android:name=".Feedback" />
 
-        <!--uCrop-->
+        <!-- uCrop -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait" />
 
-        <!--to write & read file from external storage-->
+        <!-- to write & read file from external storage -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -69,7 +72,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <!--FCM-->
+        <!-- FCM -->
         <service
             android:name=".firebase.MyFirebaseMessagingService"
             android:enabled="true"
@@ -78,6 +81,11 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver
+            android:name=".broadcast.MyReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

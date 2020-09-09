@@ -8,8 +8,6 @@
     <string name="channel_newsletter_id">newsletter_channel</string>
     <string name="channel_newsletter_name">Newsletters</string>
 
-    <!--    <string name="temp_country_name">CountryName</string>-->
-
     <string name="btn_admin_login">Admin Login</string>
     <string name="btn_user_login">User Login</string>
     <string name="btn_edit_profile">Edit Profile</string>
@@ -117,6 +115,7 @@
     <string name="make_announcement">Make Announcement</string>
     <string name="karobari">Karobari</string>
     <string name="general">General</string>
+    <string name="coming_soon">Coming soon</string>
 
     <string name="topic_global">global</string>
     <string name="topic_login">login</string>
