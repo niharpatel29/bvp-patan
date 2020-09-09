@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/padding"
-    tools:context=".CalendarEvents">
+    tools:context=".activities.categories.CalendarEvents">
 
     <TextView
         android:layout_width="wrap_content"

@@ -43,18 +43,18 @@
         <activity android:name=".Categories" />
         <activity android:name=".Profile" />
         <activity android:name=".ModifyProfile" />
-        <activity android:name=".UserDirectory" />
+        <activity android:name=".activities.categories.UserDirectory" />
         <activity android:name=".UserDetails" />
-        <activity android:name=".Newsletters" />
-        <activity android:name=".CalendarEvents" />
+        <activity android:name=".activities.categories.Newsletters" />
+        <activity android:name=".activities.categories.CalendarEvents" />
         <activity
-            android:name=".Announcement"
+            android:name=".activities.categories.Announcement"
             android:parentActivityName=".Categories">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Categories" />
         </activity>
-        <activity android:name=".Feedback" />
+        <activity android:name=".activities.categories.Feedback" />
 
         <!-- uCrop -->
         <activity

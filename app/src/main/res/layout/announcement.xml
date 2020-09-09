@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".Announcement">
+    tools:context=".activities.categories.Announcement">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

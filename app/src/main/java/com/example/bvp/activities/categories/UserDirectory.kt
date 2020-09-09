@@ -1,4 +1,4 @@
-package com.example.bvp
+package com.example.bvp.activities.categories
 
 import android.graphics.PorterDuff
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bvp.R
 import com.example.bvp.adapter.UsersAdapter
 import com.example.bvp.model.ListItem
 import com.example.bvp.sqlite.MyDBHandler

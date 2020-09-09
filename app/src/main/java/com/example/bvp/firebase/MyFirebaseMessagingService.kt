@@ -10,7 +10,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.bvp.Announcement
+import com.example.bvp.activities.categories.Announcement
 import com.example.bvp.R
 import com.example.bvp.operations.Operations
 import com.example.bvp.prefs.SharedPref

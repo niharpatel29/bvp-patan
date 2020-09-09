@@ -1,4 +1,4 @@
-package com.example.bvp
+package com.example.bvp.activities.categories
 
 import android.Manifest
 import android.content.Intent
@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bvp.R
 import com.example.bvp.adapter.NewsletterAdapter
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient

@@ -1,9 +1,10 @@
-package com.example.bvp
+package com.example.bvp.activities.categories
 
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bvp.R
 import kotlinx.android.synthetic.main.feedback.*
 
 class Feedback : AppCompatActivity() {

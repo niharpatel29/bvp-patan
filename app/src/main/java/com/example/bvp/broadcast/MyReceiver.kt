@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.bvp.CalendarEvents
+import com.example.bvp.activities.categories.CalendarEvents
 import com.example.bvp.R
 import com.example.bvp.operations.Operations
 
