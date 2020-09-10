@@ -4,7 +4,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.bvp.model.UserModel
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 var DATABASE_VERSION: Int = 1
 const val DATABASE_NAME: String = "bvppatan.db"
@@ -30,6 +34,10 @@ const val COLUMN_POSITION: String = "position"
 
 class MyDBHandler(context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+
+    companion object {
+        const val TAG = "MyDBHandlerTAG"
+    }
 
     private val defaultValue: String = ""
 
@@ -84,6 +92,55 @@ class MyDBHandler(context: Context) :
         val db = writableDatabase
         db.insert(TABLE_NAME, null, values)
         db.close()
+    }
+
+    fun checkBirthday() {
+        val simpleDateFormat = SimpleDateFormat("dd-MMM", Locale.getDefault())
+        val systemDate = simpleDateFormat.format(Calendar.getInstance().time)
+
+        val db = readableDatabase
+        val query = "SELECT count(*) FROM $TABLE_NAME WHERE $COLUMN_DOB LIKE '$systemDate%'"
+
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val count = cursor.getInt(0)
+        Log.d(TAG, count.toString())
+
+        cursor.close()
+        db.close()
+    }
+
+    fun anyBirthdayToday(): Boolean {
+        val db = readableDatabase
+        val query = "SELECT count(*) FROM $TABLE_NAME WHERE $COLUMN_DOB != '$defaultValue'"
+
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val count = cursor.getInt(0)
+        Log.d(TAG, count.toString())
+
+        cursor.close()
+        db.close()
+
+        return count > 0
+    }
+
+    fun anyAnniversaryToday(): Boolean {
+        val db = readableDatabase
+        val query = "SELECT count(*) FROM $TABLE_NAME WHERE $COLUMN_ANNIVERSARY != '$defaultValue'"
+
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val count = cursor.getInt(0)
+        Log.d(TAG, count.toString())
+
+        cursor.close()
+        db.close()
+
+        return count > 0
     }
 
     // get all users

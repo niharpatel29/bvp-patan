@@ -56,6 +56,7 @@
     <string name="mobile_secondary">Secondary Mobile</string>
     <string name="birth_date">Birth Date</string>
     <string name="anniversary">Anniversary</string>
+    <string name="birthday">Birthday</string>
     <string name="bloodgroup">Bloodgroup</string>
     <string name="residential_address">Residential Address</string>
     <string name="mobile_number">Mobile Number</string>
@@ -93,6 +94,7 @@
     <string name="cancel">Cancel</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="test">Test</string>
     <string name="confirm_logout">Are you sure you want to logout?</string>
     <string name="response_failed">Response failed</string>
     <string name="please_wait">Please wait…</string>
@@ -116,6 +118,7 @@
     <string name="karobari">Karobari</string>
     <string name="general">General</string>
     <string name="coming_soon">Coming soon</string>
+    <string name="tap_here_to_wish">Tap here to wish</string>
 
     <string name="topic_global">global</string>
     <string name="topic_login">login</string>
@@ -123,6 +126,7 @@
     <string name="topic_general">general</string>
 
     <string name="type_dob">dob</string>
+    <string name="type_birthday">birthday</string>
     <string name="type_anniversary">anniversary</string>
     <string name="type_bloodgroup">bloodgroup</string>
     <string name="type_gender">gender</string>

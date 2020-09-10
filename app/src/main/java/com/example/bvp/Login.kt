@@ -1,8 +1,12 @@
 package com.example.bvp
 
 import android.app.AlarmManager
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -51,13 +55,28 @@ class Login : AppCompatActivity() {
 
     private fun initialCalls() {
         Topic(this).run { subscribe(global) }
+        createDefaultChannel()
         sendBroadcast()
+    }
+
+    private fun createDefaultChannel() {
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val defaultChannel = NotificationChannel(
+                getString(R.string.channel_default_id),
+                getString(R.string.channel_default_name),
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationManager.createNotificationChannel(defaultChannel)
+        }
     }
 
     private fun sendBroadcast() {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 18)
-        calendar.set(Calendar.MINUTE, 35)
+        calendar.set(Calendar.HOUR_OF_DAY, 8)
+        calendar.set(Calendar.MINUTE, 30)
         calendar.set(Calendar.SECOND, 0)
 
         Log.d(TAG, calendar.get(Calendar.YEAR).toString())
@@ -80,7 +99,7 @@ class Login : AppCompatActivity() {
 
         val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
-        //setting the repeating alarm that will be fired every day
+        //setting the repeating alarm that will be triggered every day
         alarmManager.setRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,

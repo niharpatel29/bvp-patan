@@ -22,6 +22,8 @@ import com.example.bvp.prefs.SharedPref
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.categories.*
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 class Categories : AppCompatActivity() {
 
@@ -64,8 +66,31 @@ class Categories : AppCompatActivity() {
                 logout()
                 true
             }
+            R.id.action_test -> {
+//                logout()
+//                abc()
+                dbHandler.checkBirthday()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun abc() {
+
+        val stringToDate = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+        val bDate = stringToDate.parse("10-Sep-2020")!!
+
+        val calendar = Calendar.getInstance()
+        val simpleDateFormat = SimpleDateFormat("dd-MMM", Locale.getDefault())
+        val systemDate = simpleDateFormat.format(calendar.time)
+
+        if (simpleDateFormat.format(bDate).contains(systemDate, true)) {
+            operations.displayToast("match")
+        }
+
+        Log.d(TAG, systemDate)
+        Log.d(TAG, simpleDateFormat.format(bDate))
     }
 
     private fun toolbar() {
