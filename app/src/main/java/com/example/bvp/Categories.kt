@@ -77,7 +77,6 @@ class Categories : AppCompatActivity() {
     }
 
     private fun abc() {
-
         val stringToDate = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
         val bDate = stringToDate.parse("10-Sep-2020")!!
 

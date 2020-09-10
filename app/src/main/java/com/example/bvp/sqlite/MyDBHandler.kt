@@ -201,7 +201,7 @@ class MyDBHandler(context: Context) :
         return users
     }
 
-    // get details for specific default_image
+    // get details for specific user
     fun getUserDetails(mUserId: String): UserModel {
         var userDetails: UserModel? = null
 
