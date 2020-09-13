@@ -1,17 +1,16 @@
 package com.example.bvp.firebase
 
-import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import com.example.bvp.R
 import com.example.bvp.activities.categories.Announcement
+import com.example.bvp.model.ChannelContainer
+import com.example.bvp.model.NotificationDataContainer
+import com.example.bvp.notification.NotificationHandler
 import com.example.bvp.operations.Operations
 import com.example.bvp.other.SQLServices
 import com.example.bvp.prefs.SharedPref
@@ -60,39 +59,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun showNotification() {
-        if (getData() == null) {
-            Log.e(TAG, "data object null")
-            return
+        Handler(Looper.getMainLooper()).post {
+            NotificationHandler(this).showNotification(channel(), notificationData(), Announcement())
         }
-
-        createChannel()
-        val title = getData()?.title
-        val message = getData()?.message
-
-        val intent = Intent(this, Announcement::class.java).apply {
-            flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
-        val pendingIntent =
-            PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val builder =
-            NotificationCompat.Builder(this, getString(R.string.channel_default_id))
-                .setContentTitle(title)
-                .setContentText(message)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setSmallIcon(R.drawable.ic_baseline_check_circle_filled)
-                .setColor(resources.getColor(R.color.colorPrimary))
-                .setChannelId(getChannel()!!.id)
-
-        notificationManager.notify(999, builder.build())
     }
 
-    data class Data(val title: String, val message: String)
-
-    private fun getData(): Data? {
+    private fun notificationData(): NotificationDataContainer? {
         return try {
             val data = getObjectFromJson("data")
 
@@ -100,7 +72,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val message = data.getString("message")
 
             Log.d(TAG, "title: $title, msg: $message")
-            Data(title, message)
+            NotificationDataContainer(title, message)
         } catch (e: JSONException) {
             Log.e(TAG, "Json Exception: ${e.message}")
             null
@@ -110,36 +82,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun createChannel() {
-        val channelId = getChannel()?.id
-        val channelName = getChannel()?.name
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_HIGH
-
-            val defaultChannel = NotificationChannel(
-                getString(R.string.channel_default_id),
-                getString(R.string.channel_default_name),
-                importance
-            )
-
-            val channel = NotificationChannel(
-                channelId,
-                channelName,
-                importance
-            )
-
-            val channelList = ArrayList<NotificationChannel>()
-            channelList.add(defaultChannel)
-            channelList.add(channel)
-
-            notificationManager.createNotificationChannels(channelList)
-        }
-    }
-
-    data class Channel(val id: String, val name: String)
-
-    private fun getChannel(): Channel? {
+    private fun channel(): ChannelContainer? {
         return try {
             val channel = getObjectFromJson("channel")
 
@@ -147,7 +90,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val name = channel.getString("name")
 
             Log.d(TAG, "id: $id, name: $name")
-            Channel(id, name)
+            ChannelContainer(this, id, name)
         } catch (e: JSONException) {
             Log.e(TAG, "Json Exception: ${e.message}")
             null

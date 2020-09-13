@@ -7,6 +7,8 @@
     <string name="channel_announcement_name">Announcements</string>
     <string name="channel_newsletter_id">newsletter_channel</string>
     <string name="channel_newsletter_name">Newsletters</string>
+    <string name="channel_birthday_anniversary_id">birthday_anniversary_channel</string>
+    <string name="channel_birthday_anniversary_name">Birthday &amp; Anniversary</string>
 
     <string name="btn_admin_login">Admin Login</string>
     <string name="btn_user_login">User Login</string>

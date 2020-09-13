@@ -9,6 +9,9 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.bvp.R
 import com.example.bvp.activities.categories.CalendarEvents
+import com.example.bvp.model.ChannelContainer
+import com.example.bvp.model.NotificationDataContainer
+import com.example.bvp.notification.NotificationHandler
 import com.example.bvp.operations.Operations
 import com.example.bvp.sqlite.MyDBHandler
 
@@ -43,32 +46,18 @@ class MyReceiver : BroadcastReceiver() {
             title = context.getString(R.string.anniversary)
         }
 
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        val repeatingIntent = Intent(context, CalendarEvents::class.java).apply {
-            flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        }
-        val pendingIntent =
-            PendingIntent.getActivity(
-                context,
-                NOTIFICATION_REQUEST_CODE,
-                repeatingIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-
-        val builder =
-            NotificationCompat.Builder(context, context.getString(R.string.channel_default_id))
-                .setContentTitle(title)
-                .setContentText(text)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setSmallIcon(R.drawable.ic_baseline_cake_filled)
-                .setColor(context.resources.getColor(R.color.colorRed))
-                .setChannelId(context.getString(R.string.channel_default_id))
-
-        notificationManager.notify(notificationId, builder.build())
+        val channel = ChannelContainer(
+            context,
+            context.getString(R.string.channel_birthday_anniversary_id),
+            context.getString(R.string.channel_birthday_anniversary_name)
+        )
+        val notification = NotificationDataContainer(
+            title,
+            text,
+            notificationId,
+            R.drawable.ic_baseline_cake_filled,
+            R.color.colorRed
+        )
+        NotificationHandler(context).showNotification(channel, notification, CalendarEvents())
     }
 }
