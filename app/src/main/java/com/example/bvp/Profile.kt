@@ -38,12 +38,13 @@ class Profile : AppCompatActivity() {
         imageOperations = ImageOperations(this)
         dbHandler = MyDBHandler(this)
 
-        userDetails = sharedPref.getAllDetails()
 
         toolbar()
     }
 
     override fun onStart() {
+        userDetails = sharedPref.getAllDetails()
+
         setHeaders()
         setContents()
         super.onStart()

@@ -13,8 +13,6 @@ class Topic(context: Context) {
 
     val global = context.getString(R.string.topic_global)
     val login = context.getString(R.string.topic_login)
-    val karobari = context.getString(R.string.topic_karobari)
-    val general = context.getString(R.string.topic_general)
 
     fun subscribe(topic: String) {
         FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnCompleteListener {

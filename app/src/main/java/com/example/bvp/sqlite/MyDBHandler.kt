@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.bvp.model.UserModel
+import com.example.bvp.operations.Operations
+import com.example.bvp.other.SQLServices
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -32,7 +34,7 @@ const val COLUMN_ZIPCODE: String = "zipcode"
 const val COLUMN_RESIDENTIAL_ADDRESS: String = "residential_address"
 const val COLUMN_POSITION: String = "position"
 
-class MyDBHandler(context: Context) :
+class MyDBHandler(val context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
@@ -68,7 +70,7 @@ class MyDBHandler(context: Context) :
         onCreate(db)
     }
 
-    // add new default_image to the database
+    // add new user to the database
     fun addUser(model: UserModel) {
         val values = ContentValues()
         values.put(COLUMN_USER_ID, model.userId)
@@ -91,6 +93,33 @@ class MyDBHandler(context: Context) :
 
         val db = writableDatabase
         db.insert(TABLE_NAME, null, values)
+        db.close()
+    }
+
+    fun updateUserDetails(model: UserModel) {
+        Log.d(SQLServices.TAG, "its running")
+        Log.d(SQLServices.TAG, model.userId!!)
+        Operations(context).displayToast("Running fine")
+
+        val values = ContentValues()
+        values.put(COLUMN_USER_ID, model.userId)
+        values.put(COLUMN_FIRSTNAME, model.firstname)
+        values.put(COLUMN_MIDDLENAME, model.middlename)
+        values.put(COLUMN_LASTNAME, model.lastname)
+        values.put(COLUMN_MOBILE_SECONDARY, model.mobileSecondary)
+        values.put(COLUMN_EMAIL, model.email)
+        values.put(COLUMN_DOB, model.dob)
+        values.put(COLUMN_ANNIVERSARY, model.anniversary)
+        values.put(COLUMN_BLOODGROUP, model.bloodgroup)
+        values.put(COLUMN_GENDER, model.gender)
+        values.put(COLUMN_COUNTRY, model.country)
+        values.put(COLUMN_STATE, model.state)
+        values.put(COLUMN_CITY, model.city)
+        values.put(COLUMN_ZIPCODE, model.zipcode)
+        values.put(COLUMN_RESIDENTIAL_ADDRESS, model.residentialAddress)
+
+        val db = writableDatabase
+        db.update(TABLE_NAME, values, "$COLUMN_USER_ID = ${model.userId}", null)
         db.close()
     }
 
