@@ -1,12 +1,9 @@
 package com.example.bvp.broadcast
 
-import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import androidx.core.app.NotificationCompat
 import com.example.bvp.R
 import com.example.bvp.activities.categories.CalendarEvents
 import com.example.bvp.model.ChannelContainer
@@ -19,7 +16,6 @@ class MyReceiver : BroadcastReceiver() {
 
     companion object {
         const val TAG = "MyReceiverTAG"
-        const val NOTIFICATION_REQUEST_CODE = 101
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
