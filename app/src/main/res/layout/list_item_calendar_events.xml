@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_5"
+    android:layout_marginEnd="@dimen/dp_10"
+    android:layout_marginBottom="@dimen/dp_5"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dp_56"
+            android:layout_height="@dimen/dp_56"
+            android:scaleType="centerInside"
+            app:srcCompat="@mipmap/ic_launcher_round"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            tools:ignore="InefficientWeight">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="User name"
+                android:textSize="@dimen/size_20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDOB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Birth date"
+                android:textSize="@dimen/size_16sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgCouple"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_baseline_couple"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/imgCake"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_baseline_cake"
+            tools:ignore="ContentDescription" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

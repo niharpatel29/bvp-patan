@@ -9,7 +9,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bvp.adapter.ContentAdapter
-import com.example.bvp.model.UserListItem
+import com.example.bvp.model.ListItemUserDetails
 import com.example.bvp.model.UserModel
 import com.example.bvp.operations.ImageOperations
 import com.example.bvp.operations.Operations
@@ -26,7 +26,7 @@ class Profile : AppCompatActivity() {
     private lateinit var dbHandler: MyDBHandler
     private lateinit var contentAdapter: ContentAdapter
     private lateinit var userDetails: UserModel
-    private var contentList = ArrayList<UserListItem>()
+    private var contentList = ArrayList<ListItemUserDetails>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,7 +92,7 @@ class Profile : AppCompatActivity() {
 
     private fun addItem(icon: Int, label: Int, value: String?) {
         if (value!!.isNotEmpty()) {
-            contentList.add(UserListItem(icon, getString(label), value))
+            contentList.add(ListItemUserDetails(icon, getString(label), value))
         }
     }
 

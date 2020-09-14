@@ -29,10 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:maxLines="1"
             android:text="@string/no_announcement"
-            android:textSize="@dimen/size_22sp"
+            android:textSize="@dimen/size_26sp"
             android:textStyle="bold"
-            android:visibility="gone" />
+            app:autoSizeTextType="uniform" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

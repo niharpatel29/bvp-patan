@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bvp.R
 import com.example.bvp.adapter.UsersAdapter
-import com.example.bvp.model.ListItem
+import com.example.bvp.model.ListItemUsers
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.user_directory.*
 
@@ -19,7 +19,7 @@ class UserDirectory : AppCompatActivity() {
         private const val TAG = "UserDirectoryTAG"
     }
 
-    private val userList = ArrayList<ListItem>()
+    private val userList = ArrayList<ListItemUsers>()
     private lateinit var usersAdapter: UsersAdapter
     private lateinit var dbHandler: MyDBHandler
 
@@ -63,7 +63,7 @@ class UserDirectory : AppCompatActivity() {
             val name = "${users[i].firstname} ${users[i].lastname}"
             val position = users[i].position
 
-            userList.add(ListItem(userId, name, position))
+            userList.add(ListItemUsers(userId, name, position))
         }
 
         usersAdapter = UsersAdapter(this, userList)
@@ -91,7 +91,7 @@ class UserDirectory : AppCompatActivity() {
     }
 
     private fun filter(text: String) {
-        val temp = ArrayList<ListItem>()
+        val temp = ArrayList<ListItemUsers>()
         for (data in userList) {
             if (data.name.contains(text, true)) {
                 temp.add(data)

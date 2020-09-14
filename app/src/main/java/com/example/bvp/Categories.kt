@@ -14,16 +14,20 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.example.bvp.activities.categories.*
+import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
 import com.example.bvp.firebase.Topic
+import com.example.bvp.model.UserModel
 import com.example.bvp.operations.ImageOperations
 import com.example.bvp.operations.Operations
 import com.example.bvp.prefs.SharedPref
+import com.example.bvp.response.AllUsers
 import com.example.bvp.sqlite.MyDBHandler
 import kotlinx.android.synthetic.main.categories.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
 
 class Categories : AppCompatActivity() {
 
@@ -66,10 +70,13 @@ class Categories : AppCompatActivity() {
                 logout()
                 true
             }
+            R.id.action_refresh -> {
+                getAllUsersFromServer("7698159590", "29111997")
+                true
+            }
             R.id.action_test -> {
 //                logout()
-//                abc()
-                dbHandler.checkBirthday()
+                abc()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -77,7 +84,12 @@ class Categories : AppCompatActivity() {
     }
 
     private fun abc() {
-        val stringToDate = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
+        for (i in dbHandler.checkBirthdayToday().indices) {
+            Log.d(TAG, "name: ${dbHandler.checkBirthdayToday()[i].userId}")
+            Log.d(TAG, "name: ${dbHandler.checkBirthdayToday()[i].name}")
+            Log.d(TAG, "name: ${dbHandler.checkBirthdayToday()[i].date}")
+        }
+        /*val stringToDate = SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault())
         val bDate = stringToDate.parse("10-Sep-2020")!!
 
         val calendar = Calendar.getInstance()
@@ -89,7 +101,7 @@ class Categories : AppCompatActivity() {
         }
 
         Log.d(TAG, systemDate)
-        Log.d(TAG, simpleDateFormat.format(bDate))
+        Log.d(TAG, simpleDateFormat.format(bDate))*/
     }
 
     private fun toolbar() {
@@ -124,6 +136,80 @@ class Categories : AppCompatActivity() {
         btnFeedback.setOnClickListener {
             startActivity(Intent(this, Feedback::class.java))
         }
+    }
+
+    private fun getAllUsersFromServer(userMobile: String, userPassword: String) {
+        operations.showProgressDialog()
+
+        val apiService = postClient()!!.create(APIInterface::class.java)
+        val call = apiService.performGetAllUsers(userMobile, userPassword)
+
+        call.enqueue(object : Callback<AllUsers> {
+            override fun onFailure(call: Call<AllUsers>, t: Throwable) {
+                operations.hideProgressDialog()
+                Log.d("onFailure", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<AllUsers>,
+                response: Response<AllUsers>
+            ) {
+                if (response.isSuccessful) {
+                    when (response.body()!!.response) {
+                        "ok" -> {
+                            val user = response.body()!!.users
+
+                            for (i in user.indices) {
+                                val userId = user[i].userId
+                                val mobilePrimary = user[i].mobilePrimary
+                                val firstName = user[i].firstName
+                                val middleName = user[i].middleName
+                                val lastName = user[i].lastName
+                                val mobileSecondary = user[i].mobileSecondary
+                                val email = user[i].email
+                                val dob = user[i].dob
+                                val anniversary = user[i].anniversary
+                                val bloodgroup = user[i].bloodgroup
+                                val gender = user[i].gender
+                                val country = user[i].country
+                                val state = user[i].state
+                                val city = user[i].city
+                                val zipcode = user[i].zipcode
+                                val residentialAddress = user[i].residentialAddress
+                                val position = user[i].position
+
+                                val mUser = UserModel(
+                                    userId,
+                                    mobilePrimary,
+                                    firstName,
+                                    middleName,
+                                    lastName,
+                                    mobileSecondary,
+                                    email,
+                                    dob,
+                                    anniversary,
+                                    bloodgroup,
+                                    gender,
+                                    country,
+                                    state,
+                                    city,
+                                    zipcode,
+                                    residentialAddress,
+                                    position
+                                )
+                                dbHandler.updateUserDetails(mUser)
+                            }
+                        }
+                        else -> {
+                            operations.displayToast(getString(R.string.unknown_error))
+                        }
+                    }
+                } else {
+                    operations.displayToast(getString(R.string.response_failed))
+                }
+                operations.hideProgressDialog()
+            }
+        })
     }
 
     private fun createDirectory() {

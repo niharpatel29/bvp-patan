@@ -8,11 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bvp.R
-import com.example.bvp.model.UserListItem
+import com.example.bvp.model.ListItemUserDetails
 
 class ContentAdapter(
     private val context: Context,
-    private var contentList: ArrayList<UserListItem>
+    private var contentList: ArrayList<ListItemUserDetails>
 ) : RecyclerView.Adapter<ContentAdapter.ViewHolder>() {
 
     companion object {
@@ -32,7 +32,7 @@ class ContentAdapter(
         val content = contentList[position]
 
         holder.image.setImageResource(content.image)
-        holder.tvHead.text = content.head
+        holder.tvHead.text = content.label
         holder.tvContent.text = content.content
     }
 

@@ -13,16 +13,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.bvp.R
 import com.example.bvp.UserDetails
 import com.example.bvp.api.postClient
-import com.example.bvp.model.ListItemUsers
+import com.example.bvp.model.ListItemCalendar
 import com.example.bvp.other.CircleTransform
+import java.util.*
 
-class UsersAdapter(
+class CalendarAdapter(
     private val context: Context,
-    private var userList: ArrayList<ListItemUsers>
-) : RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
+    private var userList: ArrayList<ListItemCalendar>
+) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.list_item_user, parent, false)
+        val view =
+            LayoutInflater.from(context).inflate(R.layout.list_item_calendar_events, parent, false)
         return ViewHolder(view)
     }
 
@@ -47,7 +49,9 @@ class UsersAdapter(
             .into(holder.imageView)
 
         holder.tvName.text = user.name
-        holder.tvPosition.text = user.position
+        holder.tvDOB.text = user.date
+
+        setIcon(holder, user.type)
 
         holder.itemView.setOnClickListener {
             context.startActivity(
@@ -57,14 +61,21 @@ class UsersAdapter(
         }
     }
 
-    fun updateList(list: ArrayList<ListItemUsers>) {
-        userList = list
-        notifyDataSetChanged()
+    private fun setIcon(holder: ViewHolder, type: String?) {
+        if (type == context.getString(R.string.type_birthday)) {
+            holder.imgCake.visibility = View.VISIBLE
+            holder.imgCouple.visibility = View.GONE
+        } else {
+            holder.imgCake.visibility = View.GONE
+            holder.imgCouple.visibility = View.VISIBLE
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView = itemView.findViewById(R.id.imgProfile) as ImageView
         val tvName = itemView.findViewById(R.id.tvName) as TextView
-        val tvPosition = itemView.findViewById(R.id.tvPosition) as TextView
+        val tvDOB = itemView.findViewById(R.id.tvDOB) as TextView
+        val imgCake = itemView.findViewById(R.id.imgCake) as ImageView
+        val imgCouple = itemView.findViewById(R.id.imgCouple) as ImageView
     }
 }

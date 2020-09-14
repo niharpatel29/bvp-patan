@@ -1,7 +1,8 @@
 package com.example.bvp.model
 
-class ListItem(
+class ListItemCalendar(
     val userId: String?,
     val name: String,
-    val position: String?
+    val date: String?,
+    val type: String?
 )

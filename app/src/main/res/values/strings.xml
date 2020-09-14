@@ -96,6 +96,7 @@
     <string name="cancel">Cancel</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="refresh">Refresh</string>
     <string name="test">Test</string>
     <string name="confirm_logout">Are you sure you want to logout?</string>
     <string name="response_failed">Response failed</string>
@@ -116,11 +117,14 @@
     <string name="admin_panel">Admin panel</string>
     <string name="file_not_selected">File not selected</string>
     <string name="no_announcement">No Announcement</string>
+    <string name="no_events">No Events Today</string>
     <string name="make_announcement">Make Announcement</string>
     <string name="karobari">Karobari</string>
     <string name="general">General</string>
     <string name="coming_soon">Coming soon</string>
     <string name="tap_here_to_wish">Tap here to wish</string>
+    <string name="birthday_and_anniversary">Birthday &amp; Anniversary</string>
+    <string name="today">Today</string>
 
     <string name="topic_global">global</string>
     <string name="topic_login">login</string>

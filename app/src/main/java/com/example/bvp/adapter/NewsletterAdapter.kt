@@ -19,7 +19,7 @@ import com.example.bvp.BuildConfig
 import com.example.bvp.R
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
-import com.example.bvp.model.NewsletterListItem
+import com.example.bvp.model.ListItemNewsletter
 import com.example.bvp.operations.Operations
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -30,7 +30,7 @@ import java.util.*
 
 class NewsletterAdapter(
     private val context: Context,
-    private var newsletterList: ArrayList<NewsletterListItem>
+    private var newsletterList: ArrayList<ListItemNewsletter>
 ) : RecyclerView.Adapter<NewsletterAdapter.ViewHolder>() {
 
     companion object {
@@ -63,7 +63,7 @@ class NewsletterAdapter(
         }
     }
 
-    private fun setDownloadState(holder: ViewHolder, item: NewsletterListItem) {
+    private fun setDownloadState(holder: ViewHolder, item: ListItemNewsletter) {
         val fileName = "${item.fileName}.${item.type}"
         val file = File(filePath, fileName)
         if (file.exists()) {
@@ -75,7 +75,7 @@ class NewsletterAdapter(
         }
     }
 
-    fun updateList(list: ArrayList<NewsletterListItem>) {
+    fun updateList(list: ArrayList<ListItemNewsletter>) {
         newsletterList = list
         notifyDataSetChanged()
     }

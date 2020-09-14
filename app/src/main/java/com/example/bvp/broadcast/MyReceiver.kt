@@ -22,10 +22,10 @@ class MyReceiver : BroadcastReceiver() {
         Operations(context!!).displayToast("Broadcast received")
         Log.d(TAG, "Broadcast received")
 
-        if (MyDBHandler(context).anyBirthdayToday()) {
+        if (MyDBHandler(context).checkBirthdayToday().isNotEmpty()) {
             showNotification(context, context.getString(R.string.type_birthday))
         }
-        if (MyDBHandler(context).anyAnniversaryToday()) {
+        if (MyDBHandler(context).checkAnniversaryToday().isNotEmpty()) {
             showNotification(context, context.getString(R.string.type_anniversary))
         }
     }

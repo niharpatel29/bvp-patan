@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.bvp.adapter.ContentAdapter
 import com.example.bvp.api.postClient
-import com.example.bvp.model.UserListItem
+import com.example.bvp.model.ListItemUserDetails
 import com.example.bvp.model.UserModel
 import com.example.bvp.operations.Operations
 import com.example.bvp.other.CircleTransform
@@ -28,7 +26,7 @@ class UserDetails : AppCompatActivity() {
     private lateinit var operations: Operations
     private lateinit var contentAdapter: ContentAdapter
 
-    private var contentList = ArrayList<UserListItem>()
+    private var contentList = ArrayList<ListItemUserDetails>()
     private lateinit var userId: String
     private lateinit var userDetails: UserModel
 
@@ -116,7 +114,7 @@ class UserDetails : AppCompatActivity() {
 
     private fun addItem(icon: Int, label: Int, value: String?) {
         if (value!!.isNotEmpty()) {
-            contentList.add(UserListItem(icon, getString(label), value))
+            contentList.add(ListItemUserDetails(icon, getString(label), value))
         }
     }
 

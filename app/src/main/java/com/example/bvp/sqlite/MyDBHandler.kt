@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.bvp.R
+import com.example.bvp.model.ListItemCalendar
 import com.example.bvp.model.UserModel
 import com.example.bvp.operations.Operations
 import com.example.bvp.other.SQLServices
@@ -97,12 +99,9 @@ class MyDBHandler(val context: Context) :
     }
 
     fun updateUserDetails(model: UserModel) {
-        Log.d(SQLServices.TAG, "its running")
-        Log.d(SQLServices.TAG, model.userId!!)
-        Operations(context).displayToast("Running fine")
-
         val values = ContentValues()
         values.put(COLUMN_USER_ID, model.userId)
+        values.put(COLUMN_MOBILE_PRIMARY, model.mobilePrimary)
         values.put(COLUMN_FIRSTNAME, model.firstname)
         values.put(COLUMN_MIDDLENAME, model.middlename)
         values.put(COLUMN_LASTNAME, model.lastname)
@@ -117,59 +116,71 @@ class MyDBHandler(val context: Context) :
         values.put(COLUMN_CITY, model.city)
         values.put(COLUMN_ZIPCODE, model.zipcode)
         values.put(COLUMN_RESIDENTIAL_ADDRESS, model.residentialAddress)
+        values.put(COLUMN_POSITION, model.position)
 
         val db = writableDatabase
         db.update(TABLE_NAME, values, "$COLUMN_USER_ID = ${model.userId}", null)
         db.close()
     }
 
-    fun checkBirthday() {
+    fun checkBirthdayToday(): ArrayList<ListItemCalendar> {
+        val users = ArrayList<ListItemCalendar>()
+
         val simpleDateFormat = SimpleDateFormat("dd-MMM", Locale.getDefault())
         val systemDate = simpleDateFormat.format(Calendar.getInstance().time)
 
         val db = readableDatabase
-        val query = "SELECT count(*) FROM $TABLE_NAME WHERE $COLUMN_DOB LIKE '$systemDate%'"
+        val query =
+            "SELECT * FROM $TABLE_NAME WHERE $COLUMN_DOB LIKE '$systemDate%'"
 
         val cursor = db.rawQuery(query, null)
-        cursor.moveToFirst()
 
-        val count = cursor.getInt(0)
-        Log.d(TAG, count.toString())
+        if (cursor.moveToFirst()) {
+            do {
+                val userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))
+                val firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME))
+                val lastName = cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME))
+                val dob = cursor.getString(cursor.getColumnIndex(COLUMN_DOB))
 
+                val name = "$firstName $lastName"
+                val type = context.getString(R.string.type_birthday)
+
+                users.add(ListItemCalendar(userId, name, dob, type))
+            } while (cursor.moveToNext())
+        }
         cursor.close()
         db.close()
+        return users
     }
 
-    fun anyBirthdayToday(): Boolean {
+    fun checkAnniversaryToday(): ArrayList<ListItemCalendar> {
+        val users = ArrayList<ListItemCalendar>()
+
+        val simpleDateFormat = SimpleDateFormat("dd-MMM", Locale.getDefault())
+        val systemDate = simpleDateFormat.format(Calendar.getInstance().time)
+
         val db = readableDatabase
-        val query = "SELECT count(*) FROM $TABLE_NAME WHERE $COLUMN_DOB != '$defaultValue'"
+        val query =
+            "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ANNIVERSARY LIKE '$systemDate%'"
 
         val cursor = db.rawQuery(query, null)
-        cursor.moveToFirst()
 
-        val count = cursor.getInt(0)
-        Log.d(TAG, count.toString())
+        if (cursor.moveToFirst()) {
+            do {
+                val userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))
+                val firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME))
+                val lastName = cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME))
+                val anniversary = cursor.getString(cursor.getColumnIndex(COLUMN_ANNIVERSARY))
 
+                val name = "$firstName $lastName"
+                val type = context.getString(R.string.type_anniversary)
+
+                users.add(ListItemCalendar(userId, name, anniversary, type))
+            } while (cursor.moveToNext())
+        }
         cursor.close()
         db.close()
-
-        return count > 0
-    }
-
-    fun anyAnniversaryToday(): Boolean {
-        val db = readableDatabase
-        val query = "SELECT count(*) FROM $TABLE_NAME WHERE $COLUMN_ANNIVERSARY != '$defaultValue'"
-
-        val cursor = db.rawQuery(query, null)
-        cursor.moveToFirst()
-
-        val count = cursor.getInt(0)
-        Log.d(TAG, count.toString())
-
-        cursor.close()
-        db.close()
-
-        return count > 0
+        return users
     }
 
     // get all users

@@ -15,7 +15,7 @@ import com.example.bvp.R
 import com.example.bvp.adapter.NewsletterAdapter
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
-import com.example.bvp.model.NewsletterListItem
+import com.example.bvp.model.ListItemNewsletter
 import com.example.bvp.operations.Operations
 import com.example.bvp.response.GetNewsletters
 import com.karumi.dexter.Dexter
@@ -37,7 +37,7 @@ class Newsletters : AppCompatActivity() {
 
     private lateinit var operations: Operations
     private lateinit var newsletterAdapter: NewsletterAdapter
-    private val newsletterList = ArrayList<NewsletterListItem>()
+    private val newsletterList = ArrayList<ListItemNewsletter>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -110,7 +110,7 @@ class Newsletters : AppCompatActivity() {
                                 val uploadTime = newsletter[i].uploadTime
 
                                 newsletterList.add(
-                                    NewsletterListItem(
+                                    ListItemNewsletter(
                                         id,
                                         fileName,
                                         path,
