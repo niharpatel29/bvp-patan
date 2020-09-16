@@ -4,12 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import com.example.bvp.R
 import com.example.bvp.model.ListItemCalendar
 import com.example.bvp.model.UserModel
-import com.example.bvp.operations.Operations
-import com.example.bvp.other.SQLServices
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

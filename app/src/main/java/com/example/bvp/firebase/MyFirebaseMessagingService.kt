@@ -2,8 +2,6 @@ package com.example.bvp.firebase
 
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -12,7 +10,7 @@ import com.example.bvp.model.ChannelContainer
 import com.example.bvp.model.NotificationDataContainer
 import com.example.bvp.notification.NotificationHandler
 import com.example.bvp.operations.Operations
-import com.example.bvp.other.SQLServices
+import com.example.bvp.other.SQLiteBackgroundTask
 import com.example.bvp.prefs.SharedPref
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -112,14 +110,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun updateUserDetails() {
         try {
-            val intent = Intent(applicationContext, SQLServices::class.java)
-                .putExtra("user", json.toString())
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startService(intent)
-            } else {
-                startService(intent)
-            }
+            SQLiteBackgroundTask(applicationContext).execute(json)
         } catch (e: JSONException) {
             Log.e(TAG, "Json Exception: ${e.message}")
         } catch (e: Exception) {
