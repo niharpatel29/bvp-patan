@@ -2,6 +2,7 @@ package com.example.bvp.other
 
 import android.app.IntentService
 import android.content.Intent
+import android.os.AsyncTask
 import android.util.Log
 import com.example.bvp.firebase.MyFirebaseMessagingService
 import com.example.bvp.model.UserModel
@@ -28,6 +29,7 @@ class SQLServices(name: String = "test-service") : IntentService(name) {
             val user = json.getJSONObject("user")
 
             val userId = user.getString("user_id")
+            val mobilePrimary = user.getString("mobile_primary")
             val firstName = user.getString("first_name")
             val middleName = user.getString("middle_name")
             val lastName = user.getString("last_name")
@@ -42,10 +44,11 @@ class SQLServices(name: String = "test-service") : IntentService(name) {
             val city = user.getString("city")
             val zipcode = user.getString("zipcode")
             val residentialAddress = user.getString("residential_address")
+            val position = user.getString("position")
 
             val userDetails = UserModel(
                 userId,
-                null,
+                mobilePrimary,
                 firstName,
                 middleName,
                 lastName,
@@ -60,7 +63,7 @@ class SQLServices(name: String = "test-service") : IntentService(name) {
                 city,
                 zipcode,
                 residentialAddress,
-                null
+                position
             )
 
             MyDBHandler(applicationContext).updateUserDetails(userDetails)
@@ -70,4 +73,18 @@ class SQLServices(name: String = "test-service") : IntentService(name) {
             Log.e(MyFirebaseMessagingService.TAG, "Exception: ${e.message}")
         }
     }
+
+    /*class DoBackgroundTask: AsyncTask<String, Void, String>() {
+        override fun onPreExecute() {
+            super.onPreExecute()
+        }
+
+        override fun doInBackground(vararg p0: String?): String {
+
+        }
+
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+        }
+    }*/
 }

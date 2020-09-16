@@ -55,22 +55,7 @@ class Login : AppCompatActivity() {
 
     private fun initialCalls() {
         Topic(this).run { subscribe(global) }
-        createDefaultChannel()
         sendBroadcast()
-    }
-
-    private fun createDefaultChannel() {
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val defaultChannel = NotificationChannel(
-                getString(R.string.channel_default_id),
-                getString(R.string.channel_default_name),
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            notificationManager.createNotificationChannel(defaultChannel)
-        }
     }
 
     private fun sendBroadcast() {

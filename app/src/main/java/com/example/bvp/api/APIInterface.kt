@@ -35,6 +35,7 @@ interface APIInterface {
     @FormUrlEncoded
     fun performUpdateUserProfile(
         @Field("user_id") user_id: String?,
+        @Field("mobile_primary") mobile_primary: String?,
         @Field("first_name") first_name: String?,
         @Field("middle_name") middle_name: String?,
         @Field("last_name") last_name: String?,
@@ -48,7 +49,8 @@ interface APIInterface {
         @Field("state") state: String?,
         @Field("city") city: String?,
         @Field("zipcode") zipcode: String?,
-        @Field("residential_address") residential_address: String?
+        @Field("residential_address") residential_address: String?,
+        @Field("position") position: String?
     ): Call<GeneralResponse>
 
     //get all users

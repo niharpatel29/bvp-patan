@@ -43,8 +43,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         try {
             json = JSONObject(remoteMessage.data.toString())
-            showNotification()
-//            getUpdatedUserDetails()
+
+            // if JSON contains 'channel' object then only show notification
+            if (json.has("channel")) {
+                showNotification()
+            }
+            if (json.get("modified_user_data") == true) {
+                updateUserDetails()
+            }
 
             Log.d(TAG, "From: ${remoteMessage.from}")
             Log.d(TAG, "JSON data: $json")
@@ -60,7 +66,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun showNotification() {
         Handler(Looper.getMainLooper()).post {
-            NotificationHandler(this).showNotification(channel(), notificationData(), Announcement())
+            NotificationHandler(this).showNotification(
+                channel(),
+                notificationData(),
+                Announcement()
+            )
         }
     }
 
@@ -100,18 +110,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun getUpdatedUserDetails() {
+    private fun updateUserDetails() {
         try {
+            val intent = Intent(applicationContext, SQLServices::class.java)
+                .putExtra("user", json.toString())
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                startForegroundService(
-                    Intent(applicationContext, SQLServices::class.java)
-                        .putExtra("user", json.toString())
-                )
+                startService(intent)
             } else {
-                startService(
-                    Intent(applicationContext, SQLServices::class.java)
-                        .putExtra("user", json.toString())
-                )
+                startService(intent)
             }
         } catch (e: JSONException) {
             Log.e(TAG, "Json Exception: ${e.message}")

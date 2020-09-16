@@ -367,6 +367,7 @@ class ModifyProfile : AppCompatActivity() {
         operations.showProgressDialog()
 
         val userId = userModel.userId
+        val mobilePrimary = sharedPref.getMobilePrimary()
         val firstName = userModel.firstname
         val middleName = userModel.middlename
         val lastName = userModel.lastname
@@ -381,10 +382,12 @@ class ModifyProfile : AppCompatActivity() {
         val city = userModel.city
         val zipcode = userModel.zipcode
         val residentialAddress = userModel.residentialAddress
+        val position = sharedPref.getPosition()
 
         val apiService = postClient()!!.create(APIInterface::class.java)
         val call = apiService.performUpdateUserProfile(
             userId,
+            mobilePrimary,
             firstName,
             middleName,
             lastName,
@@ -398,7 +401,8 @@ class ModifyProfile : AppCompatActivity() {
             state,
             city,
             zipcode,
-            residentialAddress
+            residentialAddress,
+            position
         )
 
         call.enqueue(object : Callback<GeneralResponse> {

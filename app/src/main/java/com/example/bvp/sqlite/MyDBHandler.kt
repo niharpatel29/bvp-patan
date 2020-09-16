@@ -183,7 +183,6 @@ class MyDBHandler(val context: Context) :
         return users
     }
 
-    // get all users
     fun getAllUsers(): List<UserModel> {
         val users = ArrayList<UserModel>()
 
