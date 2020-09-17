@@ -196,7 +196,14 @@ class Categories : AppCompatActivity() {
                                     residentialAddress,
                                     position
                                 )
-                                dbHandler.updateUserDetails(mUser)
+
+                                if (dbHandler.isUserExist(mUser.userId)) {
+                                    Log.d(TAG, "exist: ${mUser.userId}")
+                                    dbHandler.updateUserDetails(mUser)
+                                } else {
+                                    Log.d(TAG, "notExist: ${mUser.userId}")
+                                    dbHandler.addUser(mUser)
+                                }
                             }
                             operations.displayToast(getString(R.string.refresh_complete))
                         }

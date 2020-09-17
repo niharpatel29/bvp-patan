@@ -69,6 +69,20 @@ class MyDBHandler(val context: Context) :
         onCreate(db)
     }
 
+    fun isUserExist(userId: String?): Boolean {
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME WHERE $COLUMN_USER_ID = $userId"
+
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst()
+
+        val count = cursor.count
+        cursor.close()
+        db.close()
+
+        return count > 0
+    }
+
     // add new user to the database
     fun addUser(model: UserModel) {
         val values = ContentValues()
