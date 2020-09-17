@@ -1,12 +1,9 @@
 package com.example.bvp
 
 import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
-import android.os.Build
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -48,9 +45,22 @@ class Login : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
 
+        toolbar()
         initialCalls()
         checkLoginStatus()
         handleButtonClicks()
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        toolbar.overflowIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun initialCalls() {
@@ -194,7 +204,7 @@ class Login : AppCompatActivity() {
                             }
 
                             handleSubscription()
-                            getAllUsersFromServer(userMobile, userPassword)
+                            getAllUsersFromServer(userId, userMobile)
                         }
                         "failed" -> {
                             operations.hideProgressDialog()
@@ -245,9 +255,9 @@ class Login : AppCompatActivity() {
         }
     }
 
-    private fun getAllUsersFromServer(userMobile: String, userPassword: String) {
+    private fun getAllUsersFromServer(mUserId: String, userMobile: String) {
         val apiService = postClient()!!.create(APIInterface::class.java)
-        val call = apiService.performGetAllUsers(userMobile, userPassword)
+        val call = apiService.performGetAllUsers(mUserId, userMobile)
 
         call.enqueue(object : Callback<AllUsers> {
             override fun onFailure(call: Call<AllUsers>, t: Throwable) {

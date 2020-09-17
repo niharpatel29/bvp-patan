@@ -66,16 +66,15 @@ class Categories : AppCompatActivity() {
                 startActivity(Intent(this, Profile::class.java))
                 true
             }
+            R.id.action_refresh -> {
+                getAllUsersFromServer(sharedPref.getId(), sharedPref.getMobilePrimary())
+                true
+            }
             R.id.action_logout -> {
                 logout()
                 true
             }
-            R.id.action_refresh -> {
-                getAllUsersFromServer("7698159590", "29111997")
-                true
-            }
             R.id.action_test -> {
-//                logout()
                 abc()
                 true
             }
@@ -138,11 +137,11 @@ class Categories : AppCompatActivity() {
         }
     }
 
-    private fun getAllUsersFromServer(userMobile: String, userPassword: String) {
+    private fun getAllUsersFromServer(mUserId: String?, userMobile: String?) {
         operations.showProgressDialog()
 
         val apiService = postClient()!!.create(APIInterface::class.java)
-        val call = apiService.performGetAllUsers(userMobile, userPassword)
+        val call = apiService.performGetAllUsers(mUserId, userMobile)
 
         call.enqueue(object : Callback<AllUsers> {
             override fun onFailure(call: Call<AllUsers>, t: Throwable) {
@@ -199,6 +198,7 @@ class Categories : AppCompatActivity() {
                                 )
                                 dbHandler.updateUserDetails(mUser)
                             }
+                            operations.displayToast(getString(R.string.refresh_complete))
                         }
                         else -> {
                             operations.displayToast(getString(R.string.unknown_error))

@@ -121,10 +121,12 @@
     <string name="make_announcement">Make Announcement</string>
     <string name="karobari">Karobari</string>
     <string name="general">General</string>
+    <string name="all">All</string>
     <string name="coming_soon">Coming soon</string>
     <string name="tap_here_to_wish">Tap here to wish</string>
     <string name="birthday_and_anniversary">Birthday &amp; Anniversary</string>
     <string name="today">Today</string>
+    <string name="refresh_complete">Refresh complete</string>
 
     <string name="topic_global">global</string>
     <string name="topic_login">login</string>

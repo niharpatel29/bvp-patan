@@ -11,7 +11,7 @@ import org.json.JSONObject
 
 class SQLiteBackgroundTask(val context: Context) : AsyncTask<JSONObject, Void, String>() {
     companion object {
-        const val TAG = "IntentServicesTAG"
+        const val TAG = "SQLiteBackgroundTaskTAG"
     }
 
     override fun onPreExecute() {

@@ -16,6 +16,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class MakeAnnouncement : AppCompatActivity() {
 
     private lateinit var sharedPrefAdmin: SharedPrefAdmin
@@ -29,6 +30,7 @@ class MakeAnnouncement : AppCompatActivity() {
         operations = Operations(this)
 
         toolbar()
+        radioListener()
         handleButtonClicks()
     }
 
@@ -72,8 +74,7 @@ class MakeAnnouncement : AppCompatActivity() {
             }
             // register if not empty
             val adminId = sharedPrefAdmin.getId()
-            val topic =
-                if (radioGeneral.isChecked) getString(R.string.topic_general) else getString(R.string.topic_karobari)
+            val topic = topic()
             val title = operations.getValue(layoutTitle)
             val message = operations.getValue(layoutMessage)
 
@@ -81,13 +82,37 @@ class MakeAnnouncement : AppCompatActivity() {
         }
     }
 
+    fun radioListener() {
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            radioKarobari.error = null
+            radioGeneral.error = null
+            radioAll.error = null
+        }
+    }
+
     private fun setRadioError(error: Boolean) {
         if (error) {
             radioKarobari.error = getString(R.string.required_field)
             radioGeneral.error = getString(R.string.required_field)
+            radioAll.error = getString(R.string.required_field)
         } else {
             radioKarobari.error = null
             radioGeneral.error = null
+            radioAll.error = null
+        }
+    }
+
+    private fun topic(): String {
+        return when {
+            radioGeneral.isChecked -> {
+                getString(R.string.topic_general)
+            }
+            radioKarobari.isChecked -> {
+                getString(R.string.topic_karobari)
+            }
+            else -> {
+                getString(R.string.topic_login) // send to logged-in users
+            }
         }
     }
 

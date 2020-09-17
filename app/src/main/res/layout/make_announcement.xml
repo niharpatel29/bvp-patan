@@ -99,6 +99,15 @@
                         android:textSize="@dimen/size_18sp"
                         app:buttonTint="@color/colorPrimary" />
 
+                    <!--send push to logged-in users-->
+                    <RadioButton
+                        android:id="@+id/radioAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all"
+                        android:textSize="@dimen/size_18sp"
+                        app:buttonTint="@color/colorPrimary" />
+
                 </RadioGroup>
 
                 <com.google.android.material.button.MaterialButton

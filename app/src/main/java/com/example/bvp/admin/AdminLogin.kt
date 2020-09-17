@@ -1,6 +1,7 @@
 package com.example.bvp.admin
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -27,8 +28,21 @@ class AdminLogin : AppCompatActivity() {
         sharedPrefAdmin = SharedPrefAdmin(this)
         operations = Operations(this)
 
+        toolbar()
         checkLoginStatus()
         handleButtonClicks()
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar)
+        toolbar.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        toolbar.overflowIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun checkLoginStatus() {

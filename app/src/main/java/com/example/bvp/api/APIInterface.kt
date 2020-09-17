@@ -12,7 +12,7 @@ import retrofit2.http.*
 
 interface APIInterface {
     //default_image login
-    @POST("userLogin.php")
+    @POST("Login.php")
     @FormUrlEncoded
     fun performUserLogin(
         @Field("mobile_primary") mobile_primary: String,
@@ -20,7 +20,7 @@ interface APIInterface {
     ): Call<UserLogin>
 
     //signup default_image
-    @POST("userSignup.php")
+    @POST("Signup.php")
     @FormUrlEncoded
     fun performUserSignup(
         @Field("mobile_primary") mobile_primary: String,
@@ -31,7 +31,7 @@ interface APIInterface {
     ): Call<GeneralResponse>
 
     //modify default_image details
-    @POST("editProfile.php")
+    @POST("ModifyProfile.php")
     @FormUrlEncoded
     fun performUpdateUserProfile(
         @Field("user_id") user_id: String?,
@@ -54,15 +54,24 @@ interface APIInterface {
     ): Call<GeneralResponse>
 
     //get all users
-    @POST("getAllUsers.php")
+    @POST("GetAllUsers.php")
     @FormUrlEncoded
     fun performGetAllUsers(
-        @Field("mobile_primary") mobile_primary: String,
-        @Field("password") password: String
+        @Field("user_id") user_id: String?,
+        @Field("mobile_primary") mobile_primary: String?
     ): Call<AllUsers>
 
+    @POST("GetNewsletters.php")
+    fun performGetNewsletters(): Call<GetNewsletters>
+
+    @POST("GetAnnouncement.php")
+    @FormUrlEncoded
+    fun performGetAnnouncement(
+        @Field("topic") topic: String?
+    ): Call<GetAnnouncement>
+
     //check_user_exist admin
-    @POST("admin/adminLogin.php")
+    @POST("Admin/AdminLogin.php")
     @FormUrlEncoded
     fun performAdminLogin(
         @Field("admin_username") admin_username: String,
@@ -70,7 +79,7 @@ interface APIInterface {
     ): Call<AdminLoginModel>
 
     //admin registers new default_image
-    @POST("admin/adminRegistersNewUser.php")
+    @POST("Admin/AdminRegistersNewUser.php")
     @FormUrlEncoded
     fun performAdminRegistersNewUser(
         @Field("admin_id") admin_id: String?,
@@ -82,7 +91,7 @@ interface APIInterface {
     ): Call<AdminRegistersNewUserModel>
 
     //admin registers new default_image
-    @POST("admin/makeAnnouncement.php?apicall=new")
+    @POST("Admin/MakeAnnouncement.php?apicall=new")
     @FormUrlEncoded
     fun performMakeAnnouncement(
         @Field("admin_id") admin_id: String?,
@@ -90,9 +99,6 @@ interface APIInterface {
         @Field("title") title: String,
         @Field("message") message: String
     ): Call<MakeAnnouncementResponse>
-
-    @POST("getAnnouncement.php")
-    fun performGetAnnouncement(): Call<GetAnnouncement>
 
     @Multipart
     @POST("FileUploader/API.php?apicall=profile_picture")
@@ -108,9 +114,6 @@ interface APIInterface {
         @Part("admin_id") adminId: RequestBody,
         @Part("file_name") fileName: RequestBody
     ): Call<UploadResponse>
-
-    @POST("getNewsletters.php")
-    fun performGetNewsletters(): Call<GetNewsletters>
 
     @Streaming
     @GET

@@ -10,6 +10,7 @@ import com.example.bvp.R
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
 import com.example.bvp.operations.Operations
+import com.example.bvp.prefs.SharedPref
 import com.example.bvp.response.GetAnnouncement
 import kotlinx.android.synthetic.main.announcement.*
 import retrofit2.Call
@@ -23,12 +24,14 @@ class Announcement : AppCompatActivity() {
     }
 
     private lateinit var operations: Operations
+    private lateinit var sharedPref: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.announcement)
 
         operations = Operations(this)
+        sharedPref = SharedPref(this)
 
         toolbar()
         handleButtonClicks()
@@ -67,8 +70,10 @@ class Announcement : AppCompatActivity() {
     private fun getAnnouncement() {
         operations.showProgressDialog()
 
+        val topic = sharedPref.getCategory()
+
         val apiService = postClient()!!.create(APIInterface::class.java)
-        val call = apiService.performGetAnnouncement()
+        val call = apiService.performGetAnnouncement(topic)
 
         call.enqueue(object : Callback<GetAnnouncement> {
             override fun onFailure(call: Call<GetAnnouncement>, t: Throwable) {

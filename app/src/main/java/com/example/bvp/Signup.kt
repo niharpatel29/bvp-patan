@@ -1,6 +1,7 @@
 package com.example.bvp
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,21 @@ class Signup : AppCompatActivity() {
         sharedPref = SharedPref(this)
         operations = Operations(this)
 
+        toolbar()
         handleButtonClicks()
+    }
+
+    private fun toolbar() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.navigationIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
+        toolbar.overflowIcon?.setColorFilter(
+            resources.getColor(R.color.colorWhite),
+            PorterDuff.Mode.SRC_ATOP
+        )
     }
 
     private fun handleButtonClicks() {
@@ -51,7 +66,7 @@ class Signup : AppCompatActivity() {
                 return@setOnClickListener
             }
             // signup if not empty
-            val userMobile = intent.getStringExtra("user_mobile")
+            val userMobile = intent.getStringExtra("user_mobile")!!
             val firstName = operations.getValueET(etFirstname)
             val middleName = operations.getValueET(etMiddlename)
             val lastName = operations.getValueET(etLastname)
