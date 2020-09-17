@@ -67,11 +67,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <service
-            android:name=".other.SQLServices"
-            android:enabled="true"
-            android:exported="false" />
-
         <!-- FCM -->
         <service
             android:name=".firebase.MyFirebaseMessagingService"
