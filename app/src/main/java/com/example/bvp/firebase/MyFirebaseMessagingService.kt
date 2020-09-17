@@ -46,8 +46,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             if (json.has("channel")) {
                 showNotification()
             }
-            if (json.get("modified_user_data") == true) {
-                updateUserDetails()
+            if (json.get("update_sqlite") == true) {
+                updateUserListAndData()
             }
 
             Log.d(TAG, "From: ${remoteMessage.from}")
@@ -108,7 +108,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    private fun updateUserDetails() {
+    private fun updateUserListAndData() {
         try {
             SQLiteBackgroundTask(applicationContext).execute(json)
         } catch (e: JSONException) {

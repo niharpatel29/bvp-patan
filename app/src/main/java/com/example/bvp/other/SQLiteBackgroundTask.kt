@@ -61,7 +61,13 @@ class SQLiteBackgroundTask(val context: Context) : AsyncTask<JSONObject, Void, S
                 position
             )
 
-            MyDBHandler(context).updateUserDetails(userDetails)
+            if (MyDBHandler(context).isUserExist(userDetails.userId)) {
+                Log.d(TAG, "exist: ${userDetails.userId}")
+                MyDBHandler(context).updateUserDetails(userDetails)
+            } else {
+                Log.d(TAG, "notExist: ${userDetails.userId}")
+                MyDBHandler(context).addUser(userDetails)
+            }
         } catch (e: JSONException) {
             Log.e(MyFirebaseMessagingService.TAG, "Json Exception: ${e.message}")
         } catch (e: Exception) {
