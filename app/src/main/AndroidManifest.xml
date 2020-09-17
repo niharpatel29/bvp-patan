@@ -27,20 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".admin.AdminLogin"
-            android:theme="@style/MyTheme" />
+        <activity android:name=".admin.AdminLogin" />
         <activity android:name=".admin.AdminPanel" />
         <activity android:name=".admin.AdminRegistersNewUser" />
         <activity android:name=".admin.UploadNewsletter" />
         <activity android:name=".admin.MakeAnnouncement" />
 
-        <activity
-            android:name=".Login"
-            android:theme="@style/MyTheme" />
-        <activity
-            android:name=".Signup"
-            android:theme="@style/MyTheme" />
+        <activity android:name=".Login" />
+        <activity android:name=".Signup" />
         <activity android:name=".Categories" />
         <activity android:name=".Profile" />
         <activity android:name=".ModifyProfile" />
