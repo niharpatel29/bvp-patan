@@ -72,7 +72,7 @@ class MakeAnnouncement : AppCompatActivity() {
             } else {
                 setRadioError(false)
             }
-            // register if not empty
+            // announce if not empty
             val adminId = sharedPrefAdmin.getId()
             val topic = topic()
             val title = operations.getValue(layoutTitle)
@@ -82,7 +82,7 @@ class MakeAnnouncement : AppCompatActivity() {
         }
     }
 
-    fun radioListener() {
+    private fun radioListener() {
         radioGroup.setOnCheckedChangeListener { group, checkedId ->
             radioKarobari.error = null
             radioGeneral.error = null

@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bvp.R
 import com.example.bvp.model.ListItemPhotos
@@ -39,6 +37,11 @@ class PhotosAdapter(
 
         holder.tvLink.text = item.link
         holder.tvDesc.text = item.desc
+
+        holder.tvLink.setOnLongClickListener {
+            copyToClipboard(item.link)
+            true
+        }
 
         holder.itemView.setOnLongClickListener {
             copyToClipboard(item.link)

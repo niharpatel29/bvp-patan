@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.bvp.R
-import com.example.bvp.admin.other.AdminRegistersNewUserModel
+import com.example.bvp.admin.other.AdminGeneralResponse
 import com.example.bvp.admin.other.SharedPrefAdmin
 import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
@@ -129,15 +129,15 @@ class AdminRegistersNewUser : AppCompatActivity() {
             userMobile
         )
 
-        call.enqueue(object : Callback<AdminRegistersNewUserModel> {
-            override fun onFailure(call: Call<AdminRegistersNewUserModel>, t: Throwable) {
+        call.enqueue(object : Callback<AdminGeneralResponse> {
+            override fun onFailure(call: Call<AdminGeneralResponse>, t: Throwable) {
                 operations.hideProgressDialog()
                 Log.d("onFailure", t.toString())
             }
 
             override fun onResponse(
-                call: Call<AdminRegistersNewUserModel>,
-                response: Response<AdminRegistersNewUserModel>
+                call: Call<AdminGeneralResponse>,
+                response: Response<AdminGeneralResponse>
             ) {
                 if (response.isSuccessful) {
                     when (response.body()!!.response) {

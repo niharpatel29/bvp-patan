@@ -43,5 +43,12 @@
             android:layout_marginTop="@dimen/dp_20"
             android:text="@string/make_announcement" />
 
+        <Button
+            android:id="@+id/btnUploadPhotosLink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/upload_photos_link" />
+
     </LinearLayout>
 </LinearLayout>

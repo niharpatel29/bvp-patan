@@ -1,7 +1,7 @@
 package com.example.bvp.api
 
 import com.example.bvp.admin.other.AdminLoginModel
-import com.example.bvp.admin.other.AdminRegistersNewUserModel
+import com.example.bvp.admin.other.AdminGeneralResponse
 import com.example.bvp.admin.other.MakeAnnouncementResponse
 import com.example.bvp.response.*
 import okhttp3.MultipartBody
@@ -95,7 +95,7 @@ interface APIInterface {
         @Field("category") category: String,
         @Field("position") position: String,
         @Field("mobile_primary") mobile_primary: String
-    ): Call<AdminRegistersNewUserModel>
+    ): Call<AdminGeneralResponse>
 
     //admin registers new default_image
     @POST("Admin/MakeAnnouncement.php?apicall=new")
@@ -106,6 +106,14 @@ interface APIInterface {
         @Field("title") title: String,
         @Field("message") message: String
     ): Call<MakeAnnouncementResponse>
+
+    @POST("Admin/UploadPhotosLink.php")
+    @FormUrlEncoded
+    fun performUploadPhotosLink(
+        @Field("admin_id") admin_id: String?,
+        @Field("link") link: String,
+        @Field("description") description: String
+    ): Call<AdminGeneralResponse>
 
     @Multipart
     @POST("FileUploader/API.php?apicall=profile_picture")

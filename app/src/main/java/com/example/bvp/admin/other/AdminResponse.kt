@@ -18,7 +18,7 @@ data class Admin(
     val adminName: String
 )
 
-data class AdminRegistersNewUserModel(
+data class AdminGeneralResponse(
     @SerializedName("message")
     val message: String,
     @SerializedName("response")

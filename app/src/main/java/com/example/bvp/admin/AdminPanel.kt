@@ -63,6 +63,10 @@ class AdminPanel : AppCompatActivity() {
         btnMakeAnnouncement.setOnClickListener {
             startActivity(Intent(this, MakeAnnouncement::class.java))
         }
+
+        btnUploadPhotosLink.setOnClickListener {
+            startActivity(Intent(this, UploadPhotosLink::class.java))
+        }
     }
 
     private fun logoutDialog() {
