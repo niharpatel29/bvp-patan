@@ -42,13 +42,7 @@
         <activity android:name=".UserDetails" />
         <activity android:name=".activities.categories.Newsletters" />
         <activity android:name=".activities.categories.CalendarEvents" />
-        <activity
-            android:name=".activities.categories.Announcement"
-            android:parentActivityName=".Categories">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Categories" />
-        </activity>
+        <activity android:name=".activities.categories.Announcement" />
         <activity android:name=".activities.categories.Feedback" />
 
         <!-- uCrop -->

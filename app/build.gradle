@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.mikhaellopez:circularimageview:3.2.0' // androidHive
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'
     implementation 'com.github.abdularis:CircularImageView:1.4'
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     implementation 'com.github.yalantis:ucrop:2.2.5'
