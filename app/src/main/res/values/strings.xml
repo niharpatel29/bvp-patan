@@ -23,6 +23,7 @@
     <string name="btn_update">Update</string>
     <string name="btn_mark_read">Mark As Read</string>
     <string name="btn_send">Send</string>
+    <string name="btn_upload">Upload</string>
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
@@ -48,6 +49,8 @@
     <string name="hint_file_name">File Name</string>
     <string name="hint_title">Title</string>
     <string name="hint_message">Message</string>
+    <string name="hint_paste_link">Paste your link here</string>
+    <string name="hint_description">Description</string>
 
     <string name="name">Name</string>
     <string name="first_name">First Name</string>
@@ -66,6 +69,7 @@
     <string name="admin_login">Admin login</string>
     <string name="register_new_user">Register a new user</string>
     <string name="upload_newsletter">Upload newsletter</string>
+    <string name="upload_photos_link">Upload photos link</string>
     <string name="password">Password</string>
     <string name="signup">Signup</string>
     <string name="divider">divider</string>
@@ -127,6 +131,9 @@
     <string name="birthday_and_anniversary">Birthday &amp; Anniversary</string>
     <string name="today">Today</string>
     <string name="refresh_complete">Refresh complete</string>
+    <string name="copy_link">Copy link</string>
+    <string name="link_copied_to_clipboard">Link copied to clipboard</string>
+    <string name="please_login_again">Please login again</string>
 
     <string name="topic_global">global</string>
     <string name="topic_login">login</string>

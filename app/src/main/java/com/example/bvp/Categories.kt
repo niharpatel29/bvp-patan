@@ -67,7 +67,7 @@ class Categories : AppCompatActivity() {
                 true
             }
             R.id.action_refresh -> {
-                getAllUsersFromServer(sharedPref.getId(), sharedPref.getMobilePrimary())
+                getAllUsersFromServer()
                 true
             }
             R.id.action_logout -> {
@@ -128,6 +128,10 @@ class Categories : AppCompatActivity() {
             startActivity(Intent(this, Announcement::class.java))
         }
 
+        btnPhotos.setOnClickListener {
+            startActivity(Intent(this, Photos::class.java))
+        }
+
         btnCalendarEvents.setOnClickListener {
             startActivity(Intent(this, CalendarEvents::class.java))
         }
@@ -137,8 +141,11 @@ class Categories : AppCompatActivity() {
         }
     }
 
-    private fun getAllUsersFromServer(mUserId: String?, userMobile: String?) {
+    private fun getAllUsersFromServer() {
         operations.showProgressDialog()
+
+        val mUserId = sharedPref.getId()
+        val userMobile = sharedPref.getMobilePrimary()
 
         val apiService = postClient()!!.create(APIInterface::class.java)
         val call = apiService.performGetAllUsers(mUserId, userMobile)
@@ -206,6 +213,9 @@ class Categories : AppCompatActivity() {
                                 }
                             }
                             operations.displayToast(getString(R.string.refresh_complete))
+                        }
+                        "failed" -> {
+                            operations.displayToast(getString(R.string.please_login_again))
                         }
                         else -> {
                             operations.displayToast(getString(R.string.unknown_error))

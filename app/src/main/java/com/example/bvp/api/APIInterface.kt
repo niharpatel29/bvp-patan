@@ -70,6 +70,13 @@ interface APIInterface {
         @Field("topic") topic: String?
     ): Call<GetAnnouncement>
 
+    @POST("GetPhotosLinks.php")
+    @FormUrlEncoded
+    fun performGetPhotosLinks(
+        @Field("user_id") user_id: String?,
+        @Field("mobile_primary") mobile_primary: String?
+    ): Call<GetPhotosLinks>
+
     //check_user_exist admin
     @POST("Admin/AdminLogin.php")
     @FormUrlEncoded

@@ -105,3 +105,21 @@ data class GetAnnouncement(
     @SerializedName("title")
     val title: String
 )
+
+data class GetPhotosLinks(
+    @SerializedName("photos")
+    val photos: List<Photo>,
+    @SerializedName("response")
+    val response: String
+)
+
+data class Photo(
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("link")
+    val link: String,
+    @SerializedName("time")
+    val time: String
+)
