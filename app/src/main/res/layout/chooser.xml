@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose mobile number"
+            android:text="@string/choose_mobile_number"
             android:textSize="@dimen/size_20sp" />
 
         <LinearLayout
@@ -35,7 +35,8 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/dp_20"
                 android:text="@string/mobile"
-                android:textSize="@dimen/size_18sp" />
+                android:textSize="@dimen/size_18sp"
+                tools:ignore="UnusedAttribute" />
 
             <View
                 android:layout_width="match_parent"
@@ -50,7 +51,9 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:padding="@dimen/dp_20"
                 android:text="@string/mobile_secondary"
-                android:textSize="@dimen/size_18sp" />
+                android:textSize="@dimen/size_18sp"
+                tools:ignore="UnusedAttribute" />
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

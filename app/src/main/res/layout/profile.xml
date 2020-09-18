@@ -56,33 +56,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!--<androidx.cardview.widget.CardView
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100"
-            app:cardCornerRadius="@dimen/dp_100"
-            app:cardUseCompatPadding="false"
-            app:cardElevation="@dimen/dp_0"
-            tools:ignore="ContentDescription">
-
-            <ImageView
-                android:id="@+id/imgProfile"
-                android:layout_margin="@dimen/border"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/default_image" />
-
-        </androidx.cardview.widget.CardView>-->
-
-        <!--<com.github.abdularis.civ.CircleImageView
-            android:id="@+id/imgProfile"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="centerInside"
-            android:src="@drawable/default_image"
-            app:strokeColor="@color/colorWhite"
-            app:strokeWidth="@dimen/profile_border" />-->
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

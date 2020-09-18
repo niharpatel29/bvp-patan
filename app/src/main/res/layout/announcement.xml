@@ -42,7 +42,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:visibility="gone"
             app:cardBackgroundColor="@color/colorWhite"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="@dimen/corner_radius"
             app:cardUseCompatPadding="false">
 
             <LinearLayout
@@ -55,7 +55,7 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meeting :"
+                    android:text="Meeting"
                     android:textSize="@dimen/size_20sp"
                     android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:autoLink="web|email"
-                    android:text="meeting will be held at the BVP main branch on 8:20 pm. www.google.com niharpatel29@gmail.com kdsjknc dfjfhbhewk cx n v "
+                    android:text="Message"
                     android:textColorLink="@color/colorPrimary"
                     android:textSize="@dimen/size_20sp" />
 

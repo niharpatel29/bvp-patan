@@ -10,7 +10,7 @@
     android:layout_marginBottom="@dimen/dp_5"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="@dimen/corner_radius"
     app:cardUseCompatPadding="false">
 
     <LinearLayout

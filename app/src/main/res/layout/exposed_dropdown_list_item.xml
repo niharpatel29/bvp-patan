@@ -5,5 +5,5 @@
     android:ellipsize="end"
     android:maxLines="1"
     android:padding="@dimen/dp_16"
-    android:text="@string/bloodgroup"
+    android:text="@string/text"
     android:textAppearance="?attr/textAppearanceSubtitle1" />
