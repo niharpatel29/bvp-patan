@@ -17,6 +17,7 @@ import com.example.bvp.api.APIInterface
 import com.example.bvp.api.postClient
 import com.example.bvp.model.ListItemNewsletter
 import com.example.bvp.operations.Operations
+import com.example.bvp.prefs.SharedPref
 import com.example.bvp.response.GetNewsletters
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -36,6 +37,7 @@ class Newsletters : AppCompatActivity() {
     }
 
     private lateinit var operations: Operations
+    private lateinit var sharedPref: SharedPref
     private lateinit var newsletterAdapter: NewsletterAdapter
     private val newsletterList = ArrayList<ListItemNewsletter>()
 
@@ -44,6 +46,7 @@ class Newsletters : AppCompatActivity() {
         setContentView(R.layout.newsletters)
 
         operations = Operations(this)
+        sharedPref = SharedPref(this)
 
         toolbar()
         getNewsletters()
@@ -81,8 +84,11 @@ class Newsletters : AppCompatActivity() {
     private fun getNewsletters() {
         operations.showProgressDialog()
 
+        val userId = sharedPref.getId()
+        val userMobile = sharedPref.getMobilePrimary()
+
         val apiService = postClient()!!.create(APIInterface::class.java)
-        val call = apiService.performGetNewsletters()
+        val call = apiService.performGetNewsletters(userId, userMobile)
 
         call.enqueue(object : Callback<GetNewsletters> {
             override fun onFailure(call: Call<GetNewsletters>, t: Throwable) {
@@ -122,6 +128,9 @@ class Newsletters : AppCompatActivity() {
 
                             newsletterAdapter = NewsletterAdapter(this@Newsletters, newsletterList)
                             recyclerView.adapter = newsletterAdapter
+                        }
+                        "failed" -> {
+                            operations.displayToast(getString(R.string.please_login_again))
                         }
                         else -> {
                             operations.displayToast(getString(R.string.unknown_error))

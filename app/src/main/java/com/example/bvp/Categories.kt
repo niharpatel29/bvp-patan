@@ -119,25 +119,26 @@ class Categories : AppCompatActivity() {
         btnMembers.setOnClickListener {
             startActivity(Intent(this, UserDirectory::class.java))
         }
-
         btnNewsletters.setOnClickListener {
             startActivity(Intent(this, Newsletters::class.java))
         }
-
         btnAnnouncement.setOnClickListener {
             startActivity(Intent(this, Announcement::class.java))
         }
-
         btnPhotos.setOnClickListener {
             startActivity(Intent(this, Photos::class.java))
         }
-
+        btnProjects.setOnClickListener {
+            startActivity(Intent(this, Projects::class.java))
+        }
         btnCalendarEvents.setOnClickListener {
             startActivity(Intent(this, CalendarEvents::class.java))
         }
-
         btnFeedback.setOnClickListener {
             startActivity(Intent(this, Feedback::class.java))
+        }
+        btnAbout.setOnClickListener {
+            startActivity(Intent(this, About::class.java))
         }
     }
 

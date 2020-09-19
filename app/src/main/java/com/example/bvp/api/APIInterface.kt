@@ -62,7 +62,11 @@ interface APIInterface {
     ): Call<AllUsers>
 
     @POST("GetNewsletters.php")
-    fun performGetNewsletters(): Call<GetNewsletters>
+    @FormUrlEncoded
+    fun performGetNewsletters(
+        @Field("user_id") user_id: String?,
+        @Field("mobile_primary") mobile_primary: String?
+    ): Call<GetNewsletters>
 
     @POST("GetAnnouncement.php")
     @FormUrlEncoded

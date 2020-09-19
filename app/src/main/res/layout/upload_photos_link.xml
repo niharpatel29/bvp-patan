@@ -20,73 +20,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/padding">
+        android:gravity="center">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutLink"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:boxStrokeColor="@color/colorPrimary"
-            app:endIconMode="clear_text"
-            app:hintTextColor="@color/colorBlack"
-            app:startIconDrawable="@drawable/ic_baseline_link">
+            tools:ignore="UselessParent">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etLink"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="web"
-                android:hint="@string/hint_paste_link"
-                android:inputType="text"
-                android:maxLines="1"
-                android:textColor="@color/colorPrimary"
-                android:textColorLink="@color/colorPrimary"
-                android:textSize="@dimen/size_16sp" />
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/padding">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutLink"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:endIconMode="clear_text"
+                    app:hintTextColor="@color/colorBlack"
+                    app:startIconDrawable="@drawable/ic_baseline_link">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutDesc"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
-            app:boxStrokeColor="@color/colorPrimary"
-            app:hintTextColor="@color/colorBlack"
-            app:startIconDrawable="@drawable/ic_baseline_text">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autoLink="web"
+                        android:hint="@string/hint_paste_link"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:textColor="@color/colorPrimary"
+                        android:textColorLink="@color/colorPrimary"
+                        android:textSize="@dimen/size_16sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_description"
-                android:inputType="textMultiLine|textCapSentences"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/size_16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutDesc"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:boxStrokeColor="@color/colorPrimary"
+                    app:hintTextColor="@color/colorBlack"
+                    app:startIconDrawable="@drawable/ic_baseline_text">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnUpload"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="@dimen/short_button_width"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginTop="@dimen/dp_50"
-            android:layout_marginBottom="@dimen/margin_to_show_elevation"
-            android:elevation="@dimen/elevation"
-            android:text="@string/btn_upload"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/size_20sp"
-            android:textStyle="bold"
-            app:autoSizeMaxTextSize="@dimen/size_20sp"
-            app:autoSizeTextType="uniform"
-            app:backgroundTint="@color/colorPrimary"
-            app:cornerRadius="@dimen/button_corner_radius" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_description"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/size_16sp" />
 
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUpload"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="@dimen/short_button_width"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="@dimen/dp_50"
+                    android:layout_marginBottom="@dimen/margin_to_show_elevation"
+                    android:elevation="@dimen/elevation"
+                    android:text="@string/btn_upload"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/size_20sp"
+                    android:textStyle="bold"
+                    app:autoSizeMaxTextSize="@dimen/size_20sp"
+                    app:autoSizeTextType="uniform"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:cornerRadius="@dimen/button_corner_radius" />
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

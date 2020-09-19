@@ -24,6 +24,7 @@
     <string name="btn_mark_read">Mark As Read</string>
     <string name="btn_send">Send</string>
     <string name="btn_upload">Upload</string>
+    <string name="btn_browse_file">Browse file</string>
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
@@ -46,7 +47,7 @@
     <string name="hint_zipcode">Zipcode</string>
     <string name="hint_residential_address">Residential Address</string>
     <string name="hint_search">Search</string>
-    <string name="hint_file_name">File Name</string>
+    <string name="hint_enter_file_name">Enter File Name</string>
     <string name="hint_title">Title</string>
     <string name="hint_message">Message</string>
     <string name="hint_paste_link">Paste your link here</string>

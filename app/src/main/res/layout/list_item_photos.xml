@@ -28,6 +28,7 @@
             android:autoLink="web"
             android:ellipsize="end"
             android:maxLines="1"
+            android:singleLine="true"
             android:text="www.google.com"
             android:textColor="@color/colorPrimary"
             android:textColorLink="@color/colorPrimary"

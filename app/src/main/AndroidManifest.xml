@@ -18,7 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".admin.UploadPhotosLink"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/MyTheme">
@@ -33,6 +32,8 @@
         <activity android:name=".admin.AdminRegistersNewUser" />
         <activity android:name=".admin.UploadNewsletter" />
         <activity android:name=".admin.MakeAnnouncement" />
+        <activity android:name=".admin.UploadPhotosLink" />
+
         <activity android:name=".Login" />
         <activity android:name=".Signup" />
         <activity android:name=".Categories" />
@@ -44,10 +45,16 @@
         <activity android:name=".activities.categories.CalendarEvents" />
         <activity android:name=".activities.categories.Announcement" />
         <activity android:name=".activities.categories.Feedback" />
-        <activity android:name=".activities.categories.Photos" /> <!-- uCrop -->
+        <activity android:name=".activities.categories.Photos" />
+        <activity android:name=".activities.categories.Projects" />
+        <activity android:name=".activities.categories.About" />
+
+        <!-- uCrop -->
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait" /> <!-- to write & read file from external storage -->
+            android:screenOrientation="portrait" />
+
+        <!-- to write & read file from external storage -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -56,7 +63,9 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
-        </provider> <!-- FCM -->
+        </provider>
+
+        <!-- FCM -->
         <service
             android:name=".firebase.MyFirebaseMessagingService"
             android:enabled="true"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".activities.categories.Feedback">
+    tools:context=".activities.categories.Projects">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -15,7 +15,7 @@
         android:background="@color/colorPrimary"
         app:layout_collapseMode="pin"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:title="@string/feedback_and_rating"
+        app:title="@string/projects"
         app:titleTextColor="@color/colorWhite" />
 
     <LinearLayout

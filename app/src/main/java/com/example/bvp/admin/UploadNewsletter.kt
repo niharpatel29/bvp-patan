@@ -19,7 +19,6 @@ import com.example.bvp.operations.Operations
 import com.example.bvp.response.UploadResponse
 import com.example.bvp.upload.UploadRequestBody
 import kotlinx.android.synthetic.main.upload_newsletter.*
-import kotlinx.android.synthetic.main.upload_newsletter.toolbar
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -77,11 +76,15 @@ class UploadNewsletter : AppCompatActivity() {
     }
 
     private fun handleButtonClicks() {
-        btnSelectFile.setOnClickListener {
+        btnBrowseFile.setOnClickListener {
             openFileChooser()
         }
 
         btnUpload.setOnClickListener {
+            if (selectedFileUri == null) {
+                tvSelectedFileName.setTextColor(resources.getColor(R.color.colorError))
+                return@setOnClickListener
+            }
             if (operations.checkNullOrEmpty(layoutFileName)) {
                 return@setOnClickListener
             }
@@ -104,11 +107,6 @@ class UploadNewsletter : AppCompatActivity() {
     }
 
     private fun uploadFile(fileName: String) {
-        if (selectedFileUri == null) {
-            operations.displayToast(getString(R.string.file_not_selected))
-            return
-        }
-
         val parcelFileDescriptor =
             contentResolver.openFileDescriptor(selectedFileUri!!, "r", null) ?: return
 
@@ -174,6 +172,7 @@ class UploadNewsletter : AppCompatActivity() {
             fileName = cursor.getString(nameIndex)
             cursor.close()
         }
+        Log.d(TAG, fileName)
         return fileName
     }
 
@@ -183,9 +182,14 @@ class UploadNewsletter : AppCompatActivity() {
             when (requestCode) {
                 REQUEST_CODE_PICK_FILE -> {
                     selectedFileUri = data?.data
-                    Log.d(TAG, contentResolver.getFileName(selectedFileUri!!))
+                    setSelectedFileName(contentResolver.getFileName(selectedFileUri!!))
                 }
             }
         }
+    }
+
+    private fun setSelectedFileName(fileName: String) {
+        tvSelectedFileName.setTextColor(resources.getColor(android.R.color.tab_indicator_text))
+        tvSelectedFileName.text = fileName
     }
 }
