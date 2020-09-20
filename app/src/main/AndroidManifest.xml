@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.bvp">
+    package="com.bvp.patan">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".MainActivity"
+            android:name="com.bvp.patan.MainActivity"
             android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,27 +27,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".admin.AdminLogin" />
-        <activity android:name=".admin.AdminPanel" />
-        <activity android:name=".admin.AdminRegistersNewUser" />
-        <activity android:name=".admin.UploadNewsletter" />
-        <activity android:name=".admin.MakeAnnouncement" />
-        <activity android:name=".admin.UploadPhotosLink" />
+        <activity android:name="com.bvp.patan.admin.AdminLogin" />
+        <activity android:name="com.bvp.patan.admin.AdminPanel" />
+        <activity android:name="com.bvp.patan.admin.AdminRegistersNewUser" />
+        <activity android:name="com.bvp.patan.admin.UploadNewsletter" />
+        <activity android:name="com.bvp.patan.admin.MakeAnnouncement" />
+        <activity android:name="com.bvp.patan.admin.UploadPhotosLink" />
 
-        <activity android:name=".Login" />
-        <activity android:name=".Signup" />
-        <activity android:name=".Categories" />
-        <activity android:name=".Profile" />
-        <activity android:name=".ModifyProfile" />
-        <activity android:name=".activities.categories.UserDirectory" />
-        <activity android:name=".UserDetails" />
-        <activity android:name=".activities.categories.Newsletters" />
-        <activity android:name=".activities.categories.CalendarEvents" />
-        <activity android:name=".activities.categories.Announcement" />
-        <activity android:name=".activities.categories.Feedback" />
-        <activity android:name=".activities.categories.Photos" />
-        <activity android:name=".activities.categories.Projects" />
-        <activity android:name=".activities.categories.About" />
+        <activity android:name="com.bvp.patan.Login" />
+        <activity android:name="com.bvp.patan.Signup" />
+        <activity android:name="com.bvp.patan.Categories" />
+        <activity android:name="com.bvp.patan.Profile" />
+        <activity android:name="com.bvp.patan.ModifyProfile" />
+        <activity android:name="com.bvp.patan.activities.categories.UserDirectory" />
+        <activity android:name="com.bvp.patan.UserDetails" />
+        <activity android:name="com.bvp.patan.activities.categories.Newsletters" />
+        <activity android:name="com.bvp.patan.activities.categories.CalendarEvents" />
+        <activity android:name="com.bvp.patan.activities.categories.Announcement" />
+        <activity android:name="com.bvp.patan.activities.categories.Feedback" />
+        <activity android:name="com.bvp.patan.activities.categories.Photos" />
+        <activity android:name="com.bvp.patan.activities.categories.Projects" />
+        <activity android:name="com.bvp.patan.activities.categories.About" />
 
         <!-- uCrop -->
         <activity
@@ -67,7 +67,7 @@
 
         <!-- FCM -->
         <service
-            android:name=".firebase.MyFirebaseMessagingService"
+            android:name="com.bvp.patan.firebase.MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -76,7 +76,7 @@
         </service>
 
         <receiver
-            android:name=".broadcast.MyReceiver"
+            android:name="com.bvp.patan.broadcast.MyReceiver"
             android:enabled="true"
             android:exported="true" />
 

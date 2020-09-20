@@ -8,7 +8,7 @@ apply plugin: 'com.google.firebase.firebase-perf'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.bvp"
+        applicationId "com.bvp.patan"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
