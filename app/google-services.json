@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:803931738376:android:58f7432d13169dd6a59cbd",
+        "mobilesdk_app_id": "1:803931738376:android:8bdf7345b2deb0b8a59cbd",
         "android_client_info": {
-          "package_name": "com.example.bvp"
+          "package_name": "com.bvp.patan"
         }
       },
       "oauth_client": [
