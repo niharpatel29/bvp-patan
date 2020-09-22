@@ -10,8 +10,9 @@
     <dimen name="size_40sp">40sp</dimen>
     <dimen name="size_30sp">30sp</dimen>
     <dimen name="size_26sp">26sp</dimen>
-    <dimen name="size_20sp">20sp</dimen>
     <dimen name="size_22sp">22sp</dimen>
+    <dimen name="size_24sp">24sp</dimen>
+    <dimen name="size_20sp">20sp</dimen>
     <dimen name="size_18sp">18sp</dimen>
     <dimen name="size_16sp">16sp</dimen>
     <dimen name="size_14sp">14sp</dimen>
@@ -34,6 +35,7 @@
     <dimen name="dp_15">15dp</dimen>
     <dimen name="dp_10">10dp</dimen>
     <dimen name="dp_5">5dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_0">0dp</dimen>
 

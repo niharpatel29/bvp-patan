@@ -48,6 +48,18 @@ class Operations(private val context: Context) {
         }
     }
 
+    fun checkNullOrEmptyET(editText: EditText): Boolean {
+        val value = getValueET(editText)
+
+        return if (value.isEmpty()) {
+            editText.error = context.getString(R.string.required_field)
+            true
+        } else {
+            editText.error = null
+            false
+        }
+    }
+
     fun setText(textInputLayout: TextInputLayout, value: String?) {
         textInputLayout.editText!!.setText(value)
     }

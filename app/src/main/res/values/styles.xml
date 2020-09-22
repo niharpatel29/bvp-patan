@@ -34,6 +34,10 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
+    <style name="RatingBarStyle" parent="AppTheme">
+        <item name="colorAccent">@android:color/darker_gray</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />

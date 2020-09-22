@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context=".activities.categories.Feedback">
 
@@ -18,20 +17,108 @@
         app:title="@string/feedback_and_rating"
         app:titleTextColor="@color/colorWhite" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="@dimen/padding">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/coming_soon"
-            android:textAllCaps="true"
-            android:textSize="@dimen/size_30sp"
-            android:textStyle="bold" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/padding">
 
-    </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorBackground"
+                app:cardCornerRadius="@dimen/corner_radius"
+                app:cardElevation="@dimen/dp_0"
+                app:contentPadding="@dimen/dp_5"
+                app:contentPaddingLeft="@dimen/dp_20"
+                app:contentPaddingRight="@dimen/dp_20"
+                tools:ignore="ContentDescription">
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/ratingBar"
+                    style="?android:attr/ratingBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@android:color/darker_gray"
+                    android:progressTint="@color/colorRatingBar"
+                    android:secondaryProgressTint="@android:color/transparent"
+                    android:stepSize="1"
+                    android:theme="@style/RatingBarStyle"
+                    tools:ignore="UnusedAttribute" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="@dimen/dp_50"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:maxLines="1"
+                    android:text="@string/review"
+                    android:textSize="@dimen/size_20sp"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/dp_2"
+                    android:maxLines="1"
+                    android:textColor="@color/colorRed"
+                    android:text="@string/required_indicator"
+                    android:textSize="@dimen/size_24sp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/review_style"
+                android:gravity="top"
+                android:hint="@string/leave_your_feedback_here"
+                android:inputType="textMultiLine|textCapSentences"
+                android:lines="8"
+                android:maxLines="8"
+                android:padding="@dimen/dp_10"
+                android:singleLine="false"
+                android:textSize="@dimen/size_18sp"
+                android:theme="@style/SearchAreaStyle" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSubmit"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="@dimen/short_button_width"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/dp_50"
+                android:layout_marginBottom="@dimen/margin_to_show_elevation"
+                android:elevation="@dimen/elevation"
+                android:text="@string/btn_submit"
+                android:textAllCaps="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/size_20sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="@dimen/size_20sp"
+                app:autoSizeTextType="uniform"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/button_corner_radius" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

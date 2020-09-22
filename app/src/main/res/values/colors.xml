@@ -20,6 +20,7 @@
     <color name="colorRed">#f45858</color>
     <color name="colorProfilePictureDark">#80000000</color>
     <color name="colorError">#B00020</color>
+    <color name="colorRatingBar">#F4CA2F</color>
 
     <color name="backgroundStartColor">#5378ED</color>
     <color name="backgroundCenterColor">#6286F4</color>

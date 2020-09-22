@@ -18,6 +18,7 @@
     <string name="btn_register">Register</string>
     <string name="btn_next">Next</string>
     <string name="btn_signup">Signup</string>
+    <string name="btn_submit">Submit</string>
     <string name="btn_select_dob">Select DOB</string>
     <string name="btn_select_anniversary">Select Anniversary</string>
     <string name="btn_update">Update</string>
@@ -137,6 +138,10 @@
     <string name="link_copied_to_clipboard">Link copied to clipboard</string>
     <string name="please_login_again">Please login again</string>
     <string name="choose_mobile_number">Choose mobile number</string>
+    <string name="review">Review</string>
+    <string name="required_indicator">*</string>
+    <string name="leave_your_feedback_here">Leave your feedback here…</string>
+    <string name="rating_is_required">Rating is required</string>
 
     <string name="topic_global">global</string>
     <string name="topic_login">login</string>

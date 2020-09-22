@@ -83,7 +83,8 @@ class Categories : AppCompatActivity() {
     }
 
     private fun crash() {
-        throw RuntimeException("Test Crash")
+//        throw RuntimeException("Test Crash")
+        operations.displayToast("Runtime Exception")
     }
 
     private fun toolbar() {

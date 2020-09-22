@@ -1,7 +1,7 @@
 package com.bvp.patan.api
 
-import com.bvp.patan.admin.other.AdminLoginModel
 import com.bvp.patan.admin.other.AdminGeneralResponse
+import com.bvp.patan.admin.other.AdminLoginModel
 import com.bvp.patan.admin.other.MakeAnnouncementResponse
 import com.bvp.patan.response.*
 import okhttp3.MultipartBody
@@ -88,6 +88,18 @@ interface APIInterface {
         @Field("admin_username") admin_username: String,
         @Field("admin_password") admin_password: String
     ): Call<AdminLoginModel>
+
+    @POST("SendFeedback.php")
+    @FormUrlEncoded
+    fun performSendFeedback(
+        @Field("user_id") user_id: String?,
+        @Field("rating") rating: String,
+        @Field("feedback") feedback: String,
+        @Field("brand") brand: String,
+        @Field("model") model: String,
+        @Field("device") device: String,
+        @Field("version") version: String
+    ): Call<GeneralResponse>
 
     //admin registers new default_image
     @POST("Admin/AdminRegistersNewUser.php")
