@@ -66,7 +66,7 @@
             android:layout_width="@dimen/dp_28"
             android:layout_height="@dimen/dp_28"
             android:visibility="gone"
-            app:srcCompat="@drawable/ic_baseline_couple"
+            app:srcCompat="@drawable/ic_baseline_rings"
             tools:ignore="ContentDescription" />
 
         <ImageView

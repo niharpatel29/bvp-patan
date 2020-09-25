@@ -120,6 +120,7 @@ class Feedback : AppCompatActivity() {
                     when (mResponse.response) {
                         "ok" -> {
                             operations.displayToast(responseMessage)
+                            finish()
                         }
                         "error" -> {
                             operations.displayToast(responseMessage)

@@ -129,7 +129,7 @@ class UserDetails : AppCompatActivity() {
         )
         addItem(R.drawable.ic_baseline_email, R.string.email, userDetails.email)
         addItem(R.drawable.ic_baseline_cake, R.string.birth_date, userDetails.dob)
-        addItem(R.drawable.ic_baseline_cake, R.string.anniversary, userDetails.anniversary)
+        addItem(R.drawable.ic_baseline_rings, R.string.anniversary, userDetails.anniversary)
         addItem(R.drawable.ic_baseline_drop, R.string.bloodgroup, userDetails.bloodgroup)
         addItem(
             R.drawable.ic_baseline_home,

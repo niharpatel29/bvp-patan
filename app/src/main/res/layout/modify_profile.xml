@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     android:orientation="vertical"
     tools:context=".ModifyProfile">
 
@@ -261,7 +260,7 @@
                 app:boxStrokeColor="@color/colorPrimary"
                 app:endIconMode="clear_text"
                 app:hintTextColor="@color/colorBlack"
-                app:startIconDrawable="@drawable/ic_baseline_cake_filled">
+                app:startIconDrawable="@drawable/ic_baseline_rings">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAnniversary"
