@@ -19,7 +19,7 @@ interface APIInterface {
         @Field("password") password: String? = null
     ): Call<UserLogin>
 
-    //signup default_image
+    //signup user
     @POST("Signup.php")
     @FormUrlEncoded
     fun performUserSignup(
@@ -30,7 +30,7 @@ interface APIInterface {
         @Field("password") password: String
     ): Call<GeneralResponse>
 
-    //modify default_image details
+    //modify user details
     @POST("ModifyProfile.php")
     @FormUrlEncoded
     fun performUpdateUserProfile(
@@ -81,7 +81,7 @@ interface APIInterface {
         @Field("mobile_primary") mobile_primary: String?
     ): Call<GetPhotosLinks>
 
-    //check_user_exist admin
+    // admin login
     @POST("Admin/AdminLogin.php")
     @FormUrlEncoded
     fun performAdminLogin(
@@ -101,7 +101,7 @@ interface APIInterface {
         @Field("version") version: String
     ): Call<GeneralResponse>
 
-    //admin registers new default_image
+    //admin registers new user
     @POST("Admin/AdminRegistersNewUser.php")
     @FormUrlEncoded
     fun performAdminRegistersNewUser(
@@ -113,7 +113,7 @@ interface APIInterface {
         @Field("mobile_primary") mobile_primary: String
     ): Call<AdminGeneralResponse>
 
-    //admin registers new default_image
+    //admin registers new user
     @POST("Admin/MakeAnnouncement.php?apicall=new")
     @FormUrlEncoded
     fun performMakeAnnouncement(
