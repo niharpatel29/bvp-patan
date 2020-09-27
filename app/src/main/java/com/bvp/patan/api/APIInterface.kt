@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface APIInterface {
-    //default_image login
+    //user login
     @POST("Login.php")
     @FormUrlEncoded
     fun performUserLogin(
