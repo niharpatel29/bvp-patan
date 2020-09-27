@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical"
     tools:context=".activities.categories.Feedback">
 
@@ -78,27 +80,37 @@
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/dp_2"
                     android:maxLines="1"
-                    android:textColor="@color/colorRed"
                     android:text="@string/required_indicator"
+                    android:textColor="@color/colorRed"
                     android:textSize="@dimen/size_24sp" />
 
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etFeedback"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutFeedback"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/review_style"
-                android:gravity="top"
-                android:hint="@string/leave_your_feedback_here"
-                android:inputType="textMultiLine|textCapSentences"
-                android:lines="8"
-                android:maxLines="8"
-                android:padding="@dimen/dp_10"
-                android:singleLine="false"
-                android:textSize="@dimen/size_18sp"
-                android:theme="@style/SearchAreaStyle" />
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFeedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="@string/leave_your_feedback_here"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:lines="8"
+                    android:maxLines="8"
+                    android:padding="@dimen/dp_10"
+                    android:singleLine="false"
+                    android:textSize="@dimen/size_18sp"
+                    android:theme="@style/SearchAreaStyle" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSubmit"

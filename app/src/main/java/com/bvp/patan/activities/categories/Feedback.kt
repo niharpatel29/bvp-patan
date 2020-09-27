@@ -69,12 +69,12 @@ class Feedback : AppCompatActivity() {
                 operations.displayToast(getString(R.string.rating_is_required))
                 return@setOnClickListener
             }
-            if (operations.checkNullOrEmptyET(etFeedback)) {
+            if (operations.checkNullOrEmpty(layoutFeedback)) {
                 return@setOnClickListener
             }
             // send if not empty
             val rating = ratingBar.rating.toString()
-            val feedback = operations.getValueET(etFeedback)
+            val feedback = operations.getValue(layoutFeedback)
             sendFeedback(rating, feedback)
         }
     }

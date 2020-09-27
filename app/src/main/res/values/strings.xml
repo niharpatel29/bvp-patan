@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BVP</string>
+    <string name="app_name">BVP Patan</string>
 
     <string name="channel_default_id">default_channel</string>
     <string name="channel_default_name">BVP notifications</string>

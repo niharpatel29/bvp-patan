@@ -35,11 +35,13 @@ class MyReceiver : BroadcastReceiver() {
         var notificationId = 89
         var title = context!!.getString(R.string.birthday)
         val text = context.getString(R.string.tap_here_to_wish)
+        var icon = R.drawable.ic_baseline_cake_filled
 
         // changes value if anniversary
         if (type == context.getString(R.string.type_anniversary)) {
             notificationId = 99
             title = context.getString(R.string.anniversary)
+            icon = R.drawable.ic_baseline_rings
         }
 
         val channel = ChannelContainer(
@@ -51,7 +53,7 @@ class MyReceiver : BroadcastReceiver() {
             title,
             text,
             notificationId,
-            R.drawable.ic_baseline_cake_filled,
+            icon,
             R.color.colorRed
         )
         NotificationHandler(context).showNotification(channel, notification, CalendarEvents())
