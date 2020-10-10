@@ -13,8 +13,7 @@ import com.bvp.patan.api.postClient
 import com.bvp.patan.broadcast.MyReceiver
 import com.bvp.patan.firebase.Topic
 import com.bvp.patan.model.UserModel
-import com.bvp.patan.operations.ImageOperations
-import com.bvp.patan.operations.Operations
+import com.bvp.patan.operations.*
 import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.AllUsers
 import com.bvp.patan.response.UserLogin
@@ -32,7 +31,8 @@ class Login : AppCompatActivity() {
     }
 
     private lateinit var sharedPref: SharedPref
-    private lateinit var operations: Operations
+
+    //    private lateinit var operations: Operations
     private lateinit var dbHandler: MyDBHandler
     private lateinit var imageOperations: ImageOperations
 
@@ -41,7 +41,7 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.login)
 
         sharedPref = SharedPref(this)
-        operations = Operations(this)
+//        operations = Operations(this)
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
 
@@ -113,17 +113,17 @@ class Login : AppCompatActivity() {
     private fun handleButtonClicks() {
         btnLogin.setOnClickListener {
             // return if empty
-            if (operations.checkNullOrEmpty(layoutMobile)) {
+            if (checkNullOrEmpty(layoutMobile)) {
                 return@setOnClickListener
             }
             if (isPasswordLayoutVisible()) {
-                if (operations.checkNullOrEmpty(layoutPassword)) {
+                if (checkNullOrEmpty(layoutPassword)) {
                     return@setOnClickListener
                 }
             }
             // check_user_exist if not empty
-            val userMobile = operations.getValue(layoutMobile)
-            val userPassword = operations.getValue(layoutPassword)
+            val userMobile = getValue(layoutMobile)
+            val userPassword = getValue(layoutPassword)
 
             userLogin(userMobile, userPassword)
         }
@@ -134,7 +134,11 @@ class Login : AppCompatActivity() {
     }
 
     private fun userLogin(userMobile: String, userPassword: String) {
-        operations.showProgressDialog()
+        if (!internetAvailable()) {
+            view.displaySnackBar(getString(R.string.no_internet))
+            return
+        }
+        showProgressDialog()
 
         val apiService = postClient()!!.create(APIInterface::class.java)
         val call = if (!isPasswordLayoutVisible()) {
@@ -145,7 +149,7 @@ class Login : AppCompatActivity() {
 
         call.enqueue(object : Callback<UserLogin> {
             override fun onFailure(call: Call<UserLogin>, t: Throwable) {
-                operations.hideProgressDialog()
+                hideProgressDialog()
                 Log.d("onFailure", t.toString())
             }
 
@@ -176,6 +180,7 @@ class Login : AppCompatActivity() {
                             val city = user.city
                             val zipcode = user.zipcode
                             val residentialAddress = user.residentialAddress
+                            val adminFlag = user.adminFlag
 
                             try {
                                 sharedPref.run {
@@ -198,45 +203,46 @@ class Login : AppCompatActivity() {
                                     setCity(city)
                                     setZipcode(zipcode)
                                     setResidentialAddress(residentialAddress)
+                                    setAdminFlag(adminFlag)
                                 }
                             } catch (e: Exception) {
-                                operations.displayToast(e.message.toString())
+                                displayToast(e.message.toString())
                             }
 
                             handleSubscription()
                             getAllUsersFromServer(userId, userMobile)
                         }
                         "failed" -> {
-                            operations.hideProgressDialog()
-                            operations.displayToast(getString(R.string.login_failed))
+                            hideProgressDialog()
+                            displayToast(getString(R.string.login_failed))
                         }
                         "able_to_login" -> {
-                            operations.hideProgressDialog()
+                            hideProgressDialog()
                             actionOnAbleToLogin()
                         }
                         "able_to_signup" -> {
-                            operations.hideProgressDialog()
+                            hideProgressDialog()
                             startActivity(
                                 Intent(this@Login, Signup::class.java)
                                     .putExtra("user_mobile", userMobile)
                             )
                         }
                         "user_not_exist" -> {
-                            operations.hideProgressDialog()
-                            operations.displayToast(getString(R.string.user_not_exist))
+                            hideProgressDialog()
+                            displayToast(getString(R.string.user_not_exist))
                         }
                         "error" -> {
-                            operations.hideProgressDialog()
-                            operations.displayToast(getString(R.string.sql_error))
+                            hideProgressDialog()
+                            displayToast(getString(R.string.sql_error))
                         }
                         else -> {
-                            operations.hideProgressDialog()
-                            operations.displayToast(getString(R.string.unknown_error))
+                            hideProgressDialog()
+                            displayToast(getString(R.string.unknown_error))
                         }
                     }
                 } else {
-                    operations.hideProgressDialog()
-                    operations.displayToast(getString(R.string.response_failed))
+                    hideProgressDialog()
+                    displayToast(getString(R.string.response_failed))
                 }
             }
         })
@@ -261,7 +267,7 @@ class Login : AppCompatActivity() {
 
         call.enqueue(object : Callback<AllUsers> {
             override fun onFailure(call: Call<AllUsers>, t: Throwable) {
-                operations.hideProgressDialog()
+                hideProgressDialog()
                 Log.d("onFailure", t.toString())
             }
 
@@ -318,13 +324,13 @@ class Login : AppCompatActivity() {
                             finish()
                         }
                         else -> {
-                            operations.displayToast(getString(R.string.unknown_error))
+                            displayToast(getString(R.string.unknown_error))
                         }
                     }
                 } else {
-                    operations.displayToast(getString(R.string.response_failed))
+                    displayToast(getString(R.string.response_failed))
                 }
-                operations.hideProgressDialog()
+                hideProgressDialog()
             }
         })
     }

@@ -19,7 +19,6 @@ class MyReceiver : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        Operations(context!!).displayToast("Broadcast received")
         Log.d(TAG, "Broadcast received")
 
         if (MyDBHandler(context).checkBirthdayToday().isNotEmpty()) {

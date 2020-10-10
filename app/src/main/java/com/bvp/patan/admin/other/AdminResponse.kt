@@ -13,9 +13,7 @@ data class AdminLoginModel(
 //
 data class Admin(
     @SerializedName("admin_id")
-    val adminId: String,
-    @SerializedName("admin_name")
-    val adminName: String
+    val adminId: String
 )
 
 data class AdminGeneralResponse(

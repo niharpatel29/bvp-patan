@@ -22,16 +22,6 @@ class SharedPrefAdmin(private val context: Context) {
         return sharedPreferences.getBoolean(KEY_ADMIN_LOGIN_STATUS, false)
     }
 
-    fun setName(name: String) {
-        val editor = sharedPreferences.edit()
-        editor.putString(KEY_ADMIN_NAME, name)
-        editor.apply()
-    }
-
-    fun getName(): String? {
-        return sharedPreferences.getString(KEY_ADMIN_NAME, "admin")
-    }
-
     fun setId(id: String) {
         val editor = sharedPreferences.edit()
         editor.putString(KEY_ADMIN_ID, id)

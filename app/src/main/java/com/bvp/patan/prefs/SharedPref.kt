@@ -29,6 +29,7 @@ class SharedPref(context: Context) {
         private const val KEY_CITY = "city"
         private const val KEY_ZIPCODE = "zipcode"
         private const val KEY_RESIDENTIAL_ADDRESS = "residential_address"
+        private const val KEY_ADMIN_FLAG = "admin_flag"
     }
 
     private val sharedPreferences =
@@ -263,6 +264,16 @@ class SharedPref(context: Context) {
 
     fun getResidentialAddress(): String? {
         return sharedPreferences.getString(KEY_RESIDENTIAL_ADDRESS, defaultValue)
+    }
+
+    fun setAdminFlag(flag: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_ADMIN_FLAG, flag)
+        editor.apply()
+    }
+
+    fun getAdminFlag(): Boolean {
+        return sharedPreferences.getBoolean(KEY_ADMIN_FLAG, false)
     }
 
     fun getAllDetails(): UserModel {

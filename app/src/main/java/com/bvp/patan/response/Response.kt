@@ -61,7 +61,9 @@ data class UserInfo(
     @SerializedName("user_id")
     val userId: String,
     @SerializedName("zipcode")
-    val zipcode: String
+    val zipcode: String,
+    @SerializedName("admin_flag")
+    val adminFlag: Boolean
 )
 
 data class UploadResponse(

@@ -4,18 +4,20 @@ import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.net.Uri
+import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import com.bvp.patan.R
 import com.bvp.patan.dialog.Chooser
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 class Operations(private val context: Context) {
 
     val bvpDirectory = "/BVP Patan/"
-    private val progressDialog = ProgressDialog(context)
 
     fun getValue(value: TextInputLayout): String {
         return value.editText?.text?.trim().toString()
@@ -133,7 +135,19 @@ class Operations(private val context: Context) {
         }
     }
 
+    fun internetAvailable(): Boolean {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        val activeNetworkInfo = connectivityManager!!.activeNetworkInfo
+
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected
+    }
+
+    private val progressDialog = ProgressDialog(context)
+
     fun showProgressDialog() {
+        progressDialog
+
         progressDialog.setMessage(context.getString(R.string.please_wait))
         progressDialog.setCancelable(false)
         progressDialog.show()
@@ -145,5 +159,9 @@ class Operations(private val context: Context) {
 
     fun displayToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun View.displaySnackBar(message: String) {
+        Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
     }
 }

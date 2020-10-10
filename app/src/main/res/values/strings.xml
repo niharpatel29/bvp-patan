@@ -70,6 +70,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="admin_login">Admin login</string>
+    <string name="add_new_admin">Add new admin</string>
     <string name="register_new_user">Register a new user</string>
     <string name="upload_newsletter">Upload newsletter</string>
     <string name="upload_photos_link">Upload photos link</string>
@@ -124,6 +125,7 @@
     <string name="admin_panel">Admin panel</string>
     <string name="file_not_selected">File not selected</string>
     <string name="no_announcement">No Announcement</string>
+    <string name="no_internet">No internet</string>
     <string name="no_events">No Events Today</string>
     <string name="make_announcement">Make Announcement</string>
     <string name="karobari">Karobari</string>

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bvp.patan.activities.categories.*
+import com.bvp.patan.admin.AdminLogin
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
 import com.bvp.patan.firebase.Topic
@@ -49,6 +50,7 @@ class Categories : AppCompatActivity() {
         operations = Operations(this)
         imageOperations = ImageOperations(this)
 
+        invalidateOptionsMenu()
         toolbar()
         handleButtonClicks()
         createDirectory()
@@ -57,13 +59,22 @@ class Categories : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.category_menu, menu)
+        menu!!.findItem(R.id.action_admin_panel).isVisible = adminButtonVisibility()
         return true
+    }
+
+    private fun adminButtonVisibility(): Boolean {
+        return sharedPref.getAdminFlag()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item!!.itemId) {
             R.id.action_profile -> {
                 startActivity(Intent(this, Profile::class.java))
+                true
+            }
+            R.id.action_admin_panel -> {
+                startActivity(Intent(this, AdminLogin::class.java))
                 true
             }
             R.id.action_refresh -> {

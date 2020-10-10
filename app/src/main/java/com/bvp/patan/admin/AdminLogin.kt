@@ -11,6 +11,7 @@ import com.bvp.patan.admin.other.SharedPrefAdmin
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
 import com.bvp.patan.operations.Operations
+import com.bvp.patan.prefs.SharedPref
 import kotlinx.android.synthetic.main.admin_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,6 +20,7 @@ import retrofit2.Response
 class AdminLogin : AppCompatActivity() {
 
     private lateinit var sharedPrefAdmin: SharedPrefAdmin
+    private lateinit var sharedPref: SharedPref
     private lateinit var operations: Operations
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +28,7 @@ class AdminLogin : AppCompatActivity() {
         setContentView(R.layout.admin_login)
 
         sharedPrefAdmin = SharedPrefAdmin(this)
+        sharedPref = SharedPref(this)
         operations = Operations(this)
 
         toolbar()
@@ -55,25 +58,23 @@ class AdminLogin : AppCompatActivity() {
     private fun handleButtonClicks() {
         btnLogin.setOnClickListener {
             // return if empty
-            if (operations.checkNullOrEmpty(layoutAdminUsername)) {
-                return@setOnClickListener
-            }
             if (operations.checkNullOrEmpty(layoutAdminPassword)) {
                 return@setOnClickListener
             }
             // check_user_exist if not empty
-            val adminUsername = operations.getValue(layoutAdminUsername)
             val adminPassword = operations.getValue(layoutAdminPassword)
 
-            adminLogin(adminUsername, adminPassword)
+            adminLogin(adminPassword)
         }
     }
 
-    private fun adminLogin(username: String, password: String) {
+    private fun adminLogin(password: String) {
         operations.showProgressDialog()
 
+        val userId = sharedPref.getId()
+
         val apiService = postClient()!!.create(APIInterface::class.java)
-        val call = apiService.performAdminLogin(username, password)
+        val call = apiService.performAdminLogin(userId, password)
 
         call.enqueue(object : Callback<AdminLoginModel> {
             override fun onFailure(call: Call<AdminLoginModel>, t: Throwable) {
@@ -88,12 +89,10 @@ class AdminLogin : AppCompatActivity() {
                 if (response.isSuccessful) {
                     when (response.body()!!.response) {
                         "ok" -> {
-                            val adminName = response.body()!!.admin.adminName
                             val adminId = response.body()!!.admin.adminId
 
                             sharedPrefAdmin.run {
                                 setLoginStatus(true)
-                                setName(adminName)
                                 setId(adminId)
                             }
 

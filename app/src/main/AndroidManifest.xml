@@ -19,15 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity
-            android:name="com.bvp.patan.MainActivity"
-            android:theme="@style/MyTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name="com.bvp.patan.admin.AdminLogin" />
         <activity android:name="com.bvp.patan.admin.AdminPanel" />
         <activity android:name="com.bvp.patan.admin.AdminRegistersNewUser" />
@@ -35,7 +26,13 @@
         <activity android:name="com.bvp.patan.admin.MakeAnnouncement" />
         <activity android:name="com.bvp.patan.admin.UploadPhotosLink" />
 
-        <activity android:name="com.bvp.patan.Login" />
+        <activity android:name="com.bvp.patan.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.bvp.patan.Signup" />
         <activity android:name="com.bvp.patan.Categories" />
         <activity android:name="com.bvp.patan.Profile" />

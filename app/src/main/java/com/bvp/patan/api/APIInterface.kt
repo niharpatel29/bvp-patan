@@ -85,7 +85,7 @@ interface APIInterface {
     @POST("Admin/AdminLogin.php")
     @FormUrlEncoded
     fun performAdminLogin(
-        @Field("admin_username") admin_username: String,
+        @Field("user_id") user_id: String?,
         @Field("admin_password") admin_password: String
     ): Call<AdminLoginModel>
 
