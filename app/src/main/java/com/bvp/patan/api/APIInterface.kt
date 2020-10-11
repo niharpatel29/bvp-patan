@@ -113,6 +113,21 @@ interface APIInterface {
         @Field("mobile_primary") mobile_primary: String
     ): Call<AdminGeneralResponse>
 
+    @POST("Admin/MakeNewAdmin.php")
+    @FormUrlEncoded
+    fun performMakeNewAdmin(
+        @Field("user_id") user_id: String?,
+        @Field("admin_made_by") admin_made_by: String?
+    ): Call<AdminGeneralResponse>
+
+    @POST("Admin/ChangeAdminPassword.php")
+    @FormUrlEncoded
+    fun performChangeAdminPassword(
+        @Field("admin_id") admin_id: String?,
+        @Field("old_password") old_password: String,
+        @Field("new_password") new_password: String
+    ): Call<AdminGeneralResponse>
+
     //admin registers new user
     @POST("Admin/MakeAnnouncement.php?apicall=new")
     @FormUrlEncoded

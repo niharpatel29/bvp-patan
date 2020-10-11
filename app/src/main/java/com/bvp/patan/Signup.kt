@@ -59,10 +59,10 @@ class Signup : AppCompatActivity() {
             if (operations.checkNullOrEmpty(layoutPassword)) {
                 return@setOnClickListener
             }
-            if (operations.checkNullOrEmpty(layoutConfirmPassword)) {
+            if (operations.checkNullOrEmpty(layoutConfirmNewPassword)) {
                 return@setOnClickListener
             }
-            if ((!operations.passwordMatch(layoutPassword, layoutConfirmPassword))) {
+            if ((!operations.passwordMatch(layoutPassword, layoutConfirmNewPassword))) {
                 return@setOnClickListener
             }
             // signup if not empty

@@ -29,6 +29,9 @@
 
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
+    <string name="hint_old_password">Old Password</string>
+    <string name="hint_new_password">New Password</string>
+    <string name="hint_confirm_new_password">Confirm New Password</string>
     <string name="hint_mobile_number">Mobile Number</string>
     <string name="hint_first_name">First Name</string>
     <string name="hint_middle_name">Middle Name</string>
@@ -70,7 +73,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="admin_login">Admin login</string>
-    <string name="add_new_admin">Add new admin</string>
+    <string name="make_new_admin">Make new admin</string>
     <string name="register_new_user">Register a new user</string>
     <string name="upload_newsletter">Upload newsletter</string>
     <string name="upload_photos_link">Upload photos link</string>
@@ -104,8 +107,11 @@
     <string name="cancel">Cancel</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="make_admin">Make admin</string>
     <string name="refresh">Refresh</string>
     <string name="test">Test</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="confirm_make_admin">Confirm make admin</string>
     <string name="confirm_logout">Are you sure you want to logout?</string>
     <string name="response_failed">Response failed</string>
     <string name="please_wait">Please wait…</string>
@@ -123,6 +129,7 @@
     <string name="feedback_and_rating">Feedback &amp; Rating</string>
     <string name="about">About</string>
     <string name="admin_panel">Admin panel</string>
+    <string name="change_admin_password">Change admin password</string>
     <string name="file_not_selected">File not selected</string>
     <string name="no_announcement">No Announcement</string>
     <string name="no_internet">No internet</string>
@@ -138,6 +145,7 @@
     <string name="refresh_complete">Refresh complete</string>
     <string name="copy_link">Copy link</string>
     <string name="link_copied_to_clipboard">Link copied to clipboard</string>
+    <string name="password_copied_to_clipboard">Password copied to clipboard</string>
     <string name="please_login_again">Please login again</string>
     <string name="choose_mobile_number">Choose mobile number</string>
     <string name="review">Review</string>

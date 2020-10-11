@@ -9,7 +9,6 @@ import com.bvp.patan.activities.categories.CalendarEvents
 import com.bvp.patan.model.ChannelContainer
 import com.bvp.patan.model.NotificationDataContainer
 import com.bvp.patan.notification.NotificationHandler
-import com.bvp.patan.operations.Operations
 import com.bvp.patan.sqlite.MyDBHandler
 
 class MyReceiver : BroadcastReceiver() {
@@ -21,7 +20,7 @@ class MyReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d(TAG, "Broadcast received")
 
-        if (MyDBHandler(context).checkBirthdayToday().isNotEmpty()) {
+        if (MyDBHandler(context!!).checkBirthdayToday().isNotEmpty()) {
             showNotification(context, context.getString(R.string.type_birthday))
         }
         if (MyDBHandler(context).checkAnniversaryToday().isNotEmpty()) {

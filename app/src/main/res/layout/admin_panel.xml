@@ -24,10 +24,10 @@
         android:padding="@dimen/padding">
 
         <Button
-            android:id="@+id/btnAddNewAdmin"
+            android:id="@+id/btnMakeNewAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_new_admin" />
+            android:text="@string/make_new_admin" />
 
         <Button
             android:id="@+id/btnRegisterNewUser"

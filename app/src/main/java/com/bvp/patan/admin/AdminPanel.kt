@@ -3,6 +3,7 @@ package com.bvp.patan.admin
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -28,10 +29,19 @@ class AdminPanel : AppCompatActivity() {
         logoutDialog()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.admin_menu, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item!!.itemId) {
             android.R.id.home -> {
                 onBackPressed()
+                true
+            }
+            R.id.action_change_password -> {
+                startActivity(Intent(this, ChangeAdminPassword::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -52,6 +62,10 @@ class AdminPanel : AppCompatActivity() {
     }
 
     private fun handleButtonClicks() {
+        btnMakeNewAdmin.setOnClickListener {
+            startActivity(Intent(this, MakeNewAdmin::class.java))
+        }
+
         btnRegisterNewUser.setOnClickListener {
             startActivity(Intent(this, AdminRegistersNewUser::class.java))
         }
