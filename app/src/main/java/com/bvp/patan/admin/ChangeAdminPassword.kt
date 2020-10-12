@@ -3,6 +3,7 @@ package com.bvp.patan.admin
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.R
 import com.bvp.patan.admin.other.AdminGeneralResponse
@@ -22,6 +23,16 @@ class ChangeAdminPassword : AppCompatActivity() {
 
         toolbar()
         handleButtonClicks()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item!!.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun toolbar() {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.R
 import com.bvp.patan.admin.other.AdminLoginModel
@@ -36,8 +37,19 @@ class AdminLogin : AppCompatActivity() {
         handleButtonClicks()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item!!.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun toolbar() {
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.navigationIcon?.setColorFilter(
             resources.getColor(R.color.colorWhite),
             PorterDuff.Mode.SRC_ATOP
