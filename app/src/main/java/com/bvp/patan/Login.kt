@@ -52,7 +52,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun dumpDatabase() {
-        if (BuildConfig.VERSION_NAME < "2.0.5") {
+        if (BuildConfig.VERSION_NAME < "2.1.0") {
             if (!sharedPref.getDatabaseDeletedFlag()) {
                 if (getDatabasePath(dbHandler.databaseName).exists()) {
                     Log.d(TAG, "exist")
