@@ -15,6 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bvp.patan.activities.categories.*
 import com.bvp.patan.admin.AdminLogin
+import com.bvp.patan.admin.other.SharedPrefAdmin
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
 import com.bvp.patan.firebase.Topic
@@ -78,24 +79,15 @@ class Categories : AppCompatActivity() {
                 true
             }
             R.id.action_refresh -> {
-                getAllUsersFromServer()
+                refreshUserList()
                 true
             }
             R.id.action_logout -> {
                 logout()
                 true
             }
-            R.id.action_test -> {
-                crash()
-                true
-            }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun crash() {
-//        throw RuntimeException("Test Crash")
-        operations.displayToast("Runtime Exception")
     }
 
     private fun toolbar() {
@@ -137,7 +129,7 @@ class Categories : AppCompatActivity() {
         }
     }
 
-    private fun getAllUsersFromServer() {
+    private fun refreshUserList() {
         operations.showProgressDialog()
 
         val mUserId = sharedPref.getId()
@@ -160,6 +152,7 @@ class Categories : AppCompatActivity() {
                     when (response.body()!!.response) {
                         "ok" -> {
                             val user = response.body()!!.users
+                            dbHandler.clearDatabase()
 
                             for (i in user.indices) {
                                 val userId = user[i].userId
@@ -179,6 +172,7 @@ class Categories : AppCompatActivity() {
                                 val zipcode = user[i].zipcode
                                 val residentialAddress = user[i].residentialAddress
                                 val position = user[i].position
+                                val category = user[i].category
 
                                 val mUser = UserModel(
                                     userId,
@@ -197,16 +191,13 @@ class Categories : AppCompatActivity() {
                                     city,
                                     zipcode,
                                     residentialAddress,
-                                    position
+                                    position,
+                                    category
                                 )
 
-                                if (dbHandler.isUserExist(mUser.userId)) {
-                                    Log.d(TAG, "exist: ${mUser.userId}")
-                                    dbHandler.updateUserDetails(mUser)
-                                } else {
-                                    Log.d(TAG, "notExist: ${mUser.userId}")
-                                    dbHandler.addUser(mUser)
-                                }
+                                Log.d(TAG, "notExist: ${mUser.userId}")
+                                dbHandler.addUser(mUser)
+
                             }
                             operations.displayToast(getString(R.string.refresh_complete))
                         }
@@ -270,6 +261,9 @@ class Categories : AppCompatActivity() {
         sharedPref.userLogout()
         dbHandler.clearDatabase()
         deleteProfilePicture()
+
+        val sharedPrefAdmin = SharedPrefAdmin(this)
+        if (sharedPrefAdmin.getLoginStatus()) sharedPrefAdmin.adminLogout()
 
         startActivity(Intent(this, Login::class.java))
         finish()

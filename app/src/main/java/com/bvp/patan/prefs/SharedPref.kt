@@ -7,6 +7,9 @@ import com.bvp.patan.model.UserModel
 class SharedPref(context: Context) {
 
     companion object {
+        private const val KEY_DATABASE_DELETED = "database_deleted_flag"
+        private const val dbPreference = "dbPref"
+
         private const val defaultValue = ""
         private const val myPreference = "myPref"
         private const val KEY_LOGIN_STATUS = "login_status"
@@ -34,6 +37,19 @@ class SharedPref(context: Context) {
 
     private val sharedPreferences =
         context.getSharedPreferences(myPreference, Context.MODE_PRIVATE)
+
+    private val databaseSharedPref =
+        context.getSharedPreferences(dbPreference, Context.MODE_PRIVATE)
+
+    fun setDatabaseDeletedFlag(flag: Boolean) {
+        val editor = databaseSharedPref.edit()
+        editor.putBoolean(KEY_DATABASE_DELETED, flag)
+        editor.apply()
+    }
+
+    fun getDatabaseDeletedFlag(): Boolean {
+        return databaseSharedPref.getBoolean(KEY_DATABASE_DELETED, false)
+    }
 
     fun setLoginStatus(loginStatus: Boolean) {
         val editor = sharedPreferences.edit()
@@ -294,6 +310,7 @@ class SharedPref(context: Context) {
         val zipcode = getZipcode()
         val residentialAddress = getResidentialAddress()
         val position = getPosition()
+        val category = getCategory()
 
         return UserModel(
             userId,
@@ -312,7 +329,8 @@ class SharedPref(context: Context) {
             city,
             zipcode,
             residentialAddress,
-            position
+            position,
+            category
         )
     }
 

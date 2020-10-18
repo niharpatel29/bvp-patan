@@ -17,5 +17,6 @@ data class UserModel(
     val city: String?,
     val zipcode: String?,
     val residentialAddress: String?,
-    val position: String?
+    val position: String?,
+    val category: String?
 )

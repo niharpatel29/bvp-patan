@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.util.*
 
 class Login : AppCompatActivity() {
@@ -31,8 +32,6 @@ class Login : AppCompatActivity() {
     }
 
     private lateinit var sharedPref: SharedPref
-
-    //    private lateinit var operations: Operations
     private lateinit var dbHandler: MyDBHandler
     private lateinit var imageOperations: ImageOperations
 
@@ -41,14 +40,48 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.login)
 
         sharedPref = SharedPref(this)
-//        operations = Operations(this)
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
+
+        dumpDatabase()
 
         toolbar()
         initialCalls()
         checkLoginStatus()
         handleButtonClicks()
+    }
+
+    private fun dumpDatabase() {
+        if (BuildConfig.VERSION_NAME < "2.0.5") {
+            if (!sharedPref.getDatabaseDeletedFlag()) {
+                if (getDatabasePath(dbHandler.databaseName).exists()) {
+                    Log.d(TAG, "exist")
+                    if (deleteDatabase(dbHandler.databaseName)) {
+                        sharedPref.setDatabaseDeletedFlag(true)
+                        handleLogoutTopics()
+                        sharedPref.userLogout()
+                        deleteProfilePicture()
+                        Log.d(TAG, "deleted")
+                    }
+                } else {
+                    Log.d(TAG, "not exist")
+                }
+            }
+        }
+    }
+
+    private fun handleLogoutTopics() {
+        Topic(this).run {
+            unsubscribe(login)
+            unsubscribe(sharedPref.getCategory()!!)
+        }
+    }
+
+    private fun deleteProfilePicture() {
+        val file = File(imageOperations.profilePicturePath, imageOperations.fileName)
+        if (file.exists()) {
+            file.delete()
+        }
     }
 
     private fun toolbar() {
@@ -298,6 +331,7 @@ class Login : AppCompatActivity() {
                                 val zipcode = user[i].zipcode
                                 val residentialAddress = user[i].residentialAddress
                                 val position = user[i].position
+                                val category = user[i].category
 
                                 val mUser = UserModel(
                                     userId,
@@ -316,7 +350,8 @@ class Login : AppCompatActivity() {
                                     city,
                                     zipcode,
                                     residentialAddress,
-                                    position
+                                    position,
+                                    category
                                 )
                                 dbHandler.addUser(mUser)
                             }

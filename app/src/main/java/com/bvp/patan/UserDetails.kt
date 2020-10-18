@@ -44,6 +44,7 @@ class UserDetails : AppCompatActivity() {
         setHeaders()
         setContents()
     }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item!!.itemId) {
             android.R.id.home -> {
@@ -119,7 +120,9 @@ class UserDetails : AppCompatActivity() {
     }
 
     private fun contents() {
-        val city = "${userDetails.city}, ${userDetails.state}"
+//        val city = "${userDetails.city}, ${userDetails.state}"
+        val city =
+            if (userDetails.city!!.isNotEmpty()) "${userDetails.city}, ${userDetails.state}" else ""
 
         addItem(R.drawable.ic_baseline_phone, R.string.mobile, userDetails.mobilePrimary)
         addItem(

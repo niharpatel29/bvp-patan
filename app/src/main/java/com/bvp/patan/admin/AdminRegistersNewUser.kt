@@ -30,7 +30,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
         operations = Operations(this)
 
         toolbar()
-        setVisibility()
+        listener()
         handleButtonClicks()
     }
 
@@ -57,7 +57,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
         )
     }
 
-    private fun setVisibility() {
+    private fun listener() {
         radioGroup.setOnCheckedChangeListener { radioGroup, i ->
             if (radioGeneral.isChecked) {
                 layoutPosition.visibility = View.GONE
@@ -145,7 +145,7 @@ class AdminRegistersNewUser : AppCompatActivity() {
                             operations.displayToast(getString(R.string.registration_successful))
                         }
                         "exist" -> {
-                            operations.displayToast(getString(R.string.already_registered))
+                            operations.displayToast(getString(R.string.user_already_registered))
                         }
                         "error" -> {
                             operations.displayToast(getString(R.string.sql_error))

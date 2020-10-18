@@ -119,10 +119,6 @@ class Signup : AppCompatActivity() {
                     when (response.body()!!.response) {
                         "ok" -> {
                             operations.displayToast(getString(R.string.registered_successfully_please_login))
-                            startActivity(
-                                Intent(this@Signup, Login::class.java)
-                                    .putExtra("userMobile", userMobile)
-                            )
                             finish()
                         }
                         "error" -> {

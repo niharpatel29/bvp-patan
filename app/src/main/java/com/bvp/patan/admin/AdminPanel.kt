@@ -62,12 +62,22 @@ class AdminPanel : AppCompatActivity() {
     }
 
     private fun handleButtonClicks() {
-        btnMakeNewAdmin.setOnClickListener {
-            startActivity(Intent(this, MakeNewAdmin::class.java))
-        }
-
         btnRegisterNewUser.setOnClickListener {
             startActivity(Intent(this, AdminRegistersNewUser::class.java))
+        }
+
+        btnDeleteUser.setOnClickListener {
+            startActivity(
+                Intent(this, UserList::class.java)
+                    .putExtra("type", getString(R.string.type_delete_user))
+            )
+        }
+
+        btnModifyUserProfile.setOnClickListener {
+            startActivity(
+                Intent(this, UserList::class.java)
+                    .putExtra("type", getString(R.string.type_modify_user))
+            )
         }
 
         btnUploadNewsletter.setOnClickListener {
@@ -80,6 +90,13 @@ class AdminPanel : AppCompatActivity() {
 
         btnUploadPhotosLink.setOnClickListener {
             startActivity(Intent(this, UploadPhotosLink::class.java))
+        }
+
+        btnMakeNewAdmin.setOnClickListener {
+            startActivity(
+                Intent(this, UserList::class.java)
+                    .putExtra("type", getString(R.string.type_make_admin))
+            )
         }
     }
 

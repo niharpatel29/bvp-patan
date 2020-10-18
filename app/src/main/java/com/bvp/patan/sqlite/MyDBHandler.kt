@@ -32,15 +32,15 @@ const val COLUMN_CITY: String = "city"
 const val COLUMN_ZIPCODE: String = "zipcode"
 const val COLUMN_RESIDENTIAL_ADDRESS: String = "residential_address"
 const val COLUMN_POSITION: String = "position"
+const val COLUMN_CATEGORY: String = "category"
 
 class MyDBHandler(val context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         const val TAG = "MyDBHandlerTAG"
+        const val defaultValue: String = ""
     }
-
-    private val defaultValue: String = ""
 
     override fun onCreate(db: SQLiteDatabase?) {
         val query = "CREATE TABLE $TABLE_NAME (" +
@@ -60,7 +60,8 @@ class MyDBHandler(val context: Context) :
                 "$COLUMN_CITY TEXT DEFAULT '$defaultValue', " +
                 "$COLUMN_ZIPCODE TEXT DEFAULT '$defaultValue', " +
                 "$COLUMN_RESIDENTIAL_ADDRESS TEXT DEFAULT '$defaultValue', " +
-                "$COLUMN_POSITION TEXT DEFAULT '$defaultValue');"
+                "$COLUMN_POSITION TEXT DEFAULT '$defaultValue', " +
+                "$COLUMN_CATEGORY TEXT DEFAULT '$defaultValue');"
         db!!.execSQL(query)
     }
 
@@ -103,9 +104,16 @@ class MyDBHandler(val context: Context) :
         values.put(COLUMN_ZIPCODE, model.zipcode)
         values.put(COLUMN_RESIDENTIAL_ADDRESS, model.residentialAddress)
         values.put(COLUMN_POSITION, model.position)
+        values.put(COLUMN_CATEGORY, model.category)
 
         val db = writableDatabase
         db.insert(TABLE_NAME, null, values)
+        db.close()
+    }
+
+    fun deleteUser(userId: String?) {
+        val db = writableDatabase
+        db.delete(TABLE_NAME, "$COLUMN_USER_ID = $userId", null)
         db.close()
     }
 
@@ -128,6 +136,7 @@ class MyDBHandler(val context: Context) :
         values.put(COLUMN_ZIPCODE, model.zipcode)
         values.put(COLUMN_RESIDENTIAL_ADDRESS, model.residentialAddress)
         values.put(COLUMN_POSITION, model.position)
+        values.put(COLUMN_CATEGORY, model.category)
 
         val db = writableDatabase
         db.update(TABLE_NAME, values, "$COLUMN_USER_ID = ${model.userId}", null)
@@ -222,6 +231,7 @@ class MyDBHandler(val context: Context) :
                 val residentialAddress =
                     cursor.getString(cursor.getColumnIndex(COLUMN_RESIDENTIAL_ADDRESS))
                 val position = cursor.getString(cursor.getColumnIndex(COLUMN_POSITION))
+                val category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
 
                 users.add(
                     UserModel(
@@ -241,7 +251,8 @@ class MyDBHandler(val context: Context) :
                         city,
                         zipcode,
                         residentialAddress,
-                        position
+                        position,
+                        category
                     )
                 )
             } while (cursor.moveToNext())
@@ -280,6 +291,7 @@ class MyDBHandler(val context: Context) :
                 val residentialAddress =
                     cursor.getString(cursor.getColumnIndex(COLUMN_RESIDENTIAL_ADDRESS))
                 val position = cursor.getString(cursor.getColumnIndex(COLUMN_POSITION))
+                val category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
 
                 userDetails = UserModel(
                     userId,
@@ -298,7 +310,8 @@ class MyDBHandler(val context: Context) :
                     city,
                     zipcode,
                     residentialAddress,
-                    position
+                    position,
+                    category
                 )
             } while (cursor.moveToNext())
         }

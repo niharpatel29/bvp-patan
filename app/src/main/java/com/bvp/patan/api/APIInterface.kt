@@ -50,7 +50,8 @@ interface APIInterface {
         @Field("city") city: String?,
         @Field("zipcode") zipcode: String?,
         @Field("residential_address") residential_address: String?,
-        @Field("position") position: String?
+        @Field("position") position: String?,
+        @Field("category") category: String?
     ): Call<GeneralResponse>
 
     //get all users
@@ -111,6 +112,12 @@ interface APIInterface {
         @Field("category") category: String,
         @Field("position") position: String,
         @Field("mobile_primary") mobile_primary: String
+    ): Call<AdminGeneralResponse>
+
+    @POST("Admin/DeleteUser.php")
+    @FormUrlEncoded
+    fun performDeleteUser(
+        @Field("user_id") user_id: String?
     ): Call<AdminGeneralResponse>
 
     @POST("Admin/MakeNewAdmin.php")

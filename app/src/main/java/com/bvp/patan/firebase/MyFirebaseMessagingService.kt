@@ -10,7 +10,7 @@ import com.bvp.patan.model.ChannelContainer
 import com.bvp.patan.model.NotificationDataContainer
 import com.bvp.patan.notification.NotificationHandler
 import com.bvp.patan.operations.Operations
-import com.bvp.patan.other.SQLiteBackgroundTask
+import com.bvp.patan.background_worker.SQLiteBackgroundTask
 import com.bvp.patan.prefs.SharedPref
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -46,8 +46,15 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             if (json.has("channel")) {
                 showNotification()
             }
-            if (json.get("update_sqlite") == true) {
-                updateUserListAndData()
+            if (json.has("update_sqlite")) {
+                if (json.get("update_sqlite") == true) {
+                    updateUserListAndData()
+                }
+            }
+            if (json.has("update_db")) {
+                if (json.get("update_db") == true) {
+                    updateUserListAndData()
+                }
             }
 
             Log.d(TAG, "From: ${remoteMessage.from}")

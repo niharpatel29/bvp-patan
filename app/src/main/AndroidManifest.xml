@@ -19,8 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,UnusedAttribute">
-        <activity android:name=".admin.ChangeAdminPassword"></activity>
-        <activity android:name=".admin.MakeNewAdmin" />
+        <activity android:name=".admin.UserList" />
+        <activity android:name=".admin.AdminModifyUserProfile" />
+        <activity android:name=".admin.ChangeAdminPassword" />
         <activity android:name=".admin.AdminLogin" />
         <activity android:name=".admin.AdminPanel" />
         <activity android:name=".admin.AdminRegistersNewUser" />

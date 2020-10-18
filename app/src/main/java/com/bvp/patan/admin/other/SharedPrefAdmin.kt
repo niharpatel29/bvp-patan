@@ -4,10 +4,12 @@ import android.content.Context
 
 class SharedPrefAdmin(private val context: Context) {
 
-    private val adminPreference = "adminPref"
-    private var KEY_ADMIN_LOGIN_STATUS = "admin_login_status"
-    private var KEY_ADMIN_NAME = "admin_name"
-    private var KEY_ADMIN_ID = "admin_id"
+    companion object {
+        private const val adminPreference = "adminPref"
+        private const val KEY_ADMIN_LOGIN_STATUS = "admin_login_status"
+        private const val KEY_ADMIN_NAME = "admin_name"
+        private const val KEY_ADMIN_ID = "admin_id"
+    }
 
     private var sharedPreferences =
         context.getSharedPreferences(adminPreference, Context.MODE_PRIVATE)

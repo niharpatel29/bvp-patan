@@ -72,9 +72,13 @@
     <string name="residential_address">Residential Address</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="modify_user_profile">Modify User Profile</string>
     <string name="admin_login">Admin login</string>
     <string name="make_new_admin">Make new admin</string>
     <string name="register_new_user">Register a new user</string>
+    <string name="add_new_user">Add new user</string>
+    <string name="delete">Delete</string>
+    <string name="delete_user">Delete user</string>
     <string name="upload_newsletter">Upload newsletter</string>
     <string name="upload_photos_link">Upload photos link</string>
     <string name="password">Password</string>
@@ -92,6 +96,7 @@
     <string name="user_registered_successfully">Registered successfully</string>
     <string name="registration_successful">Registration successful</string>
     <string name="already_registered">You are already registered</string>
+    <string name="user_already_registered">User already registered</string>
     <string name="country">Country</string>
     <string name="state">State</string>
     <string name="city">City</string>
@@ -112,6 +117,8 @@
     <string name="test">Test</string>
     <string name="confirmation">Confirmation</string>
     <string name="confirm_make_admin">Confirm make admin</string>
+    <string name="confirm_delete">Confirm delete</string>
+    <string name="confirm_delete_user">Confirm delete user</string>
     <string name="confirm_logout">Are you sure you want to logout?</string>
     <string name="response_failed">Response failed</string>
     <string name="please_wait">Please wait…</string>
@@ -175,6 +182,9 @@
     <string name="type_call">call</string>
     <string name="type_sms">sms</string>
     <string name="type_whatsapp">whatsapp</string>
+    <string name="type_make_admin">make_admin</string>
+    <string name="type_delete_user">delete_user</string>
+    <string name="type_modify_user">modify_user</string>
 
     <string name="spinner_select">Select Category</string>
 

@@ -24,17 +24,24 @@
         android:padding="@dimen/padding">
 
         <Button
-            android:id="@+id/btnMakeNewAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/make_new_admin" />
-
-        <Button
             android:id="@+id/btnRegisterNewUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/add_new_user" />
+
+        <Button
+            android:id="@+id/btnDeleteUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
-            android:text="@string/register_new_user" />
+            android:text="@string/delete_user" />
+
+        <Button
+            android:id="@+id/btnModifyUserProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/modify_user_profile" />
 
         <Button
             android:id="@+id/btnUploadNewsletter"
@@ -56,6 +63,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
             android:text="@string/upload_photos_link" />
+
+        <Button
+            android:id="@+id/btnMakeNewAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/make_new_admin" />
 
     </LinearLayout>
 </LinearLayout>
