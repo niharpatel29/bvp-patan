@@ -63,7 +63,7 @@ class Login : AppCompatActivity() {
     }
 
     private fun dumpDatabase() {
-        if (BuildConfig.VERSION_NAME < "2.1.0") {
+        if (BuildConfig.VERSION_NAME > "2.0.4") {
             if (!sharedPref.getDatabaseDeletedFlag()) {
                 if (getDatabasePath(dbHandler.databaseName).exists()) {
                     Log.d(TAG, "exist")
@@ -77,7 +77,11 @@ class Login : AppCompatActivity() {
                 } else {
                     Log.d(TAG, "not exist")
                 }
+            } else {
+                Log.d(TAG, "already deleted")
             }
+        } else {
+            Log.d(TAG, "version error")
         }
     }
 
