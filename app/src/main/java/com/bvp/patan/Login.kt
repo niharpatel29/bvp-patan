@@ -1,8 +1,10 @@
 package com.bvp.patan
 
+import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.IntentSender
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +20,9 @@ import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.AllUsers
 import com.bvp.patan.response.UserLogin
 import com.bvp.patan.sqlite.MyDBHandler
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +34,7 @@ class Login : AppCompatActivity() {
 
     companion object {
         const val TAG = "LoginTAG"
+        const val REQUEST_CODE_APP_UPDATE = 111
     }
 
     private lateinit var sharedPref: SharedPref
@@ -49,6 +55,11 @@ class Login : AppCompatActivity() {
         initialCalls()
         checkLoginStatus()
         handleButtonClicks()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkForAppUpdate()
     }
 
     private fun dumpDatabase() {
@@ -81,6 +92,27 @@ class Login : AppCompatActivity() {
         val file = File(imageOperations.profilePicturePath, imageOperations.fileName)
         if (file.exists()) {
             file.delete()
+        }
+    }
+
+    private fun checkForAppUpdate() {
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.IMMEDIATE,
+                        this,
+                        REQUEST_CODE_APP_UPDATE
+                    )
+                } catch (e: IntentSender.SendIntentException) {
+                    Log.d(TAG, e.message.toString())
+                    displayToast(getString(R.string.app_update_failed))
+                }
+            }
         }
     }
 
@@ -368,5 +400,16 @@ class Login : AppCompatActivity() {
                 hideProgressDialog()
             }
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK) {
+            when (requestCode) {
+                REQUEST_CODE_APP_UPDATE -> {
+                    displayToast(getString(R.string.app_update_failed))
+                }
+            }
+        }
     }
 }

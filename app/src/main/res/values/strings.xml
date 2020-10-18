@@ -73,6 +73,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="modify_user_profile">Modify User Profile</string>
+    <string name="app_update_failed">App update failed</string>
     <string name="admin_login">Admin login</string>
     <string name="make_new_admin">Make new admin</string>
     <string name="register_new_user">Register a new user</string>
