@@ -412,6 +412,7 @@ class Login : AppCompatActivity() {
             when (requestCode) {
                 REQUEST_CODE_APP_UPDATE -> {
                     displayToast(getString(R.string.app_update_failed))
+                    finishAffinity()
                 }
             }
         }

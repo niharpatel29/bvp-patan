@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import com.bvp.patan.model.UserModel
+import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.sqlite.MyDBHandler
 import org.json.JSONException
 import org.json.JSONObject
@@ -74,12 +75,41 @@ class SQLiteBackgroundTask(val context: Context) : AsyncTask<JSONObject, Void, S
                 category
             )
 
+            val sharedPref = SharedPref(context)
+            // update personal info
+            if (sharedPref.getLoginStatus()) {
+                if (userDetails.userId == sharedPref.getId()) {
+                    try {
+                        sharedPref.run {
+                            setMobilePrimary(mobilePrimary)
+                            setFirstname(firstName)
+                            setMiddlename(middleName)
+                            setLastname(lastName)
+                            setMobileSecondary(mobileSecondary)
+                            setEmail(email)
+                            setDOB(dob)
+                            setAnniversary(anniversary)
+                            setBloodGroup(bloodgroup)
+                            setGender(gender)
+                            setCountry(country)
+                            setState(state)
+                            setCity(city)
+                            setZipcode(zipcode)
+                            setResidentialAddress(residentialAddress)
+                            setPosition(position)
+                            setCategory(category)
+                        }
+                    } catch (e: Exception) {
+                        Log.e(TAG, e.message.toString())
+                    }
+                }
+            }
             if (MyDBHandler(context).isUserExist(userDetails.userId)) {
-                Log.d(TAG, "exist: ${userDetails.userId}")
                 MyDBHandler(context).updateUserDetails(userDetails)
+                Log.d(TAG, "exist: ${userDetails.userId}")
             } else {
-                Log.d(TAG, "notExist: ${userDetails.userId}")
                 MyDBHandler(context).addUser(userDetails)
+                Log.d(TAG, "notExist: ${userDetails.userId}")
             }
         } catch (e: JSONException) {
             Log.e(TAG, "Json Exception: ${e.message}")

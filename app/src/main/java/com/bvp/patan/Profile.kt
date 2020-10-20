@@ -38,7 +38,6 @@ class Profile : AppCompatActivity() {
         imageOperations = ImageOperations(this)
         dbHandler = MyDBHandler(this)
 
-
         toolbar()
     }
 
