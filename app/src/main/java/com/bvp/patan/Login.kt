@@ -49,6 +49,7 @@ class Login : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
 
+        checkForAppUpdate()
         dumpDatabase()
 
         toolbar()
@@ -59,7 +60,7 @@ class Login : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        checkForAppUpdate()
+//        checkForAppUpdate()
     }
 
     private fun dumpDatabase() {

@@ -11,8 +11,8 @@ android {
         applicationId "com.bvp.patan"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 8
-        versionName "2.1.2"
+        versionCode 9
+        versionName "2.1.3"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
