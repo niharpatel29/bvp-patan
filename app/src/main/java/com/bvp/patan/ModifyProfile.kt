@@ -126,7 +126,7 @@ class ModifyProfile : AppCompatActivity() {
 
         dialog
             .setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
-                Dialog.cancel()
+                Dialog.dismiss()
             }
 
         dialog.create().show()
