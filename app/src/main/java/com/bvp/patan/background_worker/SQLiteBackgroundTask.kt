@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.AsyncTask
 import android.util.Log
 import com.bvp.patan.model.UserModel
+import com.bvp.patan.operations.logout
 import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.sqlite.MyDBHandler
 import org.json.JSONException
@@ -22,20 +23,26 @@ class SQLiteBackgroundTask(val context: Context) : AsyncTask<JSONObject, Void, S
 
     override fun doInBackground(vararg json: JSONObject?): String? {
         try {
+            val sharedPref = SharedPref(context)
+
             val user = json[0]!!.getJSONObject("user")
+            val userId = user.getString("user_id")
 
             if (json[0]!!.has("operation")) {
                 if (json[0]!!.getString("operation") == "delete_user") {
-                    val userId = user.getString("user_id")
 
-                    if (MyDBHandler(context).isUserExist(userId)) {
-                        MyDBHandler(context).deleteUser(userId)
+                    val dbHandler = MyDBHandler(context)
+                    if (dbHandler.isUserExist(userId)) {
+                        dbHandler.deleteUser(userId)
+
+                        if (userId == sharedPref.getId()) {
+                            context.logout()
+                        }
                     }
-                    return "Data updated successfully"
+                    return "User deleted successfully"
                 }
             }
 
-            val userId = user.getString("user_id")
             val mobilePrimary = user.getString("mobile_primary")
             val firstName = user.getString("first_name")
             val middleName = user.getString("middle_name")
@@ -75,7 +82,6 @@ class SQLiteBackgroundTask(val context: Context) : AsyncTask<JSONObject, Void, S
                 category
             )
 
-            val sharedPref = SharedPref(context)
             // update personal info
             if (sharedPref.getLoginStatus()) {
                 if (userDetails.userId == sharedPref.getId()) {

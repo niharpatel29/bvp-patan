@@ -15,13 +15,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bvp.patan.activities.categories.*
 import com.bvp.patan.admin.AdminLogin
-import com.bvp.patan.admin.other.SharedPrefAdmin
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
-import com.bvp.patan.firebase.Topic
 import com.bvp.patan.model.UserModel
 import com.bvp.patan.operations.ImageOperations
 import com.bvp.patan.operations.Operations
+import com.bvp.patan.operations.logout
 import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.AllUsers
 import com.bvp.patan.sqlite.MyDBHandler
@@ -84,6 +83,8 @@ class Categories : AppCompatActivity() {
             }
             R.id.action_logout -> {
                 logout()
+                startActivity(Intent(this, Login::class.java))
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -254,32 +255,5 @@ class Categories : AppCompatActivity() {
                     imageOperations.saveToInternalStorage(resource)
                 }
             })
-    }
-
-    private fun logout() {
-        handleSubscription()
-        sharedPref.userLogout()
-        dbHandler.clearDatabase()
-        deleteProfilePicture()
-
-        val sharedPrefAdmin = SharedPrefAdmin(this)
-        if (sharedPrefAdmin.getLoginStatus()) sharedPrefAdmin.adminLogout()
-
-        startActivity(Intent(this, Login::class.java))
-        finish()
-    }
-
-    private fun handleSubscription() {
-        Topic(this).run {
-            unsubscribe(login)
-            unsubscribe(sharedPref.getCategory()!!)
-        }
-    }
-
-    private fun deleteProfilePicture() {
-        val file = File(imageOperations.profilePicturePath, imageOperations.fileName)
-        if (file.exists()) {
-            file.delete()
-        }
     }
 }

@@ -1,14 +1,15 @@
 package com.bvp.patan
 
-import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.IntentSender
 import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
@@ -21,7 +22,6 @@ import com.bvp.patan.response.AllUsers
 import com.bvp.patan.response.UserLogin
 import com.bvp.patan.sqlite.MyDBHandler
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
@@ -34,7 +34,6 @@ class Login : AppCompatActivity() {
 
     companion object {
         const val TAG = "LoginTAG"
-        const val REQUEST_CODE_APP_UPDATE = 111
     }
 
     private lateinit var sharedPref: SharedPref
@@ -49,18 +48,94 @@ class Login : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
 
-        checkForAppUpdate()
-        dumpDatabase()
+//        dumpDatabase()
 
         toolbar()
         initialCalls()
-        checkLoginStatus()
+//        skipIfLoggedIn()
+//        checkForAppUpdate()
         handleButtonClicks()
     }
 
     override fun onStart() {
         super.onStart()
-//        checkForAppUpdate()
+        checkForAppUpdate()
+    }
+
+    private fun checkForAppUpdate() {
+        if (!internetAvailable()) {
+            skipIfLoggedIn()
+            Log.d(TAG, "No internet")
+            return
+        }
+
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                showDialog()
+            } else {
+                skipIfLoggedIn()
+                Log.d(TAG, "No new updates")
+            }
+        }
+    }
+
+    private fun showDialog() {
+        val dialog = AlertDialog.Builder(this)
+
+        dialog
+            .setTitle("Update available")
+            .setMessage("Please update app to continue")
+            .setCancelable(true)
+
+        dialog.setPositiveButton(getString(R.string.update)) { Dialog, id ->
+            updateApp()
+            Dialog.dismiss()
+        }
+
+        dialog.setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
+            Dialog.cancel()
+        }
+
+        dialog.setOnCancelListener {
+            finish()
+        }
+
+        dialog.create().show()
+    }
+
+    private fun updateApp() {
+        val appPackageName = packageName
+
+        try {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=$appPackageName")
+                )
+            )
+        } catch (e: ActivityNotFoundException) {
+            Log.e(TAG, e.message.toString())
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                )
+            )
+        }
+//        try {
+//            appUpdateManager.startUpdateFlowForResult(
+//                appUpdateInfo,
+//                AppUpdateType.IMMEDIATE,
+//                this,
+//                CheckForUpdate.REQUEST_CODE_APP_UPDATE
+//            )
+//        } catch (e: IntentSender.SendIntentException) {
+//            skipIfLoggedIn()
+//            Log.d(TAG, e.message.toString())
+//        }
     }
 
     private fun dumpDatabase() {
@@ -71,7 +146,7 @@ class Login : AppCompatActivity() {
                     if (deleteDatabase(dbHandler.databaseName)) {
                         sharedPref.setDatabaseDeletedFlag(true)
                         handleLogoutTopics()
-                        sharedPref.userLogout()
+                        sharedPref.clearEditor()
                         deleteProfilePicture()
                         Log.d(TAG, "deleted")
                     }
@@ -97,27 +172,6 @@ class Login : AppCompatActivity() {
         val file = File(imageOperations.profilePicturePath, imageOperations.fileName)
         if (file.exists()) {
             file.delete()
-        }
-    }
-
-    private fun checkForAppUpdate() {
-        val appUpdateManager = AppUpdateManagerFactory.create(this)
-        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
-
-        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                try {
-                    appUpdateManager.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        AppUpdateType.IMMEDIATE,
-                        this,
-                        REQUEST_CODE_APP_UPDATE
-                    )
-                } catch (e: IntentSender.SendIntentException) {
-                    Log.d(TAG, e.message.toString())
-                    displayToast(getString(R.string.app_update_failed))
-                }
-            }
         }
     }
 
@@ -173,7 +227,7 @@ class Login : AppCompatActivity() {
         )
     }
 
-    private fun checkLoginStatus() {
+    private fun skipIfLoggedIn() {
         if (sharedPref.getLoginStatus()) {
             startActivity(Intent(this, Categories::class.java))
             finish()
@@ -405,17 +459,5 @@ class Login : AppCompatActivity() {
                 hideProgressDialog()
             }
         })
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode != Activity.RESULT_OK) {
-            when (requestCode) {
-                REQUEST_CODE_APP_UPDATE -> {
-                    displayToast(getString(R.string.app_update_failed))
-                    finishAffinity()
-                }
-            }
-        }
     }
 }
