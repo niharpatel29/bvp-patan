@@ -1,10 +1,11 @@
 package com.bvp.patan.prefs
 
 import android.content.Context
+import com.bvp.patan.firebase.Topic
 import com.bvp.patan.model.UserModel
 
 // USE THIS CLASS FOR AFTER LOGIN PROCESSES FOR BEST RESULTS
-class SharedPref(context: Context) {
+class SharedPref(val context: Context) {
 
     companion object {
         private const val KEY_DATABASE_DELETED = "database_deleted_flag"
@@ -334,7 +335,7 @@ class SharedPref(context: Context) {
         )
     }
 
-    fun userLogout() {
+    fun clearEditor() {
         val editor = sharedPreferences.edit()
         editor.clear()
         setLoginStatus(false)

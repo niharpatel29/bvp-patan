@@ -25,6 +25,7 @@ import com.bvp.patan.model.Country
 import com.bvp.patan.model.UserModel
 import com.bvp.patan.operations.ImageOperations
 import com.bvp.patan.operations.Operations
+import com.bvp.patan.operations.displayToast
 import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.GeneralResponse
 import com.bvp.patan.response.UploadResponse
@@ -110,26 +111,26 @@ class ModifyProfile : AppCompatActivity() {
     }
 
     private fun goBackDialog() {
-        val builder = AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
 
-        builder
+        dialog
             .setTitle(getString(R.string.title_go_back))
             .setMessage(getString(R.string.message_go_back))
             .setCancelable(true)
 
-        builder
+        dialog
             .setPositiveButton(getString(R.string.ok)) { Dialog, id ->
                 Dialog.dismiss()
                 super.onBackPressed()
             }
 
-        builder
+        dialog
             .setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
-                Dialog.dismiss()
+//                Dialog.dismiss()
+                Dialog.cancel()
             }
 
-        val dialog = builder.create()
-        dialog.show()
+        dialog.create().show()
     }
 
     private fun setHeaders() {

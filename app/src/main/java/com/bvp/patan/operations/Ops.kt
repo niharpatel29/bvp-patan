@@ -1,5 +1,6 @@
 package com.bvp.patan.operations
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ActivityNotFoundException
 import android.content.Context
@@ -10,10 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import com.bvp.patan.Login
 import com.bvp.patan.R
+import com.bvp.patan.admin.other.SharedPrefAdmin
 import com.bvp.patan.dialog.Chooser
+import com.bvp.patan.firebase.Topic
+import com.bvp.patan.prefs.SharedPref
+import com.bvp.patan.sqlite.MyDBHandler
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import java.io.File
 
 //class Operations(private val context: Context) {
 
@@ -163,5 +170,30 @@ fun Context.displayToast(message: String) {
 
 fun View.displaySnackBar(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+}
+
+fun Context.logout() {
+    handleLogoutTopics()
+    SharedPref(this).clearEditor()
+    MyDBHandler(this).clearDatabase()
+    deleteProfilePicture()
+
+    val sharedPrefAdmin = SharedPrefAdmin(this)
+    if (sharedPrefAdmin.getLoginStatus()) sharedPrefAdmin.adminLogout()
+}
+
+private fun Context.handleLogoutTopics() {
+    Topic(this).run {
+        unsubscribe(login)
+        unsubscribe(SharedPref(this@handleLogoutTopics).getCategory()!!)
+    }
+}
+
+private fun Context.deleteProfilePicture() {
+    val imageOperations = ImageOperations(this)
+    val file = File(imageOperations.profilePicturePath, imageOperations.fileName)
+    if (file.exists()) {
+        file.delete()
+    }
 }
 //}
