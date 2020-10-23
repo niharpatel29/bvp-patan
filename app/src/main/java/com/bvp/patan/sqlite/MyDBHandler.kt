@@ -3,7 +3,9 @@ package com.bvp.patan.sqlite
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.bvp.patan.R
 import com.bvp.patan.model.ListItemCalendar
 import com.bvp.patan.model.UserModel
@@ -104,7 +106,12 @@ class MyDBHandler(val context: Context) :
         values.put(COLUMN_ZIPCODE, model.zipcode)
         values.put(COLUMN_RESIDENTIAL_ADDRESS, model.residentialAddress)
         values.put(COLUMN_POSITION, model.position)
-        values.put(COLUMN_CATEGORY, model.category)
+        try {
+            values.put(COLUMN_CATEGORY, model.category)
+        } catch (e: IllegalStateException) {
+            Log.e(TAG, e.message.toString())
+            addColumnIfNotExist()
+        }
 
         val db = writableDatabase
         db.insert(TABLE_NAME, null, values)
@@ -136,7 +143,12 @@ class MyDBHandler(val context: Context) :
         values.put(COLUMN_ZIPCODE, model.zipcode)
         values.put(COLUMN_RESIDENTIAL_ADDRESS, model.residentialAddress)
         values.put(COLUMN_POSITION, model.position)
-        values.put(COLUMN_CATEGORY, model.category)
+        try {
+            values.put(COLUMN_CATEGORY, model.category)
+        } catch (e: IllegalStateException) {
+            Log.e(TAG, e.message.toString())
+            addColumnIfNotExist()
+        }
 
         val db = writableDatabase
         db.update(TABLE_NAME, values, "$COLUMN_USER_ID = ${model.userId}", null)
@@ -231,7 +243,16 @@ class MyDBHandler(val context: Context) :
                 val residentialAddress =
                     cursor.getString(cursor.getColumnIndex(COLUMN_RESIDENTIAL_ADDRESS))
                 val position = cursor.getString(cursor.getColumnIndex(COLUMN_POSITION))
-                val category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
+//                val category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
+
+                var category = ""
+                try {
+                    category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
+                    Log.d(TAG, category)
+                } catch (e: IllegalStateException) {
+                    Log.e(TAG, e.message.toString())
+                    addColumnIfNotExist()
+                }
 
                 users.add(
                     UserModel(
@@ -260,6 +281,26 @@ class MyDBHandler(val context: Context) :
         cursor.close()
         db.close()
         return users
+    }
+
+    fun isColumnExist(): Boolean {
+        val db = readableDatabase
+        return try {
+            db.rawQuery("SELECT $COLUMN_CATEGORY FROM $TABLE_NAME", null)
+            Log.d(TAG, "exist")
+            true
+        } catch (e: SQLiteException) {
+            Log.e(TAG, "not exist")
+            false
+        }
+    }
+
+    fun addColumnIfNotExist() {
+        val db = writableDatabase
+        if (!isColumnExist()) {
+            db.execSQL("ALTER TABLE $TABLE_NAME ADD COLUMN $COLUMN_CATEGORY TEXT DEFAULT '$defaultValue'")
+        }
+        db.close()
     }
 
     // get details for specific user
@@ -291,7 +332,16 @@ class MyDBHandler(val context: Context) :
                 val residentialAddress =
                     cursor.getString(cursor.getColumnIndex(COLUMN_RESIDENTIAL_ADDRESS))
                 val position = cursor.getString(cursor.getColumnIndex(COLUMN_POSITION))
-                val category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
+//                val category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
+
+                var category = ""
+                try {
+                    category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY))
+                    Log.d(TAG, category)
+                } catch (e: IllegalStateException) {
+                    Log.e(TAG, e.message.toString())
+                    addColumnIfNotExist()
+                }
 
                 userDetails = UserModel(
                     userId,

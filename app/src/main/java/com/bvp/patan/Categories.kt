@@ -52,6 +52,7 @@ class Categories : AppCompatActivity() {
 
         invalidateOptionsMenu()
         toolbar()
+        initialCalls()
         handleButtonClicks()
         createDirectory()
         downloadProfilePicture()
@@ -61,6 +62,13 @@ class Categories : AppCompatActivity() {
         menuInflater.inflate(R.menu.category_menu, menu)
         menu!!.findItem(R.id.action_admin_panel).isVisible = adminButtonVisibility()
         return true
+    }
+
+    private fun initialCalls() {
+        if (!dbHandler.isColumnExist()) {
+            dbHandler.addColumnIfNotExist()
+            refreshUserList()
+        }
     }
 
     private fun adminButtonVisibility(): Boolean {

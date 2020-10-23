@@ -48,12 +48,8 @@ class Login : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
         imageOperations = ImageOperations(this)
 
-//        dumpDatabase()
-
         toolbar()
         initialCalls()
-//        skipIfLoggedIn()
-//        checkForAppUpdate()
         handleButtonClicks()
     }
 
@@ -65,7 +61,7 @@ class Login : AppCompatActivity() {
     private fun checkForAppUpdate() {
         if (!internetAvailable()) {
             skipIfLoggedIn()
-            Log.d(TAG, "No internet")
+            Log.e(TAG, "No internet")
             return
         }
 
@@ -136,43 +132,6 @@ class Login : AppCompatActivity() {
 //            skipIfLoggedIn()
 //            Log.d(TAG, e.message.toString())
 //        }
-    }
-
-    private fun dumpDatabase() {
-        if (BuildConfig.VERSION_NAME > "2.0.4") {
-            if (!sharedPref.getDatabaseDeletedFlag()) {
-                if (getDatabasePath(dbHandler.databaseName).exists()) {
-                    Log.d(TAG, "exist")
-                    if (deleteDatabase(dbHandler.databaseName)) {
-                        sharedPref.setDatabaseDeletedFlag(true)
-                        handleLogoutTopics()
-                        sharedPref.clearEditor()
-                        deleteProfilePicture()
-                        Log.d(TAG, "deleted")
-                    }
-                } else {
-                    Log.d(TAG, "not exist")
-                }
-            } else {
-                Log.d(TAG, "already deleted")
-            }
-        } else {
-            Log.d(TAG, "version error")
-        }
-    }
-
-    private fun handleLogoutTopics() {
-        Topic(this).run {
-            unsubscribe(login)
-            unsubscribe(sharedPref.getCategory()!!)
-        }
-    }
-
-    private fun deleteProfilePicture() {
-        val file = File(imageOperations.profilePicturePath, imageOperations.fileName)
-        if (file.exists()) {
-            file.delete()
-        }
     }
 
     private fun toolbar() {
