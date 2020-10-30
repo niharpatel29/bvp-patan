@@ -1,9 +1,11 @@
 package com.bvp.patan
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -20,10 +22,14 @@ import com.bvp.patan.api.postClient
 import com.bvp.patan.model.UserModel
 import com.bvp.patan.operations.ImageOperations
 import com.bvp.patan.operations.Operations
+import com.bvp.patan.operations.internetAvailable
 import com.bvp.patan.operations.logout
 import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.AllUsers
 import com.bvp.patan.sqlite.MyDBHandler
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.UpdateAvailability
 import kotlinx.android.synthetic.main.categories.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,12 +62,85 @@ class Categories : AppCompatActivity() {
         handleButtonClicks()
         createDirectory()
         downloadProfilePicture()
+        checkForAppUpdate()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.category_menu, menu)
         menu!!.findItem(R.id.action_admin_panel).isVisible = adminButtonVisibility()
         return true
+    }
+
+    private fun checkForAppUpdate() {
+        if (!internetAvailable()) {
+            Log.e(TAG, "No internet")
+            return
+        }
+
+        val appUpdateManager = AppUpdateManagerFactory.create(this)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
+                showUpdateDialog()
+            }
+        }
+    }
+
+    private fun showUpdateDialog() {
+        val dialog = MaterialAlertDialogBuilder(this)
+
+        dialog
+            .setTitle("Update available")
+            .setMessage("Please update app to continue")
+            .setCancelable(true)
+
+        dialog.setPositiveButton(getString(R.string.update)) { Dialog, id ->
+            redirectToPlayStore()
+            Dialog.dismiss()
+        }
+
+        dialog.setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
+            Dialog.cancel()
+        }
+
+        dialog.setOnCancelListener {
+            finishAffinity()
+        }
+
+        dialog.create().show()
+    }
+
+    private fun redirectToPlayStore() {
+        val appPackageName = packageName
+
+        try {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=$appPackageName")
+                )
+            )
+        } catch (e: ActivityNotFoundException) {
+            Log.e(TAG, e.message.toString())
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                )
+            )
+        }
+        /*try {
+            appUpdateManager.startUpdateFlowForResult(
+                appUpdateInfo,
+                AppUpdateType.IMMEDIATE,
+                this,
+                CheckForUpdate.REQUEST_CODE_APP_UPDATE
+            )
+        } catch (e: IntentSender.SendIntentException) {
+            skipIfLoggedIn()
+            Log.d(TAG, e.message.toString())
+        }*/
     }
 
     private fun initialCalls() {

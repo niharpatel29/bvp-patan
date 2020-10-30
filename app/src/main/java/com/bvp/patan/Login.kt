@@ -9,7 +9,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
@@ -21,13 +20,13 @@ import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.AllUsers
 import com.bvp.patan.response.UserLogin
 import com.bvp.patan.sqlite.MyDBHandler
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.model.UpdateAvailability
 import kotlinx.android.synthetic.main.login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 import java.util.*
 
 class Login : AppCompatActivity() {
@@ -49,18 +48,18 @@ class Login : AppCompatActivity() {
         imageOperations = ImageOperations(this)
 
         toolbar()
+//        checkForUpdate()
         initialCalls()
+        skipIfLoggedIn()
         handleButtonClicks()
     }
 
-    override fun onStart() {
-        super.onStart()
-        checkForAppUpdate()
-    }
+    /*private fun checkForUpdate() {
+        CheckForUpdate(this).execute()
+    }*/
 
     private fun checkForAppUpdate() {
         if (!internetAvailable()) {
-            skipIfLoggedIn()
             Log.e(TAG, "No internet")
             return
         }
@@ -70,16 +69,13 @@ class Login : AppCompatActivity() {
 
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
-                showDialog()
-            } else {
-                skipIfLoggedIn()
-                Log.d(TAG, "No new updates")
+                showUpdateDialog()
             }
         }
     }
 
-    private fun showDialog() {
-        val dialog = AlertDialog.Builder(this)
+    private fun showUpdateDialog() {
+        val dialog = MaterialAlertDialogBuilder(this)
 
         dialog
             .setTitle("Update available")
@@ -87,7 +83,7 @@ class Login : AppCompatActivity() {
             .setCancelable(true)
 
         dialog.setPositiveButton(getString(R.string.update)) { Dialog, id ->
-            updateApp()
+            redirectToPlayStore()
             Dialog.dismiss()
         }
 
@@ -102,7 +98,7 @@ class Login : AppCompatActivity() {
         dialog.create().show()
     }
 
-    private fun updateApp() {
+    private fun redirectToPlayStore() {
         val appPackageName = packageName
 
         try {
@@ -121,17 +117,17 @@ class Login : AppCompatActivity() {
                 )
             )
         }
-//        try {
-//            appUpdateManager.startUpdateFlowForResult(
-//                appUpdateInfo,
-//                AppUpdateType.IMMEDIATE,
-//                this,
-//                CheckForUpdate.REQUEST_CODE_APP_UPDATE
-//            )
-//        } catch (e: IntentSender.SendIntentException) {
-//            skipIfLoggedIn()
-//            Log.d(TAG, e.message.toString())
-//        }
+        /*try {
+            appUpdateManager.startUpdateFlowForResult(
+                appUpdateInfo,
+                AppUpdateType.IMMEDIATE,
+                this,
+                CheckForUpdate.REQUEST_CODE_APP_UPDATE
+            )
+        } catch (e: IntentSender.SendIntentException) {
+            skipIfLoggedIn()
+            Log.d(TAG, e.message.toString())
+        }*/
     }
 
     private fun toolbar() {
@@ -190,6 +186,8 @@ class Login : AppCompatActivity() {
         if (sharedPref.getLoginStatus()) {
             startActivity(Intent(this, Categories::class.java))
             finish()
+        } else {
+            checkForAppUpdate()
         }
     }
 

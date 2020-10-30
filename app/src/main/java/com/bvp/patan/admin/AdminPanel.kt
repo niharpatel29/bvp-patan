@@ -5,10 +5,10 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.R
 import com.bvp.patan.admin.other.SharedPrefAdmin
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.admin_panel.*
 
 class AdminPanel : AppCompatActivity() {
@@ -101,26 +101,25 @@ class AdminPanel : AppCompatActivity() {
     }
 
     private fun logoutDialog() {
-        val builder = AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
 
-        builder
+        dialog
             .setTitle(getString(R.string.logout))
             .setMessage(getString(R.string.confirm_logout))
             .setCancelable(true)
 
-        builder
+        dialog
             .setPositiveButton(getString(R.string.logout)) { Dialog, id ->
                 Dialog.dismiss()
                 logout()
             }
 
-        builder
+        dialog
             .setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
                 Dialog.dismiss()
             }
 
-        val dialog = builder.create()
-        dialog.show()
+        dialog.create().show()
     }
 
     private fun logout() {

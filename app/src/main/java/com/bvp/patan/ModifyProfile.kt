@@ -15,7 +15,6 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -25,11 +24,11 @@ import com.bvp.patan.model.Country
 import com.bvp.patan.model.UserModel
 import com.bvp.patan.operations.ImageOperations
 import com.bvp.patan.operations.Operations
-import com.bvp.patan.operations.displayToast
 import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.response.GeneralResponse
 import com.bvp.patan.response.UploadResponse
 import com.bvp.patan.upload.UploadRequestBody
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.yalantis.ucrop.UCrop
@@ -111,7 +110,7 @@ class ModifyProfile : AppCompatActivity() {
     }
 
     private fun goBackDialog() {
-        val dialog = AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
 
         dialog
             .setTitle(getString(R.string.title_go_back))
