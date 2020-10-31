@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.R
 import com.bvp.patan.api.APIInterface
@@ -18,6 +17,7 @@ import com.bvp.patan.model.UserModel
 import com.bvp.patan.operations.Operations
 import com.bvp.patan.response.GeneralResponse
 import com.bvp.patan.sqlite.MyDBHandler
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.modify_profile.*
@@ -96,26 +96,23 @@ class AdminModifyUserProfile : AppCompatActivity() {
     }
 
     private fun goBackDialog() {
-        val builder = AlertDialog.Builder(this)
+        val dialog = MaterialAlertDialogBuilder(this)
 
-        builder
+        dialog
             .setTitle(getString(R.string.title_go_back))
             .setMessage(getString(R.string.message_go_back))
             .setCancelable(true)
 
-        builder
-            .setPositiveButton(getString(R.string.ok)) { Dialog, id ->
-                Dialog.dismiss()
-                super.onBackPressed()
-            }
+        dialog.setPositiveButton(getString(R.string.ok)) { Dialog, id ->
+            Dialog.dismiss()
+            super.onBackPressed()
+        }
 
-        builder
-            .setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
-                Dialog.dismiss()
-            }
+        dialog.setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
+            Dialog.dismiss()
+        }
 
-        val dialog = builder.create()
-        dialog.show()
+        dialog.create().show()
     }
 
     private fun setValuesOnStart() {

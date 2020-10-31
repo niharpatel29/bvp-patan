@@ -117,14 +117,12 @@ class ModifyProfile : AppCompatActivity() {
             .setMessage(getString(R.string.message_go_back))
             .setCancelable(true)
 
-        dialog
-            .setPositiveButton(getString(R.string.ok)) { Dialog, id ->
+        dialog.setPositiveButton(getString(R.string.ok)) { Dialog, id ->
                 Dialog.dismiss()
                 super.onBackPressed()
             }
 
-        dialog
-            .setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
+        dialog.setNegativeButton(getString(R.string.cancel)) { Dialog, id ->
                 Dialog.dismiss()
             }
 
