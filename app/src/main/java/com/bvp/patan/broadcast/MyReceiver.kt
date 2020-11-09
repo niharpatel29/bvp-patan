@@ -9,6 +9,7 @@ import com.bvp.patan.activities.categories.CalendarEvents
 import com.bvp.patan.model.ChannelContainer
 import com.bvp.patan.model.NotificationDataContainer
 import com.bvp.patan.notification.NotificationHandler
+import com.bvp.patan.prefs.SharedPref
 import com.bvp.patan.sqlite.MyDBHandler
 
 class MyReceiver : BroadcastReceiver() {
@@ -19,21 +20,27 @@ class MyReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d(TAG, "Broadcast received")
+        SharedPref(context!!).setBroadcastRegistrationFlag(true)
 
-        if (MyDBHandler(context!!).checkBirthdayToday().isNotEmpty()) {
-            showNotification(context, context.getString(R.string.type_birthday))
-        }
-        if (MyDBHandler(context).checkAnniversaryToday().isNotEmpty()) {
-            showNotification(context, context.getString(R.string.type_anniversary))
+        val dbHandler = MyDBHandler(context)
+
+        if (SharedPref(context).getLoginStatus()) {
+            if (dbHandler.checkBirthdayToday().isNotEmpty()) {
+                showNotification(context, context.getString(R.string.type_birthday))
+            }
+            if (dbHandler.checkAnniversaryToday().isNotEmpty()) {
+                showNotification(context, context.getString(R.string.type_anniversary))
+            }
         }
     }
 
-    private fun showNotification(context: Context?, type: String) {
+    private fun showNotification(context: Context, type: String) {
         // default for birthday
         var notificationId = 89
-        var title = context!!.getString(R.string.birthday)
+        var title = context.getString(R.string.birthday)
         val text = context.getString(R.string.tap_here_to_wish)
         var icon = R.drawable.ic_baseline_cake_filled
+        val color = R.color.colorRed
 
         // changes value if anniversary
         if (type == context.getString(R.string.type_anniversary)) {
@@ -52,7 +59,7 @@ class MyReceiver : BroadcastReceiver() {
             text,
             notificationId,
             icon,
-            R.color.colorRed
+            color
         )
         NotificationHandler(context).showNotification(channel, notification, CalendarEvents())
     }

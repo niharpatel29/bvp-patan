@@ -144,10 +144,14 @@ class Login : AppCompatActivity() {
 
     private fun initialCalls() {
         Topic(this).run { subscribe(global) }
-        sendBroadcast()
+        registerBroadcast()
     }
 
-    private fun sendBroadcast() {
+    private fun registerBroadcast() {
+        if (sharedPref.getBroadcastRegistrationFlag()){
+            return
+        }
+
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, 8)
         calendar.set(Calendar.MINUTE, 30)

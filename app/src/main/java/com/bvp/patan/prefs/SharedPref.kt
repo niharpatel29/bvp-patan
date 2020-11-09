@@ -8,11 +8,9 @@ import com.bvp.patan.model.UserModel
 class SharedPref(val context: Context) {
 
     companion object {
-        private const val KEY_DATABASE_DELETED = "database_deleted_flag"
-        private const val dbPreference = "dbPref"
-
         private const val defaultValue = ""
         private const val myPreference = "myPref"
+
         private const val KEY_LOGIN_STATUS = "login_status"
         private const val KEY_FCM_TOKEN = "fcm_token"
         private const val KEY_USER_ID = "user_id"
@@ -34,22 +32,21 @@ class SharedPref(val context: Context) {
         private const val KEY_ZIPCODE = "zipcode"
         private const val KEY_RESIDENTIAL_ADDRESS = "residential_address"
         private const val KEY_ADMIN_FLAG = "admin_flag"
+
+        private const val KEY_BROADCAST_REGISTRATION = "broadcast_registration_flag"
     }
 
     private val sharedPreferences =
         context.getSharedPreferences(myPreference, Context.MODE_PRIVATE)
 
-    private val databaseSharedPref =
-        context.getSharedPreferences(dbPreference, Context.MODE_PRIVATE)
-
-    fun setDatabaseDeletedFlag(flag: Boolean) {
-        val editor = databaseSharedPref.edit()
-        editor.putBoolean(KEY_DATABASE_DELETED, flag)
+    fun setBroadcastRegistrationFlag(flag: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(KEY_BROADCAST_REGISTRATION, flag)
         editor.apply()
     }
 
-    fun getDatabaseDeletedFlag(): Boolean {
-        return databaseSharedPref.getBoolean(KEY_DATABASE_DELETED, false)
+    fun getBroadcastRegistrationFlag(): Boolean {
+        return sharedPreferences.getBoolean(KEY_BROADCAST_REGISTRATION, false)
     }
 
     fun setLoginStatus(loginStatus: Boolean) {

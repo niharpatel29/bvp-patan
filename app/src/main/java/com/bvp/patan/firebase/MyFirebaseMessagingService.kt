@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import com.bvp.patan.R
 import com.bvp.patan.activities.categories.Announcement
 import com.bvp.patan.model.ChannelContainer
 import com.bvp.patan.model.NotificationDataContainer
@@ -85,9 +86,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
             val title = data.getString("title")
             val message = data.getString("message")
+            val id = 79
+            val icon = R.drawable.ic_baseline_announcement
+            val color = R.color.colorPrimary
 
             Log.d(TAG, "title: $title, msg: $message")
-            NotificationDataContainer(title, message)
+            NotificationDataContainer(title, message, id, icon, color)
         } catch (e: JSONException) {
             Log.e(TAG, "Json Exception: ${e.message}")
             null
