@@ -1,5 +1,7 @@
 package com.bvp.patan.adapter
 
+import android.Manifest
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -7,20 +9,28 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.os.FileUriExposedException
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.bvp.patan.BuildConfig
 import com.bvp.patan.R
+import com.bvp.patan.activities.categories.Newsletters
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
 import com.bvp.patan.model.ListItemNewsletter
 import com.bvp.patan.operations.Operations
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -75,11 +85,6 @@ class NewsletterAdapter(
         }
     }
 
-    fun updateList(list: ArrayList<ListItemNewsletter>) {
-        newsletterList = list
-        notifyDataSetChanged()
-    }
-
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNewsletterName = itemView.findViewById(R.id.tvNewsletterName) as TextView
         val tvUploadTIme = itemView.findViewById(R.id.tvUploadTime) as TextView
@@ -95,6 +100,8 @@ class NewsletterAdapter(
             openFile(name, type)
             return
         }
+
+        requestStoragePermission()
 
         operations.showProgressDialog()
 
@@ -126,6 +133,66 @@ class NewsletterAdapter(
                 operations.hideProgressDialog()
             }
         })
+    }
+
+    private fun requestStoragePermission() {
+        Dexter
+            .withContext(context)
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    // check if all permissions are granted
+                    if (report.areAllPermissionsGranted()) {
+                        Log.d(Newsletters.TAG, "Permission granted")
+                    }
+
+                    // check for permanent denial of any permission
+                    if (report.isAnyPermissionPermanentlyDenied) {
+                        // show alert dialog navigating to Settings
+                        operations.displayToast("Permanently denied")
+                        showSettingsDialog()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken
+                ) {
+                    token.continuePermissionRequest()
+                }
+            }).withErrorListener {
+                operations.displayToast("Error occurred")
+            }
+            .onSameThread()
+            .check()
+    }
+
+    private fun showSettingsDialog() {
+        val alertDialog = AlertDialog.Builder(context)
+        alertDialog.setTitle("Need Permissions")
+        alertDialog.setMessage("This app needs permission to use this feature. You can grant them in app settings.")
+        alertDialog.setPositiveButton("GOTO SETTINGS") { dialog, id ->
+            dialog.cancel()
+            openSettings()
+        }
+        alertDialog.setNegativeButton("Cancel") { dialog, id ->
+            dialog.cancel()
+        }
+        alertDialog.show()
+    }
+
+    private fun openSettings() {
+        // navigating user to app settings
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts("package", context.packageName, null)
+        intent.data = uri
+        (context as Activity).startActivityForResult(
+            intent,
+            Newsletters.REQUEST_CODE_PERMISSION_SETTING
+        )
     }
 
     private fun saveDownloadedFile(body: ResponseBody, name: String?, type: String) {
@@ -168,8 +235,7 @@ class NewsletterAdapter(
                 try {
                     outputStream!!.close()
                 } catch (e: NullPointerException) {
-                    operations.displayToast("null error")
-                    Log.e(TAG, e.message.toString())
+                    Log.e(TAG, "null error: ${e.message}")
                 }
             }
         } catch (e: IOException) {
