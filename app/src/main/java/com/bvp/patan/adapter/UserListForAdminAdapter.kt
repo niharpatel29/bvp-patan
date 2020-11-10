@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -23,6 +22,7 @@ import com.bvp.patan.operations.displayToast
 import com.bvp.patan.operations.hideProgressDialog
 import com.bvp.patan.operations.showProgressDialog
 import com.bvp.patan.other.CircleTransform
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,49 +81,43 @@ class UserListForAdminAdapter(
     }
 
     private fun confirmMakeAdmin(userId: String?) {
-        val builder = AlertDialog.Builder(context)
+        val dialog = MaterialAlertDialogBuilder(context)
 
-        builder
+        dialog
             .setTitle(context.getString(R.string.confirmation))
             .setMessage(context.getString(R.string.confirm_make_admin))
             .setCancelable(true)
 
-        builder
-            .setPositiveButton(context.getString(R.string.make_admin)) { Dialog, id ->
+        dialog.setPositiveButton(context.getString(R.string.make_admin)) { Dialog, id ->
                 Dialog.dismiss()
                 makeNewAdmin(userId)
             }
 
-        builder
-            .setNegativeButton(context.getString(R.string.cancel)) { Dialog, id ->
+        dialog.setNegativeButton(context.getString(R.string.cancel)) { Dialog, id ->
                 Dialog.dismiss()
             }
 
-        val dialog = builder.create()
-        dialog.show()
+        dialog.create().show()
     }
 
     private fun confirmDeleteUser(userId: String?) {
-        val builder = AlertDialog.Builder(context)
+        val dialog = MaterialAlertDialogBuilder(context)
 
-        builder
+        dialog
             .setTitle(context.getString(R.string.confirm_delete))
             .setMessage(context.getString(R.string.confirm_delete_user))
             .setCancelable(true)
 
-        builder
-            .setPositiveButton(context.getString(R.string.delete)) { Dialog, id ->
+        dialog.setPositiveButton(context.getString(R.string.delete)) { Dialog, id ->
                 Dialog.dismiss()
                 deleteUser(userId)
             }
 
-        builder
-            .setNegativeButton(context.getString(R.string.cancel)) { Dialog, id ->
+        dialog.setNegativeButton(context.getString(R.string.cancel)) { Dialog, id ->
                 Dialog.dismiss()
             }
 
-        val dialog = builder.create()
-        dialog.show()
+        dialog.create().show()
     }
 
     private fun makeNewAdmin(userId: String?) {
