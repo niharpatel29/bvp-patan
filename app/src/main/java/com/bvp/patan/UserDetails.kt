@@ -120,7 +120,6 @@ class UserDetails : AppCompatActivity() {
     }
 
     private fun contents() {
-//        val city = "${userDetails.city}, ${userDetails.state}"
         val city =
             if (userDetails.city!!.isNotEmpty()) "${userDetails.city}, ${userDetails.state}" else ""
 
