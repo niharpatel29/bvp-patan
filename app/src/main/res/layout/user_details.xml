@@ -98,8 +98,9 @@
                 android:layout_height="@dimen/dp_40"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="@dimen/dp_30"
+                app:cardCornerRadius="@dimen/dp_20"
                 app:cardElevation="@dimen/dp_0"
+                app:cardPreventCornerOverlap="false"
                 app:cardUseCompatPadding="false"
                 tools:ignore="ContentDescription">
 
@@ -124,7 +125,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="@dimen/dp_30"
+                app:cardCornerRadius="@dimen/dp_20"
                 app:cardElevation="@dimen/dp_0"
                 app:cardUseCompatPadding="false"
                 tools:ignore="ContentDescription">
@@ -150,7 +151,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="@dimen/dp_30"
+                app:cardCornerRadius="@dimen/dp_20"
                 app:cardElevation="@dimen/dp_0"
                 app:cardUseCompatPadding="false"
                 tools:ignore="ContentDescription">
@@ -176,7 +177,7 @@
                 android:layout_height="@dimen/dp_40"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="@dimen/dp_30"
+                app:cardCornerRadius="@dimen/dp_20"
                 app:cardElevation="@dimen/dp_0"
                 app:cardUseCompatPadding="false"
                 tools:ignore="ContentDescription">
