@@ -18,7 +18,8 @@ class CalendarEvents : AppCompatActivity() {
         private const val TAG = "CalendarEventsTAG"
     }
 
-    private val userList = ArrayList<ListItemCalendar>()
+    private val userListToday = ArrayList<ListItemCalendar>()
+    private val userListTomorrow = ArrayList<ListItemCalendar>()
     private lateinit var calendarAdapter: CalendarAdapter
     private lateinit var dbHandler: MyDBHandler
 
@@ -29,7 +30,8 @@ class CalendarEvents : AppCompatActivity() {
         dbHandler = MyDBHandler(this)
 
         toolbar()
-        setUserList()
+        setUserListToday()
+        setUserListTomorrow()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -55,9 +57,9 @@ class CalendarEvents : AppCompatActivity() {
         )
     }
 
-    private fun setUserList() {
+    private fun setUserListToday() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        userList.clear()
+        userListToday.clear()
 
         val users = ArrayList<ListItemCalendar>()
         users.addAll(dbHandler.checkBirthdayToday())
@@ -69,16 +71,43 @@ class CalendarEvents : AppCompatActivity() {
             val date = users[i].date
             val type = users[i].type
 
-            userList.add(ListItemCalendar(userId, name, date, type))
+            userListToday.add(ListItemCalendar(userId, name, date, type))
         }
 
-        if (userList.isEmpty()) {
-            tvNoEvents.visibility = View.VISIBLE
+        if (userListToday.isEmpty()) {
+            tvNoEventsToday.visibility = View.VISIBLE
         } else {
-            tvNoEvents.visibility = View.GONE
+            tvNoEventsToday.visibility = View.GONE
         }
 
-        calendarAdapter = CalendarAdapter(this, userList)
+        calendarAdapter = CalendarAdapter(this, userListToday)
         recyclerView.adapter = calendarAdapter
+    }
+
+    private fun setUserListTomorrow() {
+        recyclerViewTomorrow.layoutManager = LinearLayoutManager(this)
+        userListTomorrow.clear()
+
+        val users = ArrayList<ListItemCalendar>()
+        users.addAll(dbHandler.checkBirthdayTomorrow())
+        users.addAll(dbHandler.checkAnniversaryTomorrow())
+
+        for (i in users.indices) {
+            val userId = users[i].userId
+            val name = users[i].name
+            val date = users[i].date
+            val type = users[i].type
+
+            userListTomorrow.add(ListItemCalendar(userId, name, date, type))
+        }
+
+        if (userListTomorrow.isEmpty()) {
+            tvNoEventsTomorrow.visibility = View.VISIBLE
+        } else {
+            tvNoEventsTomorrow.visibility = View.GONE
+        }
+
+        calendarAdapter = CalendarAdapter(this, userListTomorrow)
+        recyclerViewTomorrow.adapter = calendarAdapter
     }
 }

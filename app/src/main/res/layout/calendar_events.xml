@@ -33,12 +33,12 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvNoEvents"
+            android:id="@+id/tvNoEventsToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:maxLines="1"
-            android:text="@string/no_events"
+            android:text="@string/no_events_today"
             android:textSize="@dimen/size_26sp"
             android:textStyle="bold"
             android:visibility="gone"
@@ -47,7 +47,40 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/colorDivider"
+            android:contentDescription="@string/divider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/tomorrow"
+            android:textSize="@dimen/size_20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNoEventsTomorrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="@string/no_events_tomorrow"
+            android:textSize="@dimen/size_26sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:autoSizeTextType="uniform" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTomorrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </LinearLayout>

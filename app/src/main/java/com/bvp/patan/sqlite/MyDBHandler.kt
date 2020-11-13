@@ -185,6 +185,39 @@ class MyDBHandler(val context: Context) :
         return users
     }
 
+    fun checkBirthdayTomorrow(): ArrayList<ListItemCalendar> {
+        val users = ArrayList<ListItemCalendar>()
+
+        val simpleDateFormat = SimpleDateFormat("dd-MMM", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
+        val tomorrowDate = simpleDateFormat.format(calendar.time)
+
+        val db = readableDatabase
+        val query =
+            "SELECT * FROM $TABLE_NAME WHERE $COLUMN_DOB LIKE '$tomorrowDate%'"
+
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))
+                val firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME))
+                val lastName = cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME))
+                val dob = cursor.getString(cursor.getColumnIndex(COLUMN_DOB))
+
+                val name = "$firstName $lastName"
+                val type = context.getString(R.string.type_birthday)
+
+                users.add(ListItemCalendar(userId, name, dob, type))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return users
+    }
+
     fun checkAnniversaryToday(): ArrayList<ListItemCalendar> {
         val users = ArrayList<ListItemCalendar>()
 
@@ -194,6 +227,39 @@ class MyDBHandler(val context: Context) :
         val db = readableDatabase
         val query =
             "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ANNIVERSARY LIKE '$systemDate%'"
+
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val userId = cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))
+                val firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRSTNAME))
+                val lastName = cursor.getString(cursor.getColumnIndex(COLUMN_LASTNAME))
+                val anniversary = cursor.getString(cursor.getColumnIndex(COLUMN_ANNIVERSARY))
+
+                val name = "$firstName $lastName"
+                val type = context.getString(R.string.type_anniversary)
+
+                users.add(ListItemCalendar(userId, name, anniversary, type))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        db.close()
+        return users
+    }
+
+    fun checkAnniversaryTomorrow(): ArrayList<ListItemCalendar> {
+        val users = ArrayList<ListItemCalendar>()
+
+        val simpleDateFormat = SimpleDateFormat("dd-MMM", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+
+        calendar.add(Calendar.DAY_OF_MONTH, 1) // +1 defines next day
+        val tomorrowDate = simpleDateFormat.format(calendar.time)
+
+        val db = readableDatabase
+        val query =
+            "SELECT * FROM $TABLE_NAME WHERE $COLUMN_ANNIVERSARY LIKE '$tomorrowDate%'"
 
         val cursor = db.rawQuery(query, null)
 

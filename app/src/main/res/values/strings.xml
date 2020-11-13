@@ -142,7 +142,8 @@
     <string name="file_not_selected">File not selected</string>
     <string name="no_announcement">No Announcement</string>
     <string name="no_internet">No internet</string>
-    <string name="no_events">No Events Today</string>
+    <string name="no_events_today">No Events Today</string>
+    <string name="no_events_tomorrow">No Events Tomorrow</string>
     <string name="make_announcement">Make Announcement</string>
     <string name="karobari">Karobari</string>
     <string name="general">General</string>
@@ -151,6 +152,7 @@
     <string name="tap_here_to_wish">Tap here to wish</string>
     <string name="birthday_and_anniversary">Birthday &amp; Anniversary</string>
     <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
     <string name="refresh_complete">Refresh complete</string>
     <string name="copy_link">Copy link</string>
     <string name="link_copied_to_clipboard">Link copied to clipboard</string>
