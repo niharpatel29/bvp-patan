@@ -14,7 +14,7 @@ import java.util.*
 class RegisterAlarmBroadcast(val context: Context) : AsyncTask<Void, Void, Boolean>() {
 
     companion object {
-        const val TAG = "RegisterAlarmBroadcastTAG"
+        const val TAG = "AlarmBroadcastTAG"
     }
 
     override fun doInBackground(vararg p0: Void?): Boolean {
