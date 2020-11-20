@@ -12,6 +12,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bvp.patan.api.APIInterface
 import com.bvp.patan.api.postClient
+import com.bvp.patan.background_worker.RegisterAlarmBroadcast
 import com.bvp.patan.broadcast.MyReceiver
 import com.bvp.patan.firebase.Topic
 import com.bvp.patan.model.UserModel
@@ -148,42 +149,9 @@ class Login : AppCompatActivity() {
     }
 
     private fun registerBroadcast() {
-        if (sharedPref.getBroadcastRegistrationFlag()){
-            return
+        if (!sharedPref.getBroadcastRegistrationFlag()) {
+            RegisterAlarmBroadcast(this).execute()
         }
-
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.HOUR_OF_DAY, 8)
-        calendar.set(Calendar.MINUTE, 30)
-        calendar.set(Calendar.SECOND, 0)
-
-        Log.d(TAG, calendar.get(Calendar.YEAR).toString())
-        Log.d(TAG, calendar.get(Calendar.MONTH).toString())
-        Log.d(TAG, calendar.get(Calendar.DAY_OF_MONTH).toString())
-        Log.d(TAG, calendar.get(Calendar.HOUR_OF_DAY).toString())
-        Log.d(TAG, calendar.get(Calendar.MINUTE).toString())
-        Log.d(TAG, calendar.get(Calendar.SECOND).toString())
-
-        //creating a new intent specifying the broadcast receiver
-        val intent = Intent(applicationContext, MyReceiver::class.java)
-        //creating a pending intent using the intent
-        val pendingIntent =
-            PendingIntent.getBroadcast(
-                applicationContext,
-                100,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-
-        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-
-        //setting the repeating alarm that will be triggered every day
-        alarmManager.setRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            pendingIntent
-        )
     }
 
     private fun skipIfLoggedIn() {

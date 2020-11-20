@@ -20,11 +20,12 @@ class MyReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d(TAG, "Broadcast received")
-        SharedPref(context!!).setBroadcastRegistrationFlag(true)
+        val sharedPref = SharedPref(context!!)
+        sharedPref.setBroadcastRegistrationFlag(true)
 
         val dbHandler = MyDBHandler(context)
 
-        if (SharedPref(context).getLoginStatus()) {
+        if (sharedPref.getLoginStatus()) {
             if (dbHandler.checkBirthdayToday().isNotEmpty()) {
                 showNotification(context, context.getString(R.string.type_birthday))
             }
